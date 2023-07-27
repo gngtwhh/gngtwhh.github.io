@@ -1,0 +1,349 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>WAHAHA's blog | WAHAHA's blog</title><meta name="author" content="WAHAHA"><meta name="copyright" content="WAHAHA"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="以前除了新生赛再没写过WP,还是多写这东西好(博客搭建还没搞好QWQ) RE:所有题来自picoCTF2022,题目很简单,适用于萌新蒟蒻(比如我)入门快速适应re和pwn等题目的模式和解题一般顺序 file-run1: 是的,我们需要一个命令行(显然可以知道是个bash…),丢进去跑就行了…  菜鸟’s writeup结束… 或者有椰叶丢进IDA里瞧瞧…  去找flag吧…(好像是ctrl+鼠标">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WAHAHA&#39;s blog">
+<meta property="og:url" content="https://gngtwhh.github.io/2023/07/27/Writeup(%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%BD%9C%E4%B8%9A%E7%AC%AC%E4%B8%80%E5%91%A8)/index.html">
+<meta property="og:site_name" content="WAHAHA&#39;s blog">
+<meta property="og:description" content="以前除了新生赛再没写过WP,还是多写这东西好(博客搭建还没搞好QWQ) RE:所有题来自picoCTF2022,题目很简单,适用于萌新蒟蒻(比如我)入门快速适应re和pwn等题目的模式和解题一般顺序 file-run1: 是的,我们需要一个命令行(显然可以知道是个bash…),丢进去跑就行了…  菜鸟’s writeup结束… 或者有椰叶丢进IDA里瞧瞧…  去找flag吧…(好像是ctrl+鼠标">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gngtwhh.github.io/img/avatar.jpg">
+<meta property="article:published_time" content="2023-07-26T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-07-27T03:53:20.612Z">
+<meta property="article:author" content="WAHAHA">
+<meta property="article:tag" content="CTF">
+<meta property="article:tag" content="RE">
+<meta property="article:tag" content="PWN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gngtwhh.github.io/img/avatar.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://gngtwhh.github.io/2023/07/27/Writeup(%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%BD%9C%E4%B8%9A%E7%AC%AC%E4%B8%80%E5%91%A8)/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'WAHAHA\'s blog',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-07-27 11:53:20'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load',() => { preloader.endLoading() })
+
+  if (false) {
+    document.addEventListener('pjax:send', () => { preloader.initLoading() })
+    document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+  }
+})()</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">2</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 文章</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tools/"><i class="fa-fw fas fa-solid fa-wrench"></i><span> 工具</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background: transparent"><nav id="nav"><span id="blog-info"><a href="/" title="WAHAHA's blog"><img class="site-icon" src="/img/logo.png"/></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 文章</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tools/"><i class="fa-fw fas fa-solid fa-wrench"></i><span> 工具</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">无题</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-07-26T16:00:00.000Z" title="发表于 2023-07-27 00:00:00">2023-07-27</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-07-27T03:53:20.612Z" title="更新于 2023-07-27 11:53:20">2023-07-27</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E4%BA%8C%E8%BF%9B%E5%88%B6/">二进制</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>7分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>以前除了新生赛再没写过WP,还是多写这东西好(博客搭建还没搞好QWQ)</p>
+<h1 id="RE"><a href="#RE" class="headerlink" title="RE:"></a>RE:</h1><p>所有题来自picoCTF2022,题目很简单,适用于萌新蒟蒻(比如我)入门快速适应re和pwn等题目的模式和解题一般顺序</p>
+<h2 id="file-run1"><a href="#file-run1" class="headerlink" title="file-run1:"></a>file-run1:</h2><p><img src="https://xp0int-team.feishu.cn/space/api/box/stream/download/asynccode/?code=YTQ5OWYyNTFmYmE3Y2UwMzU4NTUyNGVjOGFhYmYyYWVfemtnVHJZd2NDeklYdzN3Z1p4RVg1bFlpdkhFUlB5QkdfVG9rZW46SkxBRWJRREJSb29QYVJ4SnlnUmM1em5ybnlkXzE2OTA0MjkxMjY6MTY5MDQzMjcyNl9WNA" alt="img"></p>
+<p>是的,我们需要一个命令行(显然可以知道是个bash…),丢进去跑就行了…</p>
+<p><img src="https://xp0int-team.feishu.cn/space/api/box/stream/download/asynccode/?code=MjFiYmExYjMxNWExMzIxZjQyYjI5NjI3NjI1YWMyMTZfa2t5eGlBMmNMSENHNWV1clFrdVlNV2FUV2dPTjVDc1JfVG9rZW46RjBIR2JaWEY3b25oejJ4cDdGT2NWQUdKbk9kXzE2OTA0MjkxMjY6MTY5MDQzMjcyNl9WNA" alt="img"></p>
+<p>菜鸟’s writeup结束…</p>
+<p>或者有椰叶丢进IDA里瞧瞧…</p>
+<p><img src="https://xp0int-team.feishu.cn/space/api/box/stream/download/asynccode/?code=ZTMwMzFhYWE5MGRhMTYzZTBjMmIwYmRhNmExNzAzZDlfT09kczBEZGlnY2E5SmhzalNURnlHSWI3WjR5NU10aTRfVG9rZW46VVo5NWJteGNib1dmdm14RW00MWNhd3JrbnpmXzE2OTA0MjkxMjY6MTY5MDQzMjcyNl9WNA" alt="img"></p>
+<p>去找flag吧…(好像是ctrl+鼠标左键?…)</p>
+<p><img src="https://xp0int-team.feishu.cn/space/api/box/stream/download/asynccode/?code=N2I5ODBiNTExZWUwYTBhNWUzN2Y3ZDliMjYxNTkzNThfOHQ4U0dBWkhmOXRrOEpQYmc5RGhOcW50c1pYeXdiQjBfVG9rZW46WTlMNmJObHFob2l3Qk54cGdKbWM1TjkxblBnXzE2OTA0MjkxMjY6MTY5MDQzMjcyNl9WNA" alt="img"></p>
+<p>结束了…</p>
+<h2 id="file-run2"><a href="#file-run2" class="headerlink" title="file-run2:"></a>file-run2:</h2><p>丢个Hello!的参数跑就完事了(我太菜了)</p>
+<p><img src="https://xp0int-team.feishu.cn/space/api/box/stream/download/asynccode/?code=ZDM2ZWE3ZjZiODI0NWMwNzAxZWZiZTdkYjI0ZDAxNmZfUUx2UFV0d3EySGFXVUFneWhlaVhpcFoyTm5nc3Y0RlBfVG9rZW46Qk82c2IxemRqb0dHSHd4ZEdubGNQVlpzbktWXzE2OTA0MjkxMjY6MTY5MDQzMjcyNl9WNA" alt="img"></p>
+<p>中间还打错个字母…</p>
+<h2 id="GDB-Test-Drive"><a href="#GDB-Test-Drive" class="headerlink" title="GDB Test Drive:"></a>GDB Test Drive:</h2><p>emm…这玩意就是看看你gdb装没装…虽然但是,我还得学学gdb(毕竟CLion&#x2F;VS的可视化用惯了…)</p>
+<p>(此处gdbme默认有x权限,所以没用chmod)</p>
+<p><img src="https://xp0int-team.feishu.cn/space/api/box/stream/download/asynccode/?code=ZDc0MGMwNGUwZmJkYmZlZGU4ZmQ3MmZiN2IzMzE2MDFfMVBnTFlJdG1aWnNXYlFwa0RWQnVCbjRvem9KcVlBb0tfVG9rZW46UDAwemJnNFRibzVBUlR4bDNqc2M1YVJMblZmXzE2OTA0MjkxMjY6MTY5MDQzMjcyNl9WNA" alt="img"></p>
+<p>一条一条运行调试的子命令就行(回头再学吧…gdb不是太会用)</p>
+<p><img src="https://xp0int-team.feishu.cn/space/api/box/stream/download/asynccode/?code=MmRkZDA4MmVjMDVmYmYxODc5MTI3NzA2YWZlNjUyZWRfTHo5dEZPejNQN29HdE1jQkc3b0VKb0VQWkcwSFpoa01fVG9rZW46VUp3TWIwbTF2b3pvR1l4N3VEV2MzblFhbkZNXzE2OTA0MjkxMjY6MTY5MDQzMjcyNl9WNA" alt="img"></p>
+<p>结束…</p>
+<h2 id="patchme-py"><a href="#patchme-py" class="headerlink" title="patchme.py:"></a>patchme.py:</h2><p>咱就是问,还有什么比源码更香的东西吗?…直接分析源码…</p>
+<p><img src="https://xp0int-team.feishu.cn/space/api/box/stream/download/asynccode/?code=MjRlNjIzYWNjN2IzYmE5MTRlM2E5YjEzNjJjYzUxZjRfcHJLQXhkbzZrVkdmTFJOd3padTVmZm92VTdMU09ZNnNfVG9rZW46VHVYWmJsRXlXb3dQaHV4U2dTbWMzSlNybnliXzE2OTA0MjkxMjY6MTY5MDQzMjcyNl9WNA" alt="img"></p>
+<p>python这东西就在windows下跑吧,毕竟库都装在windows下(虽然不知道为啥控制台识别不到库…)</p>
+<p><img src="https://xp0int-team.feishu.cn/space/api/box/stream/download/asynccode/?code=NzRmMmQzN2E1NzVlZThlNDM5YjVhYWMyY2NhYzhjN2JfTWg1QW1nRW5zbnFodFpvblcwZHF1NDFueVVxU2VScU5fVG9rZW46TUxRcmJ3b0h5b0pTMVl4bzNBTmM1eEVMbmhqXzE2OTA0MjkxMjY6MTY5MDQzMjcyNl9WNA" alt="img"></p>
+<p>直接看源码,发现就是个字符串比较(暂时不想管那个加密的事…)</p>
+<p><img src="https://xp0int-team.feishu.cn/space/api/box/stream/download/asynccode/?code=N2ZjNTZiN2Y4NjhiNjBhZjY3NTdiYzhjOGQ5YzBjMzRfcTdDY3pxejljNm1hNHhSdzM3WUhmckZEUzJOUmlSNXhfVG9rZW46UksxbGJYSzFMb2JRUXl4cGNBdWNjWFpyblZoXzE2OTA0MjkxMjY6MTY5MDQzMjcyNl9WNA" alt="img"></p>
+<p>有一说一,我才懒得构造那个密码,我直接全删了:</p>
+<p><img src="https://xp0int-team.feishu.cn/space/api/box/stream/download/asynccode/?code=MDM0YmRlMDk2NWE3YjZhYzA0MmM0MmU1YjY3YzU2NDJfcDhFZmx6RGwwaGZjcXZORzNWeVNWZlpZWjA2Q3g4WFFfVG9rZW46TTU0eGJmY0dHb2xDa294b0tjWGNVcERjblhmXzE2OTA0MjkxMjY6MTY5MDQzMjcyNl9WNA" alt="img"></p>
+<p>保存了再跑就完事了…(源码在手还怕啥)</p>
+<p><img src="https://xp0int-team.feishu.cn/space/api/box/stream/download/asynccode/?code=MmNkMDBjNmUxYzY1OTA4NDI4YmZlZmY1YTA3Zjg4MGNfTTByd1ozR094NE9SY2NRSzNVT29tQmpMUlRzdFhEaFFfVG9rZW46VHU2cGJYSjg0b2p6TUR4Wkk5dGNsMjdEbkpmXzE2OTA0MjkxMjY6MTY5MDQzMjcyNl9WNA" alt="img"></p>
+<p>至于解密方法能看懂在干啥,但是密码基础一点没有,反正先能跑出来再说,坐等椰叶们讲解(doge)</p>
+<h2 id="Safe-Opener"><a href="#Safe-Opener" class="headerlink" title="Safe Opener:"></a>Safe Opener:</h2><p>.java也是源码…</p>
+<p>SublimeText4 yyds!!!我直接看源码(nnd我不会java怎么办…好在c++基础还可以…)</p>
+<p>吐槽:java获取个输入这么费劲?还得手动创建输入流对象?</p>
+<p>相信椰叶们都能看懂代码…密钥就是这一坨:</p>
+<p><img src="https://xp0int-team.feishu.cn/space/api/box/stream/download/asynccode/?code=NzQ5MzcwMmFjNGFkYzY4OWU1MTk3Y2EzZmRlNTUyZjZfUnhVaDhXQTBpNTBRa3VmTFJiYlBGU1VTVktra0ppY0NfVG9rZW46RHlucmJjUkM1b2JLd3N4Y3lNU2NCTDRTbnFoXzE2OTA0MjkxMjY6MTY5MDQzMjcyNl9WNA" alt="img"></p>
+<p>而且一看就知道是base64</p>
+<p><img src="https://xp0int-team.feishu.cn/space/api/box/stream/download/asynccode/?code=NDAxZTliZDRmZmExZWM5ZDYxOTFmZTFhY2VjNDY1Yjdfb29QMVdXb29IM3A4eXpYSWlIZEJQd2ZGNUdUVDhkcEJfVG9rZW46SkJsbWJIQWw1b3FNemd4MFdyaWM3eWdWbnIyXzE2OTA0MjkxMjY6MTY5MDQzMjcyNl9WNA" alt="img"></p>
+<p>《最好用的Base64在线工具》…怕不是不知道CyberChef的大名…</p>
+<p>结束…</p>
+<h2 id="unpackme-py"><a href="#unpackme-py" class="headerlink" title="unpackme.py:"></a>unpackme.py:</h2><p>经典的加密解密库(但是我不会)</p>
+<p><img src="https://xp0int-team.feishu.cn/space/api/box/stream/download/asynccode/?code=ODhhMzA3YTQ0YTMyNWI4MTQ4MjAzODhkNDY4NjZiN2NfbXpnZFRjaFFzTXhlSjZFWFBGb3NNWHJjSkFyNlRwRmdfVG9rZW46UmR3bmJQV1V5b3RRRU54aXcwQ2MyZVdFbmtoXzE2OTA0MjkxMjY6MTY5MDQzMjcyNl9WNA" alt="img"></p>
+<p>第12行发现要对解码后的东西进行运行….所以知道加密的是一段代码,所以把exec换成print逝逝:</p>
+<p><img src="https://xp0int-team.feishu.cn/space/api/box/stream/download/asynccode/?code=MmVjMjg2NTI4ZDlmZjdlYzUwMmQ0MzE3YzkyM2UwYjhfeTBJcTZsNlVWc05hVUNKRkVKSUlwNWFRanNIdE51amxfVG9rZW46SXNaZWJzZzVnbzZKUVl4Q0paWmNmNXhFblJlXzE2OTA0MjkxMjY6MTY5MDQzMjcyNl9WNA" alt="img"></p>
+<p>这里有点奇葩,命令行找不到我的库…</p>
+<p><img src="https://xp0int-team.feishu.cn/space/api/box/stream/download/asynccode/?code=NDVkMzg0ZTYyZjc2NzFiM2M2ZGU1Y2JiZDdjNGQzMzBfNk03OU1WVEkzaWZzcDU0YjR6VEFjRWVManN3R2UyVk5fVG9rZW46TEFWMmI2Q0NTb21xeEJ4NUtqQWNHSXkwbmViXzE2OTA0MjkxMjY6MTY5MDQzMjcyNl9WNA" alt="img"></p>
+<p>还是打开pycharm吧…</p>
+<p><img src="https://xp0int-team.feishu.cn/space/api/box/stream/download/asynccode/?code=ZGNkNmNkMjg3MTI4NTEyYzQ2ZDM1MWUwYzVmOGVmNjZfNzZMYW5GbkhiYkwxVzIwamJzelVrZHFieHlVc3FLODlfVG9rZW46Q082RmJodDNGb01iY3J4T25RTGNIQXM4bmxoXzE2OTA0MjkxMjY6MTY5MDQzMjcyNl9WNA" alt="img"></p>
+<p>好吧直接结束…</p>
+<h2 id="bloat-py"><a href="#bloat-py" class="headerlink" title="bloat.py:"></a>bloat.py:</h2><p>这个程序的函数名和变量名一看就是故意的…加点注释一点点分析看看:</p>
+<p><img src="https://xp0int-team.feishu.cn/space/api/box/stream/download/asynccode/?code=Y2Q5OTFmZGFkZDIxNjY4NjEyYmNjMmI5ODkyODljNjRfRDd4aUFjMWs2Rk5lemEyTVhSUXVkZ01FTU9IV2J2STVfVG9rZW46VjNPbWI2c3NSbzJ1V0x4cnBtVmN5bHUybkplXzE2OTA0MjkxMjY6MTY5MDQzMjcyNl9WNA" alt="img"></p>
+<p>可以看到函数arg133()中有一个比较,并且对比成功了会有一个输出,我们直接将那个字符串单独打印看看(先把其他代码注释掉):</p>
+<p><img src="https://xp0int-team.feishu.cn/space/api/box/stream/download/asynccode/?code=MjI4YWJjODdjMTIwZDU5ZjQ3MGZkYWJkNmJiODUzN2NfanhuMjRmZTdRck54Mkd4WXQ0bGtTNTZ0ZFdwOUhCaExfVG9rZW46SjJDRmI4c25zb2RIVm14N2dsOGNHRDZSbjdnXzE2OTA0MjkxMjY6MTY5MDQzMjcyNl9WNA" alt="img"></p>
+<p><img src="https://xp0int-team.feishu.cn/space/api/box/stream/download/asynccode/?code=MWU1ZGE4YzM0YjdjNTRiN2VmNzNlYTAyMDY0Mzk2YjZfa2dRUDF6Ukowc1JKQ01wUWRNbUNCdldXR2VPRXV4M0lfVG9rZW46UUJSN2JqczBWbzF3U3h4ZXlDQ2NhbkpzbnplXzE2OTA0MjkxMjY6MTY5MDQzMjcyNl9WNA" alt="img"></p>
+<p>也就是说我们输入的arg432变量的值就是这个,所以将代码恢复原样重新以这个输入值运行一遍:</p>
+<p><img src="https://xp0int-team.feishu.cn/space/api/box/stream/download/asynccode/?code=NGFjMzYzZGMyMTY0MjU3ZDQyY2EzODFjMDBhOGM4NDZfYnNqdUMwM2tNdzBIQzhpMnFsRFRvcFRxbmlUMUtMWlpfVG9rZW46UEhOTmJRbmdib1VwSGl4RklweWNEdlVibkJmXzE2OTA0MjkxMjY6MTY5MDQzMjcyNl9WNA" alt="img"></p>
+<p>解密成功!</p>
+<p>注: .enc文件为常见的加密后的文件格式,常常出现在勒索病毒运行后的结果,或对文件进行加密的情况,这里的代码即对其进行特定方式的解密</p>
+<h2 id="Fresh-Java"><a href="#Fresh-Java" class="headerlink" title="Fresh Java:"></a>Fresh Java:</h2><p>这道题也不难,逆向一下class文件,然后写个解密脚本就行</p>
+<h3 id="第一步-java逆向"><a href="#第一步-java逆向" class="headerlink" title="第一步-java逆向:"></a>第一步-java逆向:</h3><p>某椰叶提供的在线逆向网站:<a target="_blank" rel="noopener" href="http://javare.cn(注意文本是白色的...我以为出问题了)/">http://javare.cn(注意文本是白色的...我以为出问题了)</a></p>
+<p><img src="https://xp0int-team.feishu.cn/space/api/box/stream/download/asynccode/?code=YTE4Yjk2OWFhNTM0MThkODY4MGY4OWVkOTFkNTI3MjZfY1IwTEdRWnFlVDg0cnBHUFBucXBwWmlGVDJBSzhKRU5fVG9rZW46RDZVc2JBQlpnb1pMc0l4TXlYa2N6ZklrbjlnXzE2OTA0MjkxMjY6MTY5MDQzMjcyNl9WNA" alt="img"></p>
+<p> 复制到一个java文件,观察发现(虽然我不会java,但是好在会其他语言…)对比的是一个字符串的每一个字符(ASCII码)</p>
+<p>于是,我们可以使用正则表达式…把那一堆ASCII码提取出来(这里在sublimetext4里使用查找替换的正则模式):</p>
+<h3 id="第二步-正则部分"><a href="#第二步-正则部分" class="headerlink" title="第二步-正则部分:"></a>第二步-正则部分:</h3><h4 id="第一步"><a href="#第一步" class="headerlink" title="第一步:"></a>第一步:</h4><p><img src="https://xp0int-team.feishu.cn/space/api/box/stream/download/asynccode/?code=MWUyYTUyNmU4ZDRiNWQwNWNmN2NiNDNmMzJlNzMxMWZfcG1DM1h6TDhaWFFNTFY0aFl0TGlmY1ZncFV3cXZCSUJfVG9rZW46UlpZVmIxQjhob0s4bkJ4NHdoNGNBMnpEbkpiXzE2OTA0MjkxMjY6MTY5MDQzMjcyNl9WNA" alt="img"></p>
+<p><img src="https://xp0int-team.feishu.cn/space/api/box/stream/download/asynccode/?code=ZjRhYTQ2ZWUxY2I5M2MwZDRkMWM4N2M0ZjM4YzE4YWZfM0labXZmZDlaRXVEQUFNSDR0bEhzd3ZBQURYTVF6dkdfVG9rZW46RDVzaGIxV29Kb1JPNEt4YzRqcmNzRWhjbndvXzE2OTA0MjkxMjY6MTY5MDQzMjcyNl9WNA" alt="img"></p>
+<h4 id="第二步"><a href="#第二步" class="headerlink" title="第二步:"></a>第二步:</h4><p><img src="https://xp0int-team.feishu.cn/space/api/box/stream/download/asynccode/?code=ZTk1NDYxNDdlNTJlNWQzMzRlZmVhYzkyOWJjOGFmNjVfZGVwR0V5UlVQY3piWDFVazlhVmttaTh0ZGVaODRCbFpfVG9rZW46Qkl0TGJnU0lkbzhnZDN4UXM3UGNkMTF1bmFiXzE2OTA0MjkxMjY6MTY5MDQzMjcyNl9WNA" alt="img"></p>
+<p><img src="https://xp0int-team.feishu.cn/space/api/box/stream/download/asynccode/?code=NjBiMGVhM2U5MWEzYjRlNzBlMjhkMDM2YzBjNDk4ZjhfUjh4d1pIakdYc1duT3EzTXRnOVhFWWN5ME1ZSm9VOElfVG9rZW46R2o2V2JoVzBhb1RrQ0p4cktrcGN5cldhbmlnXzE2OTA0MjkxMjY6MTY5MDQzMjcyNl9WNA" alt="img"></p>
+<p>直接复制出来</p>
+<h3 id="第三步-解密脚本"><a href="#第三步-解密脚本" class="headerlink" title="第三步-解密脚本:"></a>第三步-解密脚本:</h3><p><img src="https://xp0int-team.feishu.cn/space/api/box/stream/download/asynccode/?code=ZGNkZDMxYzNjNmJmNWNhN2ZkM2FlZTliNGE0NzhkNGZfZjIydzdNQWhtbXhMUlNXaERVVWJYdjRWOHp0SU5wTVhfVG9rZW46SmJYUGJHTGRIbzBiOGN4aUdzUmNnRkdxbmNkXzE2OTA0MjkxMjY6MTY5MDQzMjcyNl9WNA" alt="img"></p>
+<p>这是我们处理后的ASCII码(放在in.txt里)↑</p>
+<p>然后写脚本转换为字符串(注意最开头的34被删了,因为它是字符串的长度),这里我使用c++:</p>
+<p>之所以不使用我最擅长的c是因为c++的STL算法库有reverse函数</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> k;</span><br><span class="line">        <span class="type">char</span> str[<span class="number">35</span>]=&#123;<span class="number">0</span>&#125;;</span><br><span class="line">        <span class="built_in">freopen</span>(<span class="string">&quot;in.txt&quot;</span>,<span class="string">&quot;r&quot;</span>,stdin);</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;<span class="number">34</span>;++i)&#123;</span><br><span class="line">                cin&gt;&gt;k;</span><br><span class="line">                str[i]=k;</span><br><span class="line">                <span class="comment">// printf(&quot;%c&quot;,k);</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">reverse</span>(str,str+<span class="number">34</span>);<span class="comment">//之所以要反序是因为原来的java代码里是反着比较字符串的,</span></span><br><span class="line">                            <span class="comment">//直接在代码里反序得了</span></span><br><span class="line">        cout&lt;&lt;str;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行:</p>
+<p><img src="https://xp0int-team.feishu.cn/space/api/box/stream/download/asynccode/?code=ZGMzZGM1MGEwYmRhNWQyMGViNGNhODEzYjBhMjVkM2Jfejc1QVdDOHhvbWtCMzg2b3R6eUpIUkw4dlJjS1ZnekJfVG9rZW46UVJYaGJERHR2b1dLVW14UFJNOGNIbDlrbkVoXzE2OTA0MjkxMjY6MTY5MDQzMjcyNl9WNA" alt="img"></p>
+<p>结束…</p>
+<h2 id="Bbbbloat"><a href="#Bbbbloat" class="headerlink" title="Bbbbloat:"></a>Bbbbloat:</h2><p>直接拖IDA里看main:</p>
+<p><img src="https://xp0int-team.feishu.cn/space/api/box/stream/download/asynccode/?code=YmFhMTI0NmEwNzMxZjEzMzBhYTg4NmEyNDQ3MWI0NmNfQUlpRUtxcUVscFZDN293OGM4NFBMV2F3VzN5R3cxejFfVG9rZW46TnFFYmI4cnNZb2x0a3B4RmhOVmN1SHRkbmVoXzE2OTA0MjkxMjY6MTY5MDQzMjcyNl9WNA" alt="img"></p>
+<p>直接输549255就行:</p>
+<p><img src="https://xp0int-team.feishu.cn/space/api/box/stream/download/asynccode/?code=NzgxNzcwZDI2NzY1NDMzMzhkYzM0YzM2MjUxNTI5MDFfdFM1VkVtMGthTW5JeVV3OHduMGlsenNwaElmZmxKdkxfVG9rZW46V2pZcWJoNDR5bzF1OUl4TktGVGN4aFNZbmZiXzE2OTA0MjkxMjY6MTY5MDQzMjcyNl9WNA" alt="img"></p>
+<p>结束…</p>
+<h2 id="Unpackme"><a href="#Unpackme" class="headerlink" title="Unpackme:"></a>Unpackme:</h2><p>这里提示upx脱壳</p>
+<p>首先扔进DIE里看看,发现有UPX加壳(注意是ELF64—Linux):</p>
+<p><img src="https://xp0int-team.feishu.cn/space/api/box/stream/download/asynccode/?code=ZjVkYWRkZDNlMGVmYzZjMWVjMzc2MjVhZDQ3YjMzMzZfWlpUd2pNYTRmOTlpNXdiN1dsQnY2c3BsSTIxbG5USnVfVG9rZW46SUZ2UGI0S1Jjb3lkTnZ4ODFFTmNadnlhblBlXzE2OTA0MjkxMjY6MTY5MDQzMjcyNl9WNA" alt="img"></p>
+<p>所以我们去下载UPX进行脱壳(就是第一个):</p>
+<p><img src="https://xp0int-team.feishu.cn/space/api/box/stream/download/asynccode/?code=ODIyOGM5NTNhNDBmNDE4YTM2YTJiNDMwY2IzYTU3ZjZfckxPZnNkQkdha25HZ0xNdWdaUlM3Z0hsSnoweUVpVGRfVG9rZW46R3ZpU2JXa01Jb0RseGN4VGw2T2NHRWpPbjlmXzE2OTA0MjkxMjY6MTY5MDQzMjcyNl9WNA" alt="img"></p>
+<p>免安装,解压后即可使用(xz先解压然后tar解包):</p>
+<p><img src="https://xp0int-team.feishu.cn/space/api/box/stream/download/asynccode/?code=NDUxNDFkOTIxOGE5OGNlZGQ4ZWQyYTIzODE5MjYxNDdfTDVNSUpVbHhZNDh3eTFYTzdMS01Da3UweVBxYUtUNmRfVG9rZW46QzFYcGIxaEhXb0pkdzJ4QTZ2QWNoMEZzblRlXzE2OTA0MjkxMjY6MTY5MDQzMjcyNl9WNA" alt="img"></p>
+<p>脱壳后再检测发现已经没有壳了:</p>
+<p><img src="https://xp0int-team.feishu.cn/space/api/box/stream/download/asynccode/?code=NjZhYTk1ZDVlNGFhYzY1MjM2NmFmYmJmN2M2YzUyZjRfMWlNZzZ3dDhkV1pQRTVMenZjaDFCQzIza1NPd3JIbDFfVG9rZW46SEpuTWJVQ2ZVb1pIOEN4aWNzcGNRaTZxbkllXzE2OTA0MjkxMjY6MTY5MDQzMjcyNl9WNA" alt="img"></p>
+<p>丢进IDA即可(代码一看就懂—第17行):</p>
+<p><img src="https://xp0int-team.feishu.cn/space/api/box/stream/download/asynccode/?code=ODViOWQyODNlMWEwNzBlYjg0MTg1MDM5Y2UxYWNjOWVfaG5CbnpiNDJEelJTUjNnMTVGVDJuWkRYNVllOE9oSDVfVG9rZW46QVQ3dmJLbk9Qb2l5NHV4Q2lYV2M3Z0V3bjhjXzE2OTA0MjkxMjY6MTY5MDQzMjcyNl9WNA" alt="img"></p>
+<p>运行:</p>
+<p><img src="https://xp0int-team.feishu.cn/space/api/box/stream/download/asynccode/?code=NjJhZmFkNjMyYTUxNjc2ZjRkZWU3NTk5OGNmYTQ1ZDZfNHhiSzU0R25XUnNpYUdxNjM2MlhNTkVITXNFR1ZlMHlfVG9rZW46UUhYSGJJWVA2b0FzUjB4WDIzWWMxbmVxbjE4XzE2OTA0MjkxMjY6MTY5MDQzMjcyNl9WNA" alt="img"></p>
+<p>结束…</p>
+<h2 id="Keygenme"><a href="#Keygenme" class="headerlink" title="Keygenme:"></a>Keygenme:</h2><p>我懂那个意思…运行到字符串比较,然后直接看v14变量就行</p>
+<p>但是我的IDA各种问题无法调试…正在重装…</p>
+<p>装好了…IDA远程调试看看这篇文章:</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/abc_670/article/details/80066817">远程调试</a></p>
+<p>好现在上题:</p>
+<p>至于IDA里打开就不说了,直接找到main函数里if语句调用的函数,如果发现是类似&amp;func+1这样的就F5重新反编译一下一般就可以了:</p>
+<p>经过分析发现flag存在v17[[32-67]那么直接在v17处理后打断点调试就行:</p>
+<p><img src="https://xp0int-team.feishu.cn/space/api/box/stream/download/asynccode/?code=MjE3OWM2NjNkOTI4YTRiYzExMTg3YmRhMDE2YWRkYzZfMmRwTzh6S1Z2MkFQcWdnQURjc0FJQ1RWQ20xd0IzamJfVG9rZW46R2Zwc2JJMGRLb2hXc2p4dFFBUGMxQTZibnBjXzE2OTA0MjkxMjY6MTY5MDQzMjcyNl9WNA" alt="img"></p>
+<p> 找到v17,观察(整理)出flag即可:</p>
+<p><img src="https://xp0int-team.feishu.cn/space/api/box/stream/download/asynccode/?code=ZDEwZmI0YTc4MDk5OTY2ODg2YTJkNzYwZjM4YjYxNzNfVGdObnpOanh5cG9zNDBtUFk0c2ZnZFZNbWZQYURranFfVG9rZW46QXl0MGJlWjBrb1JHSWd4QUJxMWNFMFgzbktkXzE2OTA0MjkxMjY6MTY5MDQzMjcyNl9WNA" alt="img"></p>
+<p> picoCTF{br1ng_y0ur_0wn_k3y_9d74d90d}</p>
+<p> 结束…</p>
+<h2 id="Wizardlike"><a href="#Wizardlike" class="headerlink" title="Wizardlike:"></a>Wizardlike:</h2><p>运行一遍一看就是个纯地图</p>
+<p>然后很多地方发现过不去—这不就穿墙挂么~~~</p>
+<p>所以我们IDA吧…别问我怎么找到那个函数的…</p>
+<p><img src="https://xp0int-team.feishu.cn/space/api/box/stream/download/asynccode/?code=ODg2ZGU3NmE4NGY3NTYzMjE0YTQ5MjZkNWNjZTlmOTBfR0pta0hKWktDSmlCeUJQUkpqeXQwMVlRMllBYUFvclVfVG9rZW46SjREYmJmUnJsb09HQjJ4WHdxbGNJZU00bm5mXzE2OTA0MjkxMjY6MTY5MDQzMjcyNl9WNA" alt="img"></p>
+<p>没错就是这里↑</p>
+<p>看来是判断是否越界的函数了…(类似我以前写的贪吃蛇的is_over_lap()和againstTheWall()函数):</p>
+<p><img src="https://xp0int-team.feishu.cn/space/api/box/stream/download/asynccode/?code=YzQ3N2EwOGYzYjk3ZGRjZGYyYmVkMDE1NWZmNjg0YjlfWmdCVGdTUHk1NVh6TTV4OVBVeVlKTjFoOHludXNNVUhfVG9rZW46UXprN2I5MGJVb0FzUEJ4eDdoQ2NyUDRIblNtXzE2OTA0MjkxMjY6MTY5MDQzMjcyNl9WNA" alt="img"></p>
+<p><img src="https://xp0int-team.feishu.cn/space/api/box/stream/download/asynccode/?code=NTljZGI0YTk3ZDMwZGU3ZmEwZmIxZDYwNDE0NDRkMjJfUTBIQzJVY21Xazl4amVWVlVMTmZtR3R3UGZTb045UTZfVG9rZW46TDZtcWJRM3Mxb1lla3h4YnpEemMxcGJBbndlXzE2OTA0MjkxMjY6MTY5MDQzMjcyNl9WNA" alt="img"></p>
+<p>好了帮助理解结束了,现在直接把返回的0LL全改成非0就行(之所以没说改成1LL是因为我把小端和大端搞反了—我是菜逼):</p>
+<p><img src="https://xp0int-team.feishu.cn/space/api/box/stream/download/asynccode/?code=N2NhMTA1OWU3NjA0YTdkODYzMjE3ZWJhMGZiZmZjZTBfOG10cWV5YjhhR0RZRGl1WHhadGFQbG1SRUR0MGtHR0RfVG9rZW46RHR0Y2JHVnNPb2U0cWF4UVNLN2NDMDhPbmtlXzE2OTA0MjkxMjY6MTY5MDQzMjcyNl9WNA" alt="img"></p>
+<p>然后保存就行,接下来直接跑代码观察地图就行,发现地图的形状就是flag~~</p>
+<p>跑吧~~</p>
+<p><img src="https://xp0int-team.feishu.cn/space/api/box/stream/download/asynccode/?code=YjVjZGIzNTc1NDU2N2ZmYTdhMTVjNmYxZGY5NzViNGJfVDRHVExmTGsxaFRTMUUwczhudVJmZjdrRTFzNTB0NURfVG9rZW46TnBUbGJrdER6b1hHNzl4TzQza2NOSHlWbmJlXzE2OTA0MjkxMjY6MTY5MDQzMjcyNl9WNA" alt="img"></p>
+<p> 地图贼反人类…慢慢看吧…</p>
+<p> picoCTF{ur_4_w1z4rd_4844AD6F}</p>
+<p> 好像每个人的地图还不一样…</p>
+<p> 结束…</p>
+<h1 id="PWN"><a href="#PWN" class="headerlink" title="PWN:"></a>PWN:</h1><h2 id="test-your-nc"><a href="#test-your-nc" class="headerlink" title="test_your_nc:"></a>test_your_nc:</h2><p> 很简单,运行就知道是获取到shell了</p>
+<p><img src="https://xp0int-team.feishu.cn/space/api/box/stream/download/asynccode/?code=N2ExYjhmYWU0NTY0MWIxZmE1MDQ2NmU5MDBiZWI0YTNfTU9MVmlRajhUcDI1ZjZVbHhyRlBZNE1BRUhDeVNNUWhfVG9rZW46TUFYRGJWbFJBbzV6dDd4bWV4VGNOVmkzbkRiXzE2OTA0MjkxMjY6MTY5MDQzMjcyNl9WNA" alt="img"></p>
+<p><img src="https://xp0int-team.feishu.cn/space/api/box/stream/download/asynccode/?code=NmUxOTdlMjhlYTFmMWU2MGJlOGI2YTg4ZmY4MWJhMWVfd2ZGVW5iRlNIamRPeko1cFRNdUtPSzBsOWhjMXNybURfVG9rZW46T1Q5cGIwRENMbzZKODV4bXN4S2NSSER2bk9nXzE2OTA0MjkxMjY6MTY5MDQzMjcyNl9WNA" alt="img"></p>
+<p>但是作为PWN手我们要用正确的解题方式</p>
+<p><img src="https://xp0int-team.feishu.cn/space/api/box/stream/download/asynccode/?code=ZTY2OTFiODcwNTlhOTAyMTQ2ZGJlN2IyMzA0N2UzN2NfRElvS0YyQThBYkk5dmVkZ3UxM01NMktWWkJiSGlNM2pfVG9rZW46TThTbGJ6RlNMb2piWU14Y2xnaGNyTGNhbk5oXzE2OTA0MjkxMjY6MTY5MDQzMjcyNl9WNA" alt="img"></p>
+<p>丢IDA里F5大法,不用解释</p>
+<p>结束…</p>
+<h2 id="Rip"><a href="#Rip" class="headerlink" title="Rip:"></a>Rip:</h2><h3 id="总体分析"><a href="#总体分析" class="headerlink" title="总体分析:"></a>总体分析:</h3><p>先运行,发现有输入(盲猜gets()),丢IDA吧…</p>
+<p><img src="https://xp0int-team.feishu.cn/space/api/box/stream/download/asynccode/?code=MDFlNTc5ZDZmYzgxMzI0YzNlYTAzYjFkNzBjNDczMzhfUnJRNnZJUU1NM2xRZlVlTHhNc3hGYjZaZEk1OWkzdmFfVG9rZW46TEJreWJQenU4b0s3M1p4ZU5MZ2NIcG5jbjJiXzE2OTA0MjkxMjY6MTY5MDQzMjcyNl9WNA" alt="img"></p>
+<p>好,盲猜正确…接下来该面向google解题了…</p>
+<p>看看有没有其他可利用的函数—&gt;找到了fun():</p>
+<p><img src="https://xp0int-team.feishu.cn/space/api/box/stream/download/asynccode/?code=NTM4NTkxNDIyMGNmNjk1YWIxM2EwMGY2YTkyMDEyMmNfcmt6aVE3Y3UwRndYenM1Vk0waWk1WEtxeWhGbldNcXRfVG9rZW46SVA1UWJxWE5ab2l2NG54WXNIV2NhNENMbmtmXzE2OTA0MjkxMjY6MTY5MDQzMjcyNl9WNA" alt="img"></p>
+<p>于是我们就要想办法跳转到这个函数,从而获得shell入口</p>
+<h3 id="如何构造字符串"><a href="#如何构造字符串" class="headerlink" title="如何构造字符串:"></a>如何构造字符串:</h3><p><img src="https://xp0int-team.feishu.cn/space/api/box/stream/download/asynccode/?code=MzA3MzkzODlmYzFhNGI1YzY0ODY5MTA5MWRmMWZlNThfaTEwamNyUjVTbHZpUHlOU1RLN1M5ZDhsVGdmV0J6WlVfVG9rZW46SDlLY2J4d1Bob3BxY3p4ejBSUWNtcUJ1bkdkXzE2OTA0MjkxMjY6MTY5MDQzMjcyNl9WNA" alt="img"></p>
+<p>可以发现s变量占15字节(反编译也能看出来char s[15])</p>
+<p>现在问题来了,我们要知道栈溢出的细节:</p>
+<p><img src="https://xp0int-team.feishu.cn/space/api/box/stream/download/asynccode/?code=ODNiZWI5OTlmMjM5MWJhYjhiZWVlOTUzY2Q4MzA4ZWZfTmVOdEV6UkNQYTBuNUUwMldESWVROTlkRExlcXZUYVJfVG9rZW46VHNYTWJLOGxCb25sVWN4dzZIeGNVODBkbndlXzE2OTA0MjkxMjY6MTY5MDQzMjcyNl9WNA" alt="img"></p>
+<p>用DIE工具查看该文件,发现是ELF64(废话),那么针对ELF64的分析如下:</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43780092/article/details/126694251">基础知识可以看看这篇文章</a></p>
+<p>因为本蒟蒻只会一点8086,所以也就大致先看看,有个概念再说…</p>
+<p><img src="https://xp0int-team.feishu.cn/space/api/box/stream/download/asynccode/?code=YzMyY2Q4YjU4N2QzYzUxMjY0YzUzZTgxOTljN2JlMTRfRWJkd1pRZTA4VTRHOGR1bXFITGpDY1pRMHVNYkFnd0RfVG9rZW46VDIzTmJlZ3VXb0RsOVR4cTFIYmNESkExbmNiXzE2OTA0MjkxMjY6MTY5MDQzMjcyNl9WNA" alt="img"></p>
+<p>其实重点就是这张图↑</p>
+<h3 id="对栈帧的分析-也就是分析上图"><a href="#对栈帧的分析-也就是分析上图" class="headerlink" title="对栈帧的分析(也就是分析上图):"></a>对栈帧的分析(也就是分析上图):</h3><p> 首先要知道对于函数栈帧来讲,也就是对于堆栈而言,是从高地址向低地址分配的(所以对s的溢出会影响到上一个函数栈帧—我理解的应该没错)</p>
+<p> 那么我们要进行计算,首先是15字节的s数组,以任意值进行填充,然后是填充当前函数帧的ebp(对于ELF64而言,且其占用8字节—因为是64位机器),此时我们就有15+8&#x3D;&#x3D;23字节了</p>
+<p> 接下来就是我们实际要覆盖的返回地址了,这里在IDA找到fun()函数的地址(0x401186)</p>
+<p> 于是我们在python中写exp(我的环境在linux安装,所以在linux下编写)—我也不知道我啥时候装的环境</p>
+<p><img src="https://xp0int-team.feishu.cn/space/api/box/stream/download/asynccode/?code=ZjI5ZjVlODcxMjM4ZGIyOTU4Nzg2Y2ZiOGUxY2Q0MjRfVFNJWnJHUUVuRVBYeDFsQWEyeGxJOTFjdThWZVlKTElfVG9rZW46RlR1RmJIR3VUb2F1TGl4TlE2R2NKSGtMbjJmXzE2OTA0MjkxMjY6MTY5MDQzMjcyNl9WNA" alt="img"></p>
+<p> 代码如下:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *  </span><br><span class="line">p=remote(<span class="string">&quot;node4.buuoj.cn&quot;</span>,<span class="number">29939</span>) <span class="comment">#靶机地址和端口</span></span><br><span class="line">payload=<span class="string">&#x27;A&#x27;</span>*<span class="number">15</span>+<span class="string">&#x27;B&#x27;</span>*<span class="number">8</span>+p64(<span class="number">0x401186</span>+<span class="number">1</span>).decode(<span class="string">&quot;iso-8859-1&quot;</span>)</span><br><span class="line"><span class="comment">#char s的15个字节+RBP的8字节+fun函数入口地址，+1为了堆栈平衡，p64()发送数据时，是发送的字节流，也就是比特流（二进制流）。</span></span><br><span class="line">p.sendline(payload)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+
+<p> 运行结果:</p>
+<p><img src="https://xp0int-team.feishu.cn/space/api/box/stream/download/asynccode/?code=YmQyYTk4ZjFkN2Y0NTc1NjVjMTA2MGUwM2M1YzZlZGVfNGYxQ21BaHJyYkd2S1l3SGNoZHJ6VlRMVThneWdrbTFfVG9rZW46T2s1UWI1N200b0w2dlF4d0w1M2N5amVCbkdjXzE2OTA0MjkxMjY6MTY5MDQzMjcyNl9WNA" alt="img"></p>
+<h3 id="问题来了"><a href="#问题来了" class="headerlink" title="问题来了:"></a>问题来了:</h3><p><img src="https://xp0int-team.feishu.cn/space/api/box/stream/download/asynccode/?code=MDU4MmZlZmE2MzgzNDYyODM4YThkYjBkNzRlNTkzMWZfZ1lOb0cwZGJLZXJHRXF0NWI5VVdubnBoekxWTXY0d1RfVG9rZW46VkhGSmIyQUVJb2RYUjB4c1RXRmNnRHVzbkRlXzE2OTA0MjkxMjY6MTY5MDQzMjcyNl9WNA" alt="img"></p>
+<p>  是的没错,玄学,这个问题先放在这里吧,暂时搞不了…(哪天回头再看看吧,有地方没理解到位)</p>
+<p>  而且那个堆栈平衡以后也得仔细看看…</p>
+<p>​      勉强算是结束了吧…</p>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/CTF/">CTF</a><a class="post-meta__tags" href="/tags/RE/">RE</a><a class="post-meta__tags" href="/tags/PWN/">PWN</a></div><div class="post_share"><div class="social-share" data-image="/img/avatar.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-full"><a href="/2023/06/02/hello-world/" title="Hello World"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Hello World</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">WAHAHA</div><div class="author-info__description">一个爱折腾的蒟蒻</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">2</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/gngtwhh" target="_blank" title="Github"><i class="fab fa-brands fa-github"></i></a><a class="social-icon" href="mailto:2784126850@qq.com" target="_blank" title="Email"><i class="fas fa-solid fa-envelope"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#RE"><span class="toc-number">1.</span> <span class="toc-text">RE:</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#file-run1"><span class="toc-number">1.1.</span> <span class="toc-text">file-run1:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#file-run2"><span class="toc-number">1.2.</span> <span class="toc-text">file-run2:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GDB-Test-Drive"><span class="toc-number">1.3.</span> <span class="toc-text">GDB Test Drive:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#patchme-py"><span class="toc-number">1.4.</span> <span class="toc-text">patchme.py:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Safe-Opener"><span class="toc-number">1.5.</span> <span class="toc-text">Safe Opener:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#unpackme-py"><span class="toc-number">1.6.</span> <span class="toc-text">unpackme.py:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bloat-py"><span class="toc-number">1.7.</span> <span class="toc-text">bloat.py:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Fresh-Java"><span class="toc-number">1.8.</span> <span class="toc-text">Fresh Java:</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5-java%E9%80%86%E5%90%91"><span class="toc-number">1.8.1.</span> <span class="toc-text">第一步-java逆向:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5-%E6%AD%A3%E5%88%99%E9%83%A8%E5%88%86"><span class="toc-number">1.8.2.</span> <span class="toc-text">第二步-正则部分:</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5"><span class="toc-number">1.8.2.1.</span> <span class="toc-text">第一步:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5"><span class="toc-number">1.8.2.2.</span> <span class="toc-text">第二步:</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5-%E8%A7%A3%E5%AF%86%E8%84%9A%E6%9C%AC"><span class="toc-number">1.8.3.</span> <span class="toc-text">第三步-解密脚本:</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Bbbbloat"><span class="toc-number">1.9.</span> <span class="toc-text">Bbbbloat:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Unpackme"><span class="toc-number">1.10.</span> <span class="toc-text">Unpackme:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Keygenme"><span class="toc-number">1.11.</span> <span class="toc-text">Keygenme:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Wizardlike"><span class="toc-number">1.12.</span> <span class="toc-text">Wizardlike:</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#PWN"><span class="toc-number">2.</span> <span class="toc-text">PWN:</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#test-your-nc"><span class="toc-number">2.1.</span> <span class="toc-text">test_your_nc:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Rip"><span class="toc-number">2.2.</span> <span class="toc-text">Rip:</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E4%BD%93%E5%88%86%E6%9E%90"><span class="toc-number">2.2.1.</span> <span class="toc-text">总体分析:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E6%9E%84%E9%80%A0%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">2.2.2.</span> <span class="toc-text">如何构造字符串:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E6%A0%88%E5%B8%A7%E7%9A%84%E5%88%86%E6%9E%90-%E4%B9%9F%E5%B0%B1%E6%98%AF%E5%88%86%E6%9E%90%E4%B8%8A%E5%9B%BE"><span class="toc-number">2.2.3.</span> <span class="toc-text">对栈帧的分析(也就是分析上图):</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E6%9D%A5%E4%BA%86"><span class="toc-number">2.2.4.</span> <span class="toc-text">问题来了:</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/07/27/Writeup(%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%BD%9C%E4%B8%9A%E7%AC%AC%E4%B8%80%E5%91%A8)/" title="无题">无题</a><time datetime="2023-07-26T16:00:00.000Z" title="发表于 2023-07-27 00:00:00">2023-07-27</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/06/02/hello-world/" title="Hello World">Hello World</a><time datetime="2023-06-02T09:41:42.566Z" title="发表于 2023-06-02 17:41:42">2023-06-02</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 By WAHAHA</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Hi, welcome to my <a href="https://gngtwhh.github.io/">blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
