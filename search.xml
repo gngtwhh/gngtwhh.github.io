@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>常见算法识别</title>
+      <link href="/2023/09/14/%E4%BA%8C%E8%BF%9B%E5%88%B6/%E5%B8%B8%E8%A7%81%E7%AE%97%E6%B3%95%E8%AF%86%E5%88%AB/"/>
+      <url>/2023/09/14/%E4%BA%8C%E8%BF%9B%E5%88%B6/%E5%B8%B8%E8%A7%81%E7%AE%97%E6%B3%95%E8%AF%86%E5%88%AB/</url>
+      
+        <content type="html"><![CDATA[<h1 id="特征值识别"><a href="#特征值识别" class="headerlink" title="特征值识别"></a>特征值识别</h1><p>许多常见算法会使用一些常量,如AES,DES等,为了提高效率,常常被硬编码在程序中,所以可以通过识别这些常量来推测程序是否使用了该算法.</p><p>例如:</p><p><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/2183824-20210712212520283-1123075736.png" alt="img"></p><p>IDA中的FindCrypt插件,PEiD的KANAL可以查找特征值</p><h2 id="特征运算识别"><a href="#特征运算识别" class="headerlink" title="特征运算识别"></a>特征运算识别</h2><p>特定的算法会有与之对应的运算,特征值不足以识别的时候,可以尝试分析程序中使用了那些特征运算,来进行算法的识别</p><p>例如:</p><p><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/2183824-20210712215155442-1406369467.png" alt="img"></p><h1 id="第三方库识别"><a href="#第三方库识别" class="headerlink" title="第三方库识别"></a>第三方库识别</h1><h2 id="字符串识别"><a href="#字符串识别" class="headerlink" title="字符串识别"></a>字符串识别</h2><p>许多第三方库都会将自己的版权信息,使用到的字符串(报错信息等)以字符串写入库,静态编译时,可以在二进制程序中找到这些信息,即可判断使用了哪些第三方库</p><h2 id="函数签名识别"><a href="#函数签名识别" class="headerlink" title="函数签名识别"></a>函数签名识别</h2><p>库对应一系列函数,可通过特定的函数签名来识别具体的函数,可以使用IDA的签名识别功能来进行查找,同时若IDA没有预置需要识别的库函数签名,则可以上网查找需要的函数签名库进行导入,或者使用IDA SDK中提供的FLAIR工具,根据已有的静态库文件来生成一份签名</p><h2 id="二进制比对识别"><a href="#二进制比对识别" class="headerlink" title="二进制比对识别"></a>二进制比对识别</h2><p>可以使用BinDiff工具来对二进制程序A(要分析的程序)和二进制程序B(自行找到的一个包含特定信息的程序)进行比较分析.</p><p>如果已知了A使用了某特定库,但是因为环境不同等原因不能完全匹配,这时可以找另外一个已经使用了该库的程序进行比对,来查看相似度,相似度达0.99的大概率是相同函数</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 知识库 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> CTF </tag>
+            
+            <tag> RE </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>C语言贪吃蛇</title>
       <link href="/2023/09/08/CC++%E7%BC%96%E7%A8%8B%E7%BB%83%E4%B9%A0%E5%92%8C%E9%A1%B9%E7%9B%AE/%E8%B4%AA%E5%90%83%E8%9B%87/"/>
       <url>/2023/09/08/CC++%E7%BC%96%E7%A8%8B%E7%BB%83%E4%B9%A0%E5%92%8C%E9%A1%B9%E7%9B%AE/%E8%B4%AA%E5%90%83%E8%9B%87/</url>
@@ -83,60 +110,6 @@
     
     
     <entry>
-      <title>RE学习1-3周总结</title>
-      <link href="/2023/08/09/RE/RE%E5%AD%A6%E4%B9%A01-3%E5%91%A8%E6%80%BB%E7%BB%93/"/>
-      <url>/2023/08/09/RE/RE%E5%AD%A6%E4%B9%A01-3%E5%91%A8%E6%80%BB%E7%BB%93/</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-      
-      <categories>
-          
-          <category> 知识库 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> CTF </tag>
-            
-            <tag> RE </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>PWN学习1-3周总结</title>
-      <link href="/2023/08/09/PWN/PWN%E5%AD%A6%E4%B9%A01-3%E5%91%A8%E6%80%BB%E7%BB%93/"/>
-      <url>/2023/08/09/PWN/PWN%E5%AD%A6%E4%B9%A01-3%E5%91%A8%E6%80%BB%E7%BB%93/</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-      
-      <categories>
-          
-          <category> 知识库 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> CTF </tag>
-            
-            <tag> PWN </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>二进制作业第三周</title>
       <link href="/2023/08/06/%E4%BA%8C%E8%BF%9B%E5%88%B6/WriteUp(%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%BD%9C%E4%B8%9A%E7%AC%AC%E4%B8%89%E5%91%A8)/"/>
       <url>/2023/08/06/%E4%BA%8C%E8%BF%9B%E5%88%B6/WriteUp(%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%BD%9C%E4%B8%9A%E7%AC%AC%E4%B8%89%E5%91%A8)/</url>
@@ -177,8 +150,8 @@
     
     <entry>
       <title>Python常用工具库</title>
-      <link href="/2023/08/03/%E7%9F%A5%E8%AF%86%E5%BA%93/Python%E5%B8%B8%E7%94%A8%E5%BA%93/"/>
-      <url>/2023/08/03/%E7%9F%A5%E8%AF%86%E5%BA%93/Python%E5%B8%B8%E7%94%A8%E5%BA%93/</url>
+      <link href="/2023/08/03/%E5%85%B6%E4%BB%96/Python%E5%B8%B8%E7%94%A8%E5%BA%93/"/>
+      <url>/2023/08/03/%E5%85%B6%E4%BB%96/Python%E5%B8%B8%E7%94%A8%E5%BA%93/</url>
       
         <content type="html"><![CDATA[<h1 id="IDA"><a href="#IDA" class="headerlink" title="IDA"></a>IDA</h1><h2 id="IDA-Python"><a href="#IDA-Python" class="headerlink" title="IDA Python"></a>IDA Python</h2><p>顾名思义,在IDA中写python脚本,用来提取数据等</p><p>用到idc_bc695这个库</p><p>另见:</p><p>​<a href="https://blog.csdn.net/m0_52164435/article/details/124878537">https://blog.csdn.net/m0_52164435/article/details/124878537</a></p><h1 id="外部工具"><a href="#外部工具" class="headerlink" title="外部工具"></a>外部工具</h1><h2 id="数学库"><a href="#数学库" class="headerlink" title="数学库"></a>数学库</h2><h3 id="z3库"><a href="#z3库" class="headerlink" title="z3库"></a>z3库</h3><h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><p>需要使用python3(python2已不再受支持,安装很可能出现问题)来安装</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pip install z3</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">上面命令失败的话可以尝试</span></span><br><span class="line">pip install z3-solver</span><br></pre></td></tr></table></figure><h4 id="声明求解范围"><a href="#声明求解范围" class="headerlink" title="声明求解范围"></a>声明求解范围</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#Int()和Ints()函数用于申请整数解</span></span><br><span class="line">a = Int(<span class="string">&#x27;a&#x27;</span>)</span><br><span class="line">a,b = Ints(<span class="string">&#x27;a b&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 有理数解</span></span><br><span class="line">a = Real(<span class="string">&quot;a&quot;</span>)</span><br><span class="line">a, b = Reals(<span class="string">&quot;a b&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 位向量，用于求解与/或/移位等位运算</span></span><br><span class="line"><span class="comment"># 第二个参数表示位数</span></span><br><span class="line">a = BitVec(<span class="string">&quot;a&quot;</span>, <span class="number">8</span>)</span><br><span class="line">a, b = BitVecs(<span class="string">&quot;a b&quot;</span>, <span class="number">8</span>)</span><br></pre></td></tr></table></figure><h4 id="增加方程约束"><a href="#增加方程约束" class="headerlink" title="增加方程约束"></a>增加方程约束</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#建立求解器</span></span><br><span class="line">S=Solver()</span><br><span class="line"><span class="comment">#添加约束</span></span><br><span class="line">equs=[</span><br><span class="line">    a+b==<span class="number">10</span>,</span><br><span class="line">    a-b==<span class="number">6</span></span><br><span class="line">]</span><br><span class="line">S.add(equs)</span><br><span class="line"><span class="comment">#也可以一个一个加</span></span><br><span class="line">S.add(a+b==<span class="number">10</span>)</span><br></pre></td></tr></table></figure><h4 id="求解"><a href="#求解" class="headerlink" title="求解"></a>求解</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(s.check())   <span class="comment"># sat代表有解，unsat代表无解</span></span><br><span class="line"><span class="built_in">print</span>(s.model())</span><br></pre></td></tr></table></figure>]]></content>
       
@@ -206,8 +179,8 @@
     
     <entry>
       <title>8086汇编学习笔记1---寄存器</title>
-      <link href="/2023/07/31/PWN/8086%E6%B1%87%E7%BC%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/"/>
-      <url>/2023/07/31/PWN/8086%E6%B1%87%E7%BC%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/</url>
+      <link href="/2023/07/31/%E4%BA%8C%E8%BF%9B%E5%88%B6/8086%E6%B1%87%E7%BC%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/"/>
+      <url>/2023/07/31/%E4%BA%8C%E8%BF%9B%E5%88%B6/8086%E6%B1%87%E7%BC%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/</url>
       
         <content type="html"><![CDATA[<h1 id="8086寄存器"><a href="#8086寄存器" class="headerlink" title="8086寄存器"></a>8086寄存器</h1><p>不同CPU的寄存器个数结构不同,对于8086CPU,有14个寄存器,分为:</p><p>​AX,BX,CX,DX,SI,DI,SP,BP,IP,CS,SS,DS,ES,PSW</p><h1 id="通用寄存器"><a href="#通用寄存器" class="headerlink" title="通用寄存器"></a>通用寄存器</h1><p>在x86架构的汇编语言中ax,bx,cx,dx是通用寄存器,用于存储数据或进行算术运算。这些寄存器的功能区别如下：</p><ol><li>AX (Accumulator): AX寄存器是累加器寄存器,用于执行算术和逻辑操作,以及存放函数返回值。在乘法和除法运算中,AX寄存器存储乘法的结果或除法的被除数。</li><li>BX (Base Register): BX寄存器通常用作基址寄存器,用于存放内存访问中的偏移地址。在一些特殊情况下,BX也可以用作通用寄存器。</li><li>CX (Count Register): CX寄存器通常用作计数器,特别是在循环操作中。它可以作为循环的计数值,并在循环执行过程中递减。</li><li>DX (Data Register): DX寄存器常用于存放一些数据,例如乘法的乘数或除法的除数。</li></ol><p>8086的寄存器均为16位,一个16位寄存器又可分为两部分,即kH,kL(k为A,B,C,D),各为一个字节(2字节&#x2F;16位为一个字)</p><h2 id="AX寄存器"><a href="#AX寄存器" class="headerlink" title="AX寄存器"></a>AX寄存器</h2><p>​AX寄存器一般用来存储临时数据,存储函数返回值,存储控制信息等,所以经常被用于MOV指令</p><h2 id="BX寄存器"><a href="#BX寄存器" class="headerlink" title="BX寄存器"></a>BX寄存器</h2><p>​BX寄存器通常用于内存寻址,即用于存储内存地址或作为其他寄存器的间接寻址寄存器</p><p>​例如:</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">MOV BX, 2000h    ; 将数据2000h传送到BX寄存器，作为内存地址</span><br><span class="line">MOV AX, [BX]     ; 将BX寄存器中存储的地址所对应的内存数据传送到AX寄存器</span><br><span class="line">MOV [BX], CX     ; 将CX寄存器的值传送到BX所指向的内存地址</span><br></pre></td></tr></table></figure><h2 id="CX寄存器"><a href="#CX寄存器" class="headerlink" title="CX寄存器"></a>CX寄存器</h2><p>​CX寄存器常用于计数器,用来在循环中(Loop)计数和存储计数值</p><p>​Loop &lt;标号&gt;命令执行时,会进行两步操作:</p><p>​1.(cx)&#x3D;(cx)-1;</p><p>​2.判断cx是否为0,如果为0则向下执行,否则跳转至标号处执行程序]</p><h2 id="DX寄存器"><a href="#DX寄存器" class="headerlink" title="DX寄存器"></a>DX寄存器</h2><p>​DX常用于存储数据或者作为数据传输的缓冲区,例如存储循环累加的值</p><h1 id="段寄存器"><a href="#段寄存器" class="headerlink" title="段寄存器"></a>段寄存器</h1><p>​在 8086 处理器中，共有四个段寄存器，它们是 CS (Code Segment)、DS (Data Segment)、SS (Stack Segment) 和 ES (Extra Segment),各个段寄存器的功能如下:</p><ol><li>CS (Code Segment)：指向代码段的起始地址，用于存储程序代码的位置。CS 寄存器中的内容加上指令的偏移地址，形成实际的物理地址，从而取得代码段中的指令。</li><li>DS (Data Segment)：指向数据段的起始地址，用于存储程序的全局数据和静态数据。DS 寄存器中的内容加上数据的偏移地址，形成实际的物理地址，从而访问数据段中的数据。</li><li>SS (Stack Segment)：指向栈段的起始地址，用于存储程序的运行时栈。SS 寄存器中的内容加上栈中数据的偏移地址，形成实际的物理地址，从而操作栈中的数据。</li><li>ES (Extra Segment)：额外段寄存器，用于存储其他数据段的起始地址。在特定情况下，程序可以使用 ES 寄存器来访问额外的数据段。</li></ol><p>参阅:</p><p>​<a href="https://blog.csdn.net/tju_zxl/article/details/128766360">https://blog.csdn.net/tju_zxl/article/details/128766360</a></p>]]></content>
       
@@ -235,8 +208,8 @@
     
     <entry>
       <title>makefile的使用</title>
-      <link href="/2023/07/29/%E7%9F%A5%E8%AF%86%E5%BA%93/makefile%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
-      <url>/2023/07/29/%E7%9F%A5%E8%AF%86%E5%BA%93/makefile%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
+      <link href="/2023/07/29/%E5%85%B6%E4%BB%96/makefile%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
+      <url>/2023/07/29/%E5%85%B6%E4%BB%96/makefile%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
       
         <content type="html"><![CDATA[<h1 id="makefile基本规则"><a href="#makefile基本规则" class="headerlink" title="makefile基本规则"></a>makefile基本规则</h1><p>一.格式:</p><p>​<strong>Target</strong> : Dependencies…</p><p>​Command…</p><p>​这即为一个规则,其中:</p><p>​1.Target 为目标,是规则的名字,也是make命令的入口.</p><p>​Target可以是目标文件—main.o main等等</p><p>​也可以是伪目标—并非真正要生成的文件,而是一个标签,不要和实际要生成的文件同名,一般为一个有意义的名字,可以描述其下Command命令功能的名字</p><p>​Target中一般只有一个文件;多个文件用空格分开,但是必须为相同类型的文件</p><p>​2.<strong>Dependencies</strong>为依赖文件列表</p><p>​例如main依赖main.o和hello.o,即为:</p><p>​main:main.o hello.o</p><p>​如果依赖文件一个都不写的话,那么只要输入make命令command命令就会执行</p><p>一般都将生成可执行文件的规则放在第一个,如下(?):</p><p>​<img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20230729190209136.png" alt="image-20230729190209136" style="zoom:33%;" /></p><p>如果不想将命令显示出来,在每条Command命令前都加上@即可:</p><p>​<img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20230729190236956.png" alt="image-20230729190236956" style="zoom:33%;" /></p><p>二.自动化变量</p><p>1.每一条规则都有互不冲突的变量:</p><table><thead><tr><th>$&lt;</th><th>规则的第一个依赖文件名</th></tr></thead><tbody><tr><td>$^</td><td>规则的所有依赖文件列表</td></tr><tr><td>$@</td><td>规则的目标文件名</td></tr></tbody></table><p>使用自动化变量可以简化规则的书写,例如:</p><p>​<img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20230729190322189.png" alt="image-20230729190322189" style="zoom: 33%;" /></p><p><strong>注意:自动化变量只能用于Command中,不能用于每个规则的第一行</strong></p><p>2.可以定义变量替代一系列文件名:</p><p>targets&#x3D;main.o add.o sub.o</p><p>该变量相当于全局变量,可以用在任何出现main.o add.o sub.o的地方</p><p>但是使用的时候写法为$(targets)而不能直接使用targets</p><p>一般只需要定义如下变量放于开头:</p><p>​<img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20230729190425899.png" alt="image-20230729190425899" style="zoom:33%;" /></p><p>分别为:最后可执行文件的变量;生成该可执行文件所需要的所有.o文件的变量;所有头文件的变量</p><h1 id="makefile的简化"><a href="#makefile的简化" class="headerlink" title="makefile的简化"></a>makefile的简化</h1><p>一.%.o:%.c</p><p>观察下面规则:</p><p>​<img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20230729190520197.png" alt="image-20230729190520197" style="zoom:33%;" /></p><p>可以使用</p><p>​%.o:%.c</p><p>​gcc -c $&lt; -o $@</p><p>来简化</p><p>%.o代表所有的.o文件,%.c代表所有的.c文件</p><p><strong>注意</strong>:尽管写在了一起,但是仍然是”只有发生改变的文件以及与该文件有依赖关系的文件才会重新编译”</p><h1 id="makefile隐含规则"><a href="#makefile隐含规则" class="headerlink" title="makefile隐含规则"></a>makefile隐含规则</h1><p>隐含规则是系统在makefile中已经写好的,隐含的一些规则</p><p>1.将.c文件编译生成.o文件</p><p>​make会自动推导出这种规则,并生成.o文件</p><p>​所以前面的规则可以写成:</p><p>​<img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20230729190606717.png" alt="image-20230729190606717" style="zoom:33%;" /></p><h1 id="存在多个makefile文件时执行哪一个"><a href="#存在多个makefile文件时执行哪一个" class="headerlink" title="存在多个makefile文件时执行哪一个"></a>存在多个makefile文件时执行哪一个</h1><p>1.make命令能够找到的makeflie文件只能是makefile或Makefile</p><p>​其他名字需要使用-f参数,例如:</p><p>​make -f makefile1</p><p>​make clean -f makefile1</p><p>​<img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20230729190646494.png" alt="image-20230729190646494" style="zoom:25%;" /></p>]]></content>
       
@@ -262,10 +235,10 @@
     
     <entry>
       <title>GDB调试的使用</title>
-      <link href="/2023/07/29/PWN/GDB%E8%B0%83%E8%AF%95%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
-      <url>/2023/07/29/PWN/GDB%E8%B0%83%E8%AF%95%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
+      <link href="/2023/07/29/%E4%BA%8C%E8%BF%9B%E5%88%B6/GDB%E8%B0%83%E8%AF%95%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
+      <url>/2023/07/29/%E4%BA%8C%E8%BF%9B%E5%88%B6/GDB%E8%B0%83%E8%AF%95%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
       
-        <content type="html"><![CDATA[<h1 id="GDB概述"><a href="#GDB概述" class="headerlink" title="GDB概述"></a>GDB概述</h1><h2 id="GDB组成架构"><a href="#GDB组成架构" class="headerlink" title="GDB组成架构"></a>GDB组成架构</h2><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/241-s2r1grmfpvr.png" alt="img" style="zoom:50%;" /><h2 id="基本工作原理"><a href="#基本工作原理" class="headerlink" title="基本工作原理"></a>基本工作原理</h2><p>gdb 通过系统调用 <code>ptrace</code> 来接管一个进程的执行。ptrace 系统调用提供了一种方法使得父进程可以观察和控制其它进程的执行，检查和改变其核心映像以及寄存器。它主要用来实现断点调试和系统调用跟踪。</p><h3 id="三种调试方式"><a href="#三种调试方式" class="headerlink" title="三种调试方式"></a>三种调试方式</h3><p>​直接运行并调试一个新进程</p><p>​运行并调试一个新进程</p><p>​运行 gdb，通过命令行或 <code>file</code> 命令指定目标程序。</p><p>​输入<code>run</code>命令， gdb 执行下面的操作：</p><p>​通过 <code>fork()</code> 系统调用创建一个新进程</p><p>​在新创建的子进程中执行操作：<code>ptrace(PTRACE_TRACEME, 0, 0, 0)</code></p><p>​在子进程中通过 <code>execv()</code> 系统调用加载用户指定的可执行文件</p><p>​attach并调试一个已经运行的进程</p><p>​用户确定需要进行调试的进程 PID</p><p>​运行 gdb，输入 <code>attach &lt;pid&gt;</code>，gdb 将对指定进程执行操作：<code>ptrace(PTRACE_ATTACH, pid, 0, 0)</code></p><p>​远程调试目标机上新创建的进程</p><p>​gdb 运行在调试机上，gdbserver 运行在目标机上，两者之间的通信数据格式由 gdb 远程串行协议（Remote Serial Protocol）定义</p><p>​RSP 协议数据的基本格式为： <code>$..........#xx</code></p><p>​gdbserver 的启动方式相当于运行并调试一个新创建的进程</p><h1 id="使用GDB前的准备"><a href="#使用GDB前的准备" class="headerlink" title="使用GDB前的准备"></a>使用GDB前的准备</h1><p>编译</p><p>​一般关闭-o优化选项</p><p>​打开-g调试选项</p><p>​-Wall打开所有warning</p><h1 id="GDB启动-x2F-退出-x2F-查看代码命令"><a href="#GDB启动-x2F-退出-x2F-查看代码命令" class="headerlink" title="GDB启动&#x2F;退出&#x2F;查看代码命令"></a>GDB启动&#x2F;退出&#x2F;查看代码命令</h1><p>启动退出</p><p>​gdb 可执行文件 —启动调试</p><p>​quit&#x2F;ctrl+d —退出</p><p>设置参数&#x2F;获取设置参数</p><p>​set args 10 20</p><p>​show args</p><p>GDB使用帮助</p><p>​help</p><p>查看当前文件代码</p><p>​list&#x2F;l —从默认位置显示</p><p>​list&#x2F;l &lt;行号&gt; —从制定的行显示</p><p>​list&#x2F;l &lt;函数名&gt; —从指定的函数开始显示</p><p>​disassemble&#x2F;disas —反汇编命令</p><p>​<code>disas &lt;func&gt;</code> 反汇编指定函数</p><p>​<code>disas &lt;addr&gt;</code> 反汇编某地址所在函数</p><p>​<code>disas &lt;begin_addr&gt; &lt;end_addr&gt;</code> 反汇编从开始地址到结束地址的部分</p><p>查看非当前文件代码</p><p>​list&#x2F;l &lt;文件名:行号&gt;</p><p>​list&#x2F;l &lt;文件名:函数名&gt;</p><p>设置显示的行数</p><p>​show list&#x2F;listsize</p><p>​set list&#x2F;listsize &lt;行数&gt;</p><p>其他</p><p>​pwd —显示工作目录</p><p>​shell —不离开gdb就能运行shell命令</p><p>​directory&#x2F;dir —设置查找源文件的路径(或者gdb的-d参数)</p><h1 id="GDB断点命令"><a href="#GDB断点命令" class="headerlink" title="GDB断点命令"></a>GDB断点命令</h1><p>设置断点</p><p>​b&#x2F;break &lt;行号&gt;</p><p>​b&#x2F;break &lt;函数名&gt;</p><p>​b&#x2F;break &lt;文件名:行号&gt;</p><p>​b&#x2F;break &lt;文件名:函数名&gt;</p><hr><p>​tbreak —临时断点,如同break,只不过在一次命中后被删除</p><p>查看断点</p><p>​i&#x2F;info b&#x2F;break</p><p>删除断点</p><p>​d&#x2F;del&#x2F;delete 断点编号</p><p>设置断点无效</p><p>​dis&#x2F;disable 断点编号</p><p>设置断点生效</p><p>​ena&#x2F;enable 断点编号</p><p>设置条件断点</p><p>​b&#x2F;break 10 if i&#x3D;&#x3D;5</p><h1 id="GDB调试运行命令"><a href="#GDB调试运行命令" class="headerlink" title="GDB调试运行命令"></a>GDB调试运行命令</h1><p>运行GDB</p><p>​start —停止于第一行</p><p>​run —运行到下一个断点</p><p>继续运行到下一个断点</p><p>​c&#x2F;continue</p><p>向下执行一段代码(不会进入函数体)</p><p>​n&#x2F;next</p><p>向下单步调试(遇到函数步进)</p><p>​s&#x2F;step —步进</p><p>​finish —运行直至跳出函数体</p><p>反向步进程序</p><p>​reverse-step [n] —反向步进程序,直到到达另一个源码行的开头,n表示执行n次,或某种原因程序停止</p><p>变量操作</p><p>​p&#x2F;print 变量名 —打印值</p><p>​ptype 变量名 —打印类型</p><p>自动变量操作</p><p>​display num —自动打印指定变量的值</p><p>​undisplay —取消…</p><p>​i&#x2F;info display</p><p>​undisplay 编号</p><p>其他操作</p><p>​until —跳出循环</p><p>​until &lt;行号&gt; —在函数内，进行指定位置跳转，执行完区间代码</p><h1 id="表达式监视-x2F-修改命令"><a href="#表达式监视-x2F-修改命令" class="headerlink" title="表达式监视&#x2F;修改命令"></a>表达式监视&#x2F;修改命令</h1><p>print &lt;表达式&gt; —对任意正确的表达式进行求值并打印</p><p>display &lt;表达式&gt; —每次单步进行指令后,紧接着输出被设置的表达式及值(单步运行非常有用)</p><p>watch &lt;表达式&gt; —设置一个监视点,一旦被监视的”表达式”的值改变,gdb将强行终止正在被调试的程序</p><p>​另外 <code>rwatch</code> 表示在访问时停止，<code>awatch</code> 表示在访问和改变时都停止</p><p>whatis —查询变量或函数</p><p>info &lt;函数&gt; —查询函数</p><p>info locals —查看当前堆栈页所有的变量</p><p>set var 变量名&#x3D;变量值 —修改变量的值</p><h1 id="特殊执行命令"><a href="#特殊执行命令" class="headerlink" title="特殊执行命令"></a>特殊执行命令</h1><p>运行代码</p><p>​call 函数(参数) —调用和执行函数</p><p>​return <expression> —取消函数调用的执行,expression被当做函数的返回值</p><p>生成代码</p><p>​make —不退出gdb就能重新产生可执行文件</p><h1 id="内存查看命令"><a href="#内存查看命令" class="headerlink" title="内存查看命令"></a>内存查看命令</h1><table><thead><tr><th>命令</th><th align="left">子选项</th><th>解释</th></tr></thead><tbody><tr><td>x</td><td align="left">x&#x2F;3 内存地址</td><td>需要显示的内存单元的个数，也就是说从当前地址向后显示几个内存单元的内容，一个内存单元的大小由后面的u定义</td></tr><tr><td></td><td align="left">x&#x2F;f 内存地址</td><td>f 表示显示的格式 ：  x 按十六进制格式显示变量。  d 按十进制格式显示变量。   u 按十进制格式显示无符号整型。   o 按八进制格式显示变量。   t 按二进制格式显示变量。   a 按十六进制格式显示变量。   i 指令地址格式   c 按字符格式显示变量。   f 按浮点数格式显示变量。</td></tr><tr><td></td><td align="left">x&#x2F;u 内存地址</td><td>u表示一个地址单元的长度    b表示单字节，    h表示双字节，    w表示四字节，    g表示八字节</td></tr><tr><td>举例</td><td align="left">x &#x2F;3dw 内存地址</td><td>打印3个四字节，按照10进制格式打印(即将上面各个部分组合起来)</td></tr></tbody></table><p>例如:</p><p><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20230729165808207.png" alt="image-20230729165808207"></p><p>这里打印了str[0]~str[15]的所有值(以16进制)</p><h1 id="堆栈和寄存器处理命令"><a href="#堆栈和寄存器处理命令" class="headerlink" title="堆栈和寄存器处理命令"></a>堆栈和寄存器处理命令</h1><p>bt —查看当前函数调用栈,即当前函数调用的上一层函数以及它们的调用栈信息</p><p>up&#x2F;down n —在堆栈中向上&#x2F;向下移动n层</p><p>frame n —切换到第n层堆栈</p><p>info相关的命令</p><p>​info frame —查看当前堆栈帧的信息，包括函数名、参数、返回地址等</p><p>​info args —查看当前函数的参数信息</p><p>​info locals —查看当前函数的局部变量信息</p><p>​info registers —查看所有寄存器的信息</p><p>print &#x2F;x $reg —以16进制格式查看指定寄存器reg的值</p><p>set $reg &#x3D; value —设置指定寄存器reg的值为value</p><h1 id="查询运行状态命令"><a href="#查询运行状态命令" class="headerlink" title="查询运行状态命令"></a>查询运行状态命令</h1><p>where&#x2F;bt —当前运行的堆栈列表(?)&#x2F;查看程序出错原因</p><p>bt backtrace —显示当前调用堆栈</p><p>up&#x2F;down —改变堆栈显示的深度</p><p>info program —查看程序的是否在运行，进程号，被暂停的原因</p><p>部分转载于:</p><p><a href="https://www.wenjiangs.com/doc/lkor5lfsdn#gdb-%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"></a></p>]]></content>
+        <content type="html"><![CDATA[<h1 id="GDB概述"><a href="#GDB概述" class="headerlink" title="GDB概述"></a>GDB概述</h1><h2 id="GDB组成架构"><a href="#GDB组成架构" class="headerlink" title="GDB组成架构"></a>GDB组成架构</h2><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/241-s2r1grmfpvr.png" alt="img" style="zoom:50%;" /><h2 id="基本工作原理"><a href="#基本工作原理" class="headerlink" title="基本工作原理"></a>基本工作原理</h2><p>gdb 通过系统调用 <code>ptrace</code> 来接管一个进程的执行。ptrace 系统调用提供了一种方法使得父进程可以观察和控制其它进程的执行，检查和改变其核心映像以及寄存器。它主要用来实现断点调试和系统调用跟踪。</p><h3 id="三种调试方式"><a href="#三种调试方式" class="headerlink" title="三种调试方式"></a>三种调试方式</h3><p>​直接运行并调试一个新进程</p><p>​运行并调试一个新进程</p><p>​运行 gdb，通过命令行或 <code>file</code> 命令指定目标程序。</p><p>​输入<code>run</code>命令， gdb 执行下面的操作：</p><p>​通过 <code>fork()</code> 系统调用创建一个新进程</p><p>​在新创建的子进程中执行操作：<code>ptrace(PTRACE_TRACEME, 0, 0, 0)</code></p><p>​在子进程中通过 <code>execv()</code> 系统调用加载用户指定的可执行文件</p><p>​attach并调试一个已经运行的进程</p><p>​用户确定需要进行调试的进程 PID</p><p>​运行 gdb，输入 <code>attach &lt;pid&gt;</code>，gdb 将对指定进程执行操作：<code>ptrace(PTRACE_ATTACH, pid, 0, 0)</code></p><p>​远程调试目标机上新创建的进程</p><p>​gdb 运行在调试机上，gdbserver 运行在目标机上，两者之间的通信数据格式由 gdb 远程串行协议（Remote Serial Protocol）定义</p><p>​RSP 协议数据的基本格式为： <code>$..........#xx</code></p><p>​gdbserver 的启动方式相当于运行并调试一个新创建的进程</p><h1 id="使用GDB前的准备"><a href="#使用GDB前的准备" class="headerlink" title="使用GDB前的准备"></a>使用GDB前的准备</h1><p>编译</p><p>​一般关闭-o优化选项</p><p>​打开-g调试选项</p><p>​-Wall打开所有warning</p><h1 id="GDB启动-x2F-退出-x2F-查看代码命令"><a href="#GDB启动-x2F-退出-x2F-查看代码命令" class="headerlink" title="GDB启动&#x2F;退出&#x2F;查看代码命令"></a>GDB启动&#x2F;退出&#x2F;查看代码命令</h1><p>启动退出</p><p>​gdb 可执行文件 —启动调试</p><p>​quit&#x2F;ctrl+d —退出</p><p>设置参数&#x2F;获取设置参数</p><p>​set args 10 20</p><p>​show args</p><p>GDB使用帮助</p><p>​help</p><p>查看当前文件代码</p><p>​list&#x2F;l —从默认位置显示</p><p>​list&#x2F;l &lt;行号&gt; —从制定的行显示</p><p>​list&#x2F;l &lt;函数名&gt; —从指定的函数开始显示</p><p>​disassemble&#x2F;disas —反汇编命令</p><p>​<code>disas &lt;func&gt;</code> 反汇编指定函数</p><p>​<code>disas &lt;addr&gt;</code> 反汇编某地址所在函数</p><p>​<code>disas &lt;begin_addr&gt; &lt;end_addr&gt;</code> 反汇编从开始地址到结束地址的部分</p><p>查看非当前文件代码</p><p>​list&#x2F;l &lt;文件名:行号&gt;</p><p>​list&#x2F;l &lt;文件名:函数名&gt;</p><p>设置显示的行数</p><p>​show list&#x2F;listsize</p><p>​set list&#x2F;listsize &lt;行数&gt;</p><p>其他</p><p>​pwd —显示工作目录</p><p>​shell —不离开gdb就能运行shell命令</p><p>​directory&#x2F;dir —设置查找源文件的路径(或者gdb的-d参数)</p><h1 id="GDB断点命令"><a href="#GDB断点命令" class="headerlink" title="GDB断点命令"></a>GDB断点命令</h1><p>设置断点</p><p>​b&#x2F;break &lt;行号&gt;</p><p>​b&#x2F;break &lt;函数名&gt;</p><p>​b&#x2F;break &lt;文件名:行号&gt;</p><p>​b&#x2F;break &lt;文件名:函数名&gt;</p><hr><p>​tbreak —临时断点,如同break,只不过在一次命中后被删除</p><p>查看断点</p><p>​i&#x2F;info b&#x2F;break</p><p>删除断点</p><p>​d&#x2F;del&#x2F;delete 断点编号</p><p>设置断点无效</p><p>​dis&#x2F;disable 断点编号</p><p>设置断点生效</p><p>​ena&#x2F;enable 断点编号</p><p>设置条件断点</p><p>​b&#x2F;break 10 if i&#x3D;&#x3D;5</p><h1 id="GDB调试运行命令"><a href="#GDB调试运行命令" class="headerlink" title="GDB调试运行命令"></a>GDB调试运行命令</h1><p>运行GDB</p><p>​start —停止于第一行</p><p>​run —运行到下一个断点</p><p>继续运行到下一个断点</p><p>​c&#x2F;continue</p><p>向下执行一段代码(不会进入函数体)</p><p>​n&#x2F;next</p><p>向下单步调试(遇到函数步进)</p><p>​s&#x2F;step —步进</p><p>​finish —运行直至跳出函数体</p><p>反向步进程序</p><p>​reverse-step [n] —反向步进程序,直到到达另一个源码行的开头,n表示执行n次,或某种原因程序停止</p><p>变量操作</p><p>​p&#x2F;print 变量名 —打印值</p><p>​ptype 变量名 —打印类型</p><p>自动变量操作</p><p>​display num —自动打印指定变量的值</p><p>​undisplay —取消…</p><p>​i&#x2F;info display</p><p>​undisplay 编号</p><p>其他操作</p><p>​until —跳出循环</p><p>​until &lt;行号&gt; —在函数内，进行指定位置跳转，执行完区间代码</p><h1 id="表达式监视-x2F-修改命令"><a href="#表达式监视-x2F-修改命令" class="headerlink" title="表达式监视&#x2F;修改命令"></a>表达式监视&#x2F;修改命令</h1><p>print &lt;表达式&gt; —对任意正确的表达式进行求值并打印</p><p>display &lt;表达式&gt; —每次单步进行指令后,紧接着输出被设置的表达式及值(单步运行非常有用)</p><p>watch &lt;表达式&gt; —设置一个监视点,一旦被监视的”表达式”的值改变,gdb将强行终止正在被调试的程序</p><p>​另外 <code>rwatch</code> 表示在访问时停止，<code>awatch</code> 表示在访问和改变时都停止</p><p>whatis —查询变量或函数</p><p>info &lt;函数&gt; —查询函数</p><p>info locals —查看当前堆栈页所有的变量</p><p>set var 变量名&#x3D;变量值 —修改变量的值</p><h1 id="特殊执行命令"><a href="#特殊执行命令" class="headerlink" title="特殊执行命令"></a>特殊执行命令</h1><p>运行代码</p><p>​call 函数(参数) —调用和执行函数</p><p>​return <expression> —取消函数调用的执行,expression被当做函数的返回值</p><p>生成代码</p><p>​make —不退出gdb就能重新产生可执行文件</p><h1 id="内存查看命令"><a href="#内存查看命令" class="headerlink" title="内存查看命令"></a>内存查看命令</h1><table><thead><tr><th>命令</th><th align="left">子选项</th><th>解释</th></tr></thead><tbody><tr><td>x</td><td align="left">x&#x2F;3 内存地址</td><td>需要显示的内存单元的个数，也就是说从当前地址向后显示几个内存单元的内容，一个内存单元的大小由后面的u定义</td></tr><tr><td></td><td align="left">x&#x2F;f 内存地址</td><td>f 表示显示的格式 ：  x 按十六进制格式显示变量。  d 按十进制格式显示变量。   u 按十进制格式显示无符号整型。   o 按八进制格式显示变量。   t 按二进制格式显示变量。   a 按十六进制格式显示变量。   i 指令地址格式   c 按字符格式显示变量。   f 按浮点数格式显示变量。</td></tr><tr><td></td><td align="left">x&#x2F;u 内存地址</td><td>u表示一个地址单元的长度    b表示单字节，    h表示双字节，    w表示四字节，    g表示八字节</td></tr><tr><td>举例</td><td align="left">x &#x2F;3dw 内存地址</td><td>打印3个四字节，按照10进制格式打印(即将上面各个部分组合起来)</td></tr></tbody></table><p>例如:</p><p><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20230729165808207.png" alt="image-20230729165808207"></p><p>这里打印了str[0]~str[15]的所有值(以16进制)</p><p>另外,使用 $ida(“xxx”)可以通过IDA名称获取地址,例如 $ida(“main”)  (?)</p><h1 id="堆栈和寄存器处理命令"><a href="#堆栈和寄存器处理命令" class="headerlink" title="堆栈和寄存器处理命令"></a>堆栈和寄存器处理命令</h1><p>bt —查看当前函数调用栈,即当前函数调用的上一层函数以及它们的调用栈信息</p><p>up&#x2F;down n —在堆栈中向上&#x2F;向下移动n层</p><p>frame n —切换到第n层堆栈</p><p>info相关的命令</p><p>​info frame —查看当前堆栈帧的信息，包括函数名、参数、返回地址等</p><p>​info args —查看当前函数的参数信息</p><p>​info locals —查看当前函数的局部变量信息</p><p>​info registers —查看所有寄存器的信息</p><p>print &#x2F;x $reg —以16进制格式查看指定寄存器reg的值</p><p>set $reg &#x3D; value —设置指定寄存器reg的值为value</p><h1 id="查询运行状态命令"><a href="#查询运行状态命令" class="headerlink" title="查询运行状态命令"></a>查询运行状态命令</h1><p>where&#x2F;bt —当前运行的堆栈列表(?)&#x2F;查看程序出错原因</p><p>bt backtrace —显示当前调用堆栈</p><p>up&#x2F;down —改变堆栈显示的深度</p><p>info program —查看程序的是否在运行，进程号，被暂停的原因</p><h1 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h1><p>1.GDB不会自动在程序入口点暂停,所以需要在执行前设置好断点</p><p>部分转载于:</p><p><a href="https://www.wenjiangs.com/doc/lkor5lfsdn#gdb-%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"></a></p>]]></content>
       
       
       <categories>
