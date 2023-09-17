@@ -8,7 +8,7 @@
       <link href="/2023/09/17/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/RSA/"/>
       <url>/2023/09/17/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/RSA/</url>
       
-        <content type="html"><![CDATA[<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>RSA是目前使用最广泛的公钥密码体制之一。它是1977年由罗纳德·李维斯特（Ron Rivest）、阿迪·萨莫尔（Adi Shamir）和伦纳德·阿德曼（Leonard Adleman）一起提出的。当时他们三人都在麻省理工学院工作。RSA就是他们三人姓氏开头字母拼在一起组成的。<br> RSA算法的安全性基于RSA问题的困难性，也就是基于大整数因子分解的困难性上。但是RSA问题不会比因子分解问题更加困难，也就是说，在没有解决因子分解问题的情况下可能解决RSA问题，因此RSA算法并不是完全基于大整数因子分解的困难性上的。</p><p>注:RSA的相关证明涉及到中国剩余定理的利用</p><h1 id="算法描述"><a href="#算法描述" class="headerlink" title="算法描述"></a>算法描述</h1><h2 id="RSA产生公私钥对"><a href="#RSA产生公私钥对" class="headerlink" title="RSA产生公私钥对"></a>RSA产生公私钥对</h2><p>1.选取两个大素数 <code>p,q</code>,为了最大的安全性,p,q的位数相等</p><p>2.计算乘积 <code>n=p*q</code></p><p>3.随机取加密密钥 <code>e</code>,使得e和(p-1)(q-1)互素,然后使用欧几里得算法计算解密密钥 <code>d</code></p><p>​即有公式 <code>d = e^-1 mod (p-1)(q-1)</code></p><p>注意:</p><p>d和n也互素,至此,<code>e</code>和<code>n</code>为公钥,<code>d</code>为私钥</p><p>实际应用中，<code>e</code> 常常选择65537 (?)</p><h2 id="RSA的加解密算法"><a href="#RSA的加解密算法" class="headerlink" title="RSA的加解密算法"></a>RSA的加解密算法</h2><p>设有明文<code>m</code>,密文为<code>c</code>,其中<code>0&lt;=m&lt;n,0&lt;=c&lt;n</code></p><p>则加密算法为:</p><p>​<code>c = m^e mod n</code></p><p>解密算法为:</p><p>​<code>m = c^d mod n</code></p><h2 id="RSA对明文的加解密的过程"><a href="#RSA对明文的加解密的过程" class="headerlink" title="RSA对明文的加解密的过程"></a>RSA对明文的加解密的过程</h2><p>1.首先对于明文<code>M</code>,要对其进行比特串分组,确保每个分组<code>m</code>的十进制数都小于n(即<code>0&lt;=m&lt;n</code>)</p><p>2.然后对每个分组进行加密,整合为密文<code>C</code></p><p>3.对与密文<code>C</code>同理分组为<code>c</code>,有<code>0&lt;=c&lt;n</code></p><p>4.对其进行解密,最终整合为明文<code>M</code></p><h2 id="加解密脚本"><a href="#加解密脚本" class="headerlink" title="加解密脚本"></a>加解密脚本</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"></span><br><span class="line"><span class="comment"># 已知公私钥</span></span><br><span class="line">p = <span class="number">9648423029010515676590551740010426534945737639235739800643989352039852507298491399561035009163427050370107570733633350911691280297777160200625281665378483</span></span><br><span class="line">q = <span class="number">11874843837980297032092405848653656852760910154543380907650040190704283358909208578251063047732443992230647903887510065547947313543299303261986053486569407</span></span><br><span class="line">e = <span class="number">65537</span></span><br><span class="line">c = <span class="number">6376842280869728581726746401583705899941768214138742259689334840735633553053887641847651173776251820293087212885670180367406807406765923638973161375817392737747832762751690104423869019034</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># c = input(&#x27;请输入密文&#x27;)</span></span><br><span class="line">n = p * q</span><br><span class="line">phi_n = (p - <span class="number">1</span>) * (q - <span class="number">1</span>)  <span class="comment"># 对n取欧拉函数,p,q均为素数</span></span><br><span class="line">d = gmpy2.invert(e, phi_n)  <span class="comment"># 即e*d mod phi_n = 1 (求逆元)</span></span><br><span class="line">m = gmpy2.powmod(c, d, n)  <span class="comment"># 即m = c^d mod n (求大整数c的d次幂模n取余)</span></span><br><span class="line"><span class="built_in">print</span>(m)  <span class="comment"># 求得的明文</span></span><br><span class="line"></span><br></pre></td></tr></table></figure><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果已知公私钥</span></span><br><span class="line">p = <span class="number">9648423029010515676590551740010426534945737639235739800643989352039852507298491399561035009163427050370107570733633350911691280297777160200625281665378483</span></span><br><span class="line">q = <span class="number">11874843837980297032092405848653656852760910154543380907650040190704283358909208578251063047732443992230647903887510065547947313543299303261986053486569407</span></span><br><span class="line">e = <span class="number">65537</span></span><br><span class="line">m = <span class="number">123456</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># c = input(&#x27;请输入明文&#x27;)</span></span><br><span class="line">n = p * q</span><br><span class="line">phi_n = (p - <span class="number">1</span>) * (q - <span class="number">1</span>)  <span class="comment"># 对n取欧拉函数,p,q均为素数</span></span><br><span class="line">d = gmpy2.invert(e, phi_n)  <span class="comment"># 即e*d mod phi_n = 1 (求逆元)</span></span><br><span class="line">c = gmpy2.powmod(m, e, n)  <span class="comment"># 即c = m^e mod n (求大整数m的e次幂模n取余)</span></span><br><span class="line"><span class="built_in">print</span>(c)  <span class="comment"># 求得的密文</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+        <content type="html"><![CDATA[<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>RSA是目前使用最广泛的公钥密码体制之一。它是1977年由罗纳德·李维斯特（Ron Rivest）、阿迪·萨莫尔（Adi Shamir）和伦纳德·阿德曼（Leonard Adleman）一起提出的。当时他们三人都在麻省理工学院工作。RSA就是他们三人姓氏开头字母拼在一起组成的。<br> RSA算法的安全性基于RSA问题的困难性，也就是基于大整数因子分解的困难性上。但是RSA问题不会比因子分解问题更加困难，也就是说，在没有解决因子分解问题的情况下可能解决RSA问题，因此RSA算法并不是完全基于大整数因子分解的困难性上的。</p><p>注:RSA的相关证明涉及到中国剩余定理的利用</p><h1 id="算法描述"><a href="#算法描述" class="headerlink" title="算法描述"></a>算法描述</h1><h2 id="RSA产生公私钥对"><a href="#RSA产生公私钥对" class="headerlink" title="RSA产生公私钥对"></a>RSA产生公私钥对</h2><p>1.选取两个大素数 <code>p,q</code>,为了最大的安全性,p,q的位数相等</p><p>2.计算乘积 <code>n=p*q</code></p><p>3.随机取加密密钥 <code>e</code>,使得e和(p-1)(q-1)互素,然后使用欧几里得算法计算解密密钥<code>d</code></p><p>​即有公式 <code>d = e^-1 mod (p-1)(q-1)</code></p><p>注意:</p><p>d和n也互素,至此,<code>e</code>和<code>n</code>为公钥,<code>d</code>为私钥</p><p>实际应用中，<code>e</code> 常常选择65537 (?)</p><h2 id="RSA的加解密算法"><a href="#RSA的加解密算法" class="headerlink" title="RSA的加解密算法"></a>RSA的加解密算法</h2><p>设有明文<code>m</code>,密文为<code>c</code>,其中<code>0&lt;=m&lt;n,0&lt;=c&lt;n</code></p><p>则加密算法为:</p><p>​<code>c = m^e mod n</code></p><p>解密算法为:</p><p>​<code>m = c^d mod n</code></p><h2 id="RSA对明文的加解密的过程"><a href="#RSA对明文的加解密的过程" class="headerlink" title="RSA对明文的加解密的过程"></a>RSA对明文的加解密的过程</h2><p>1.首先对于明文<code>M</code>,要对其进行比特串分组,确保每个分组<code>m</code>的十进制数都小于n(即<code>0&lt;=m&lt;n</code>)</p><p>2.然后对每个分组进行加密,整合为密文<code>C</code></p><p>3.对与密文<code>C</code>同理分组为<code>c</code>,有<code>0&lt;=c&lt;n</code></p><p>4.对其进行解密,最终整合为明文<code>M</code></p><h2 id="加解密脚本"><a href="#加解密脚本" class="headerlink" title="加解密脚本"></a>加解密脚本</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"></span><br><span class="line"><span class="comment"># 已知公私钥</span></span><br><span class="line">p = <span class="number">9648423029010515676590551740010426534945737639235739800643989352039852507298491399561035009163427050370107570733633350911691280297777160200625281665378483</span></span><br><span class="line">q = <span class="number">11874843837980297032092405848653656852760910154543380907650040190704283358909208578251063047732443992230647903887510065547947313543299303261986053486569407</span></span><br><span class="line">e = <span class="number">65537</span></span><br><span class="line">c = <span class="number">6376842280869728581726746401583705899941768214138742259689334840735633553053887641847651173776251820293087212885670180367406807406765923638973161375817392737747832762751690104423869019034</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># c = input(&#x27;请输入密文&#x27;)</span></span><br><span class="line">n = p * q</span><br><span class="line">phi_n = (p - <span class="number">1</span>) * (q - <span class="number">1</span>)  <span class="comment"># 对n取欧拉函数,p,q均为素数</span></span><br><span class="line">d = gmpy2.invert(e, phi_n)  <span class="comment"># 即e*d mod phi_n = 1 (求逆元)</span></span><br><span class="line">m = gmpy2.powmod(c, d, n)  <span class="comment"># 即m = c^d mod n (求大整数c的d次幂模n取余)</span></span><br><span class="line"><span class="built_in">print</span>(m)  <span class="comment"># 求得的明文</span></span><br><span class="line"></span><br></pre></td></tr></table></figure><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果已知公私钥</span></span><br><span class="line">p = <span class="number">9648423029010515676590551740010426534945737639235739800643989352039852507298491399561035009163427050370107570733633350911691280297777160200625281665378483</span></span><br><span class="line">q = <span class="number">11874843837980297032092405848653656852760910154543380907650040190704283358909208578251063047732443992230647903887510065547947313543299303261986053486569407</span></span><br><span class="line">e = <span class="number">65537</span></span><br><span class="line">m = <span class="number">123456</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># c = input(&#x27;请输入明文&#x27;)</span></span><br><span class="line">n = p * q</span><br><span class="line">phi_n = (p - <span class="number">1</span>) * (q - <span class="number">1</span>)  <span class="comment"># 对n取欧拉函数,p,q均为素数</span></span><br><span class="line">d = gmpy2.invert(e, phi_n)  <span class="comment"># 即e*d mod phi_n = 1 (求逆元)</span></span><br><span class="line">c = gmpy2.powmod(m, e, n)  <span class="comment"># 即c = m^e mod n (求大整数m的e次幂模n取余)</span></span><br><span class="line"><span class="built_in">print</span>(c)  <span class="comment"># 求得的密文</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
       
       
       <categories>
@@ -272,7 +272,7 @@
       
       <categories>
           
-          <category> 工具库 </category>
+          <category> 知识库 </category>
           
       </categories>
       
@@ -337,9 +337,9 @@
       
         <tags>
             
-            <tag> tools </tag>
-            
             <tag> makefile </tag>
+            
+            <tag> tools </tag>
             
         </tags>
       
@@ -364,9 +364,9 @@
       
         <tags>
             
-            <tag> GDB </tag>
-            
             <tag> tools </tag>
+            
+            <tag> GDB </tag>
             
         </tags>
       
@@ -509,22 +509,22 @@
     
     
     <entry>
-      <title>在线工具</title>
-      <link href="/tools/index.html"/>
-      <url>/tools/index.html</url>
+      <title>我的标签</title>
+      <link href="/tags/index.html"/>
+      <url>/tags/index.html</url>
       
-        <content type="html"><![CDATA[]]></content>
+        <content type="html"><![CDATA[<p>hello world</p>]]></content>
       
     </entry>
     
     
     
     <entry>
-      <title>我的标签</title>
-      <link href="/tags/index.html"/>
-      <url>/tags/index.html</url>
+      <title>在线工具</title>
+      <link href="/tools/index.html"/>
+      <url>/tools/index.html</url>
       
-        <content type="html"><![CDATA[<p>hello world</p>]]></content>
+        <content type="html"><![CDATA[]]></content>
       
     </entry>
     
