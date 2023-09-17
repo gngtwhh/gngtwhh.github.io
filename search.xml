@@ -35,7 +35,7 @@
       <link href="/2023/09/17/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/Base64/"/>
       <url>/2023/09/17/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/Base64/</url>
       
-        <content type="html"><![CDATA[<p>(见<a href="https://blog.csdn.net/local_752/article/details/121970823">https://blog.csdn.net/local_752/article/details/121970823</a>)</p><p>Base64是一种用64个字符表示所有二进制数据的编码方式，通过将二进制数据每6位一组的方式重新组织，刚好可以使用0~9的数字、大小写字母以及“+”和“&#x2F;”总共64个字符表示从<code>000000</code>到<code>111111</code>的64种状态</p><p>它实际上是一种“二进制到文本”的编码方法</p><p>Base64是一种用64个字符(这64个字符中包括大小写字母、数字、＋和／，还有用来补缺的特殊字符&#x3D;)来表示任意二进制数据的方法。它是一种编码方式，而非加密方式。它通过将二进制数据转变为64个“可打印字符”，完成了数据在HTTP协议上的传输。通过将二进制数据每6位一组的方式重新组织，刚好可以使用0~9的数字、大小写字母以及“+”和“&#x2F;”总共64个字符表示从<code>000000</code>到<code>111111</code>的64种状态</p><p>注意：由于base64编码用了8位字符来表示信息中的6个位，所以base64编码字符串大约比原始值扩大了33%。</p><p><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20230917180421686.png" alt="image-20230917180421686"></p><p><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20230917180421686.png"></p>]]></content>
+        <content type="html"><![CDATA[<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>(见<a href="https://blog.csdn.net/local_752/article/details/121970823">https://blog.csdn.net/local_752/article/details/121970823</a>)</p><p>Base64是一种用64个字符表示所有二进制数据的编码方式，通过将二进制数据每6位一组的方式重新组织，刚好可以使用0~9的数字、大小写字母以及“+”和“&#x2F;”总共64个字符表示从<code>000000</code>到<code>111111</code>的64种状态</p><p>它实际上是一种“二进制到文本”的编码方法</p><p>Base64是一种用64个字符(这64个字符中包括大小写字母、数字、＋和／，还有用来补缺的特殊字符&#x3D;)来表示任意二进制数据的方法。它是一种编码方式，而非加密方式。它通过将二进制数据转变为64个“可打印字符”，完成了数据在HTTP协议上的传输。通过将二进制数据每6位一组的方式重新组织，刚好可以使用0~9的数字、大小写字母以及“+”和“&#x2F;”总共64个字符表示从<code>000000</code>到<code>111111</code>的64种状态</p><p>注意：由于base64编码用了8位字符来表示信息中的6个位，所以base64编码字符串大约比原始值扩大了33%。</p><p><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20230917180421686.png" alt="image-20230917180421686"></p><p><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20230917180421686.png"></p><h1 id="变表Base64"><a href="#变表Base64" class="headerlink" title="变表Base64"></a>变表Base64</h1><p>解密脚本:</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Visit https://www.lddgo.net/string/pyc-compile-decompile for more information</span></span><br><span class="line"><span class="comment"># Version : Python 3.7</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">from</span> string <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">original_title</span>():</span><br><span class="line">    <span class="comment"># 原来的题目</span></span><br><span class="line">    str1 = <span class="string">&#x27;yD9oB3Inv3YAB19YynIuJnUaAGB0um0=&#x27;</span></span><br><span class="line">    string1 = <span class="string">&#x27;ZYXWVUTSRQPONMLKJIHGFEDCBAzyxwvutsrqponmlkjihgfedcba0123456789+/&#x27;</span></span><br><span class="line">    string2 = <span class="string">&#x27;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/&#x27;</span></span><br><span class="line">    flag = <span class="built_in">input</span>(<span class="string">&#x27;welcome to moectf\ninput your flag and I wiil check it:&#x27;</span>)</span><br><span class="line">    enc_flag = base64.b64encode(flag.encode()).decode()</span><br><span class="line">    enc_flag = enc_flag.translate(<span class="built_in">str</span>.maketrans(string2, string1))</span><br><span class="line">    <span class="keyword">if</span> enc_flag == str1:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;good job!!!!&#x27;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;something wrong???&#x27;</span>)</span><br><span class="line">        exit(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">decrypt1</span>():</span><br><span class="line">    <span class="comment"># 方法1</span></span><br><span class="line">    str1 = <span class="string">&#x27;yD9oB3Inv3YAB19YynIuJnUaAGB0um0=&#x27;</span></span><br><span class="line">    string1 = <span class="string">&#x27;ZYXWVUTSRQPONMLKJIHGFEDCBAzyxwvutsrqponmlkjihgfedcba0123456789+/&#x27;</span></span><br><span class="line">    string2 = <span class="string">&#x27;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/&#x27;</span></span><br><span class="line"></span><br><span class="line">    convert_dict = &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(string1)):</span><br><span class="line">        ch1 = string1[i]</span><br><span class="line">        ch2 = string2[i]</span><br><span class="line">        convert_dict[ch1] = ch2</span><br><span class="line"></span><br><span class="line">    str2 = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> str1:</span><br><span class="line">        <span class="keyword">if</span> i <span class="keyword">not</span> <span class="keyword">in</span> convert_dict.keys():</span><br><span class="line">            str2 += i</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        j = convert_dict[i]</span><br><span class="line">        str2 += j</span><br><span class="line">    flag = base64.b64decode(str2.encode()).decode()</span><br><span class="line">    <span class="built_in">print</span>(flag)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">decrypt2</span>():</span><br><span class="line">    <span class="comment"># 方法2</span></span><br><span class="line">    str1 = <span class="string">&#x27;yD9oB3Inv3YAB19YynIuJnUaAGB0um0=&#x27;</span></span><br><span class="line">    string1 = <span class="string">&#x27;ZYXWVUTSRQPONMLKJIHGFEDCBAzyxwvutsrqponmlkjihgfedcba0123456789+/&#x27;</span></span><br><span class="line">    string2 = <span class="string">&#x27;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/&#x27;</span></span><br><span class="line">    flag = base64.b64decode(str1.translate(<span class="built_in">str</span>.maketrans(string2, string1)))</span><br><span class="line">    <span class="built_in">print</span>(flag.decode())</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># decrypt1()</span></span><br><span class="line">decrypt2()</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
       
       
       <categories>
@@ -337,9 +337,9 @@
       
         <tags>
             
-            <tag> makefile </tag>
-            
             <tag> tools </tag>
+            
+            <tag> makefile </tag>
             
         </tags>
       
@@ -364,9 +364,9 @@
       
         <tags>
             
-            <tag> tools </tag>
-            
             <tag> GDB </tag>
+            
+            <tag> tools </tag>
             
         </tags>
       
@@ -465,22 +465,22 @@
     
     
     <entry>
-      <title>关于</title>
-      <link href="/about/index.html"/>
-      <url>/about/index.html</url>
+      <title>分类导航</title>
+      <link href="/categories/index.html"/>
+      <url>/categories/index.html</url>
       
-        <content type="html"><![CDATA[<p><a href="https://www.baidu.com/">https://www.baidu.com</a></p>]]></content>
+        <content type="html"><![CDATA[<p>hello world</p>]]></content>
       
     </entry>
     
     
     
     <entry>
-      <title>分类导航</title>
-      <link href="/categories/index.html"/>
-      <url>/categories/index.html</url>
+      <title>关于</title>
+      <link href="/about/index.html"/>
+      <url>/about/index.html</url>
       
-        <content type="html"><![CDATA[<p>hello world</p>]]></content>
+        <content type="html"><![CDATA[<p><a href="https://www.baidu.com/">https://www.baidu.com</a></p>]]></content>
       
     </entry>
     
@@ -498,9 +498,9 @@
     
     
     <entry>
-      <title>在线工具</title>
-      <link href="/tools/index.html"/>
-      <url>/tools/index.html</url>
+      <title>我的影子</title>
+      <link href="/link/index.html"/>
+      <url>/link/index.html</url>
       
         <content type="html"><![CDATA[]]></content>
       
@@ -509,9 +509,9 @@
     
     
     <entry>
-      <title>我的影子</title>
-      <link href="/link/index.html"/>
-      <url>/link/index.html</url>
+      <title>在线工具</title>
+      <link href="/tools/index.html"/>
+      <url>/tools/index.html</url>
       
         <content type="html"><![CDATA[]]></content>
       
