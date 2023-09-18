@@ -4,11 +4,11 @@
   
     
     <entry>
-      <title>写在前面</title>
+      <title>C语言教程---写在前面</title>
       <link href="/2023/09/19/C%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/%E5%86%99%E5%9C%A8%E5%89%8D%E9%9D%A2/"/>
       <url>/2023/09/19/C%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/%E5%86%99%E5%9C%A8%E5%89%8D%E9%9D%A2/</url>
       
-        <content type="html"><![CDATA[<h1 id="为什么开始写这个教程"><a href="#为什么开始写这个教程" class="headerlink" title="为什么开始写这个教程"></a>为什么开始写这个教程</h1><p>​    首先,写这篇文章的时候，我也是一名大二的学生，但是我是从初二就开始因为兴趣开始接触c语言，中途也是起起伏伏随便学到现在的。其实因为没有师傅领进门浪费了很多时间，而且这门语言身边也没有人愿意来用，就导致我壹个人在学这门语言。</p><p>​    那么作为一个C的死忠粉，尽管我的实力有限，但是同阶段而言，我的C语言是非常熟练的。毕竟C很老了，而且有很多后起之秀，未来这门语言的形势也未曾可知，但是作为一门我的启蒙语言，我目前体会最深刻的一门语言，我想把我对这门语言的看法记录下来，融入我的这篇教程（<del>随笔</del>），以后再回头也能回忆起当时这门语言对我的影响之深。</p><p>​    本教程面向C初学者、上网闲逛的C爱好者、以及需要深入学习C语言的朋友（比如CTF比赛中的PWN，RE选手），在很多时候我写一些工具反而更愿意使用C语言。如果各位想找到浅显快速的入门教程，那么也许菜鸟更适合你，如果你有充足的时间和兴趣，又没有精力去认真读一些C语言的书,那么这个文章可能比较适合你对C有进一步的认识。</p><p>​    很多人擅长编写程序，但是不是每一个人都是一个好的阅读者（阅读他人的代码），包括我也有非常大的学习进步空间—我也刚大二（逃~），特别是一名RE手，更要在面对IDA分析出的繁杂的伪代码（C伪代码）时有着敏锐的感觉。那么，对于C语言的理解、对于程序设计思想的认识就更为重要，要从程序的目的出发，去思考代码应该是什么样的（或者说也许会被写成什么样子）。</p><p>​    那么我现在就想从一个摸爬滚打的计算机fw的角度来把我自己的感悟记录下来，所以也许这篇教程更像是自己的一个笔记&#x2F;记录，如果有幸被各位看到，有不认同的地方还请谅解，欢迎讨论。从现在开始，这篇教程就开始编写，无所谓被多少人看到（能看到最好—谁不想自己的努力被人认可呢doge），能写多少也未知晓，虽然会花费很多时间，但是愿意做这个记录，日后回看也是好事，但愿能多写一点。</p><p>​    （以上包含了一些个人的情绪，请忽略~~~doge）</p><p>​—WAHAHA，2023.9.19凌晨1.46</p>]]></content>
+        <content type="html"><![CDATA[<h1 id="为什么开始写这个教程"><a href="#为什么开始写这个教程" class="headerlink" title="为什么开始写这个教程"></a>为什么开始写这个教程</h1><p>​    首先,写这篇文章的时候，我也是一名大二的学生，但是我是从初二就开始因为兴趣开始接触c语言，中途也是起起伏伏随便学到现在的。其实因为没有师傅领进门浪费了很多时间，而且这门语言身边也没有人愿意来用，就导致我壹个人在学这门语言。</p><p>​    那么作为一个C的死忠粉，尽管我的实力有限，但是同阶段而言，我的C语言是非常熟练的。毕竟C很老了，而且有很多后起之秀，未来这门语言的形势也未曾可知，但是作为一门我的启蒙语言，我目前体会最深刻的一门语言，我想把我对这门语言的看法记录下来，融入我的这篇教程（<del>随笔</del>），以后再回头也能回忆起当时这门语言对我的影响之深。</p><p>​    本教程面向C初学者、上网闲逛的C爱好者、以及需要深入学习C语言的朋友（比如CTF比赛中的PWN，RE选手），在很多时候我写一些工具反而更愿意使用C语言。如果各位想找到浅显快速的入门教程，那么也许菜鸟更适合您，如果您有充足的时间和兴趣，又没有精力去认真读一些C语言的书,那么这个文章可能比较适合您对C有进一步的认识。</p><p>​    很多人擅长编写程序，但是不是每一个人都是一个好的阅读者（阅读他人的代码），包括我也有非常大的学习进步空间—我也刚大二（逃~），特别是一名RE手，更要在面对IDA分析出的繁杂的伪代码（C伪代码）时有着敏锐的感觉。那么，对于C语言的理解、对于程序设计思想的认识就更为重要，要从程序的目的出发，去思考代码应该是什么样的（或者说也许会被写成什么样子）。</p><p>​    那么我现在就想从一个摸爬滚打的计算机fw的角度来把我自己的感悟记录下来，所以也许这篇教程更像是自己的一个笔记&#x2F;记录，如果有幸被各位看到，有不认同的地方还请谅解，欢迎讨论。从现在开始，这篇教程就开始编写，无所谓被多少人看到（能看到最好—谁不想自己的努力被人认可呢doge），能写多少也未知晓，虽然会花费很多时间，但是愿意做这个记录，日后回看也是好事，但愿能多写一点。</p><p>​    （以上包含了一些个人的情绪，请忽略~~~doge）</p><p>​—WAHAHA，2023.9.19凌晨1.46</p><h1 id="学习C语言应该保持怎样的态度"><a href="#学习C语言应该保持怎样的态度" class="headerlink" title="学习C语言应该保持怎样的态度"></a>学习C语言应该保持怎样的态度</h1><p>​    （写完发现怎么写成“如何学习”教程了。。。）</p><p>​    我相信大部分学C语言的人都是被迫的，无论是因为学校的课程，亦或是需求所迫。目前在我看来，90%学C语言的人日后工作都不会再使用这门语言。RUST，golang，python等新语言，其他新技术的出现，还有C语言自身的不可否认的一些缺陷，都让C语言这个老古董逐渐退出舞台。所以本教程适合给想要好好学C的人看。</p><p>​    但是其实，C语言目前还是不可或缺的（2023年），很多人都会说，我也同样要说，目前在我看来，最接近底层，最容易理解的语言，还要属C语言，C仅次于汇编的简单粗暴让C在速度，自由度上有着极大的优势，同时这也是为什么C被称为中级语言的原因。而且这些特点也和C的发展历史、开发初衷不可分割。具体可以去看《C和指针》、《C专家编程》等书。</p><p>​    同时由于C语言的这些特性，也让他在当今显得不再合适，更高效率的开发模式依赖新技术，我个人支持，不过C语言我仍然放不下。虽然所谓的“C语言用来系统开发”，“C语言用来写底层非常高效”这些说法确实是C的强项，Linux，UNIX等系统，一些重要程序也都是纯C编写的，但是现在的开发讲求效率，便于维护，C语言就显得比较老旧。</p><p>​    但是无论C的形势如何，适合用C的地方，其他语言真的是不可替代的。想要应付考试，也可以移步其他教程更为快速有效，毕竟本人还是想好好的把自己的心得记录下来，而不是简单的应付考试。</p><p>​    废话一大堆，我认为学C语言最重要的一点就是“认清你的目标”，你的目标决定了你的学习方法，深入学习和快速上手是不一样的，如果您确实对C有着很大的好感，例如作为兴趣，那么欢迎来看我的文章，并欢迎讨论。如果您需要快速上手，那么也许菜鸟教程，一些视频课程应该更适合您。</p><p>​    同时还要“自觉主动”，学习是自己的事情，特别是认真学习C语言更是你的选择，不要想着别人应该有义务去教你，有不懂的地方，自觉查资料，自己去弄懂，C语言是一门技能，而不是一门课程，按照学一门课程的思维去学习C语言是掌握不了这门技能的。</p><p>​    学习不可避免要提问，“提问的艺术”是必须掌握的，无论你学什么，你都应该先认真掌握提问的艺术！！！</p><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/3cfd9b4a0f10ffb73edd760db6f89b24.jpg" alt="3cfd9b4a0f10ffb73edd760db6f89b24" style="zoom:50%;" /><p>​    具体请移步↓</p><p><a href="https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way/blob/main/README-zh_CN.md">https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way/blob/main/README-zh_CN.md</a></p><p>​    “提问的艺术”中，我着重要强调的一点是“保持礼貌”，别人不是你的学习工具，没有哪怕一丁点的义务去帮助你，所以，无论是面对你的学长&#x2F;学弟&#x2F;老师&#x2F;同学&#x2F;学习群友&#x2F;论坛坛友&#x2F;团队成员,都(TMD)放尊重点!!!因为见过很不礼貌的人（某些学习群群友等）,他最终得不到任何的帮助,反而让回答者感到很不舒服。</p><p>​    吾师道也，夫庸知其年之先后生于吾乎？是故无贵无贱，无长无少，道之所存，师之所存也。任何人只要有技术,都可以成为你的老师,面对有学问的人,首当其冲的就是尊重。</p><p>​    接下来要注意的就是，永远不要高估自己的实力，也不要绝对相信自己的判断，保持谦虚求实的态度会让你进步的更加迅速。</p><p>​    作为C语言的学习者，你不可避免的会遇到很多看似正确，实则错误的写法，这也许怪不得你，因为C语言如此精简使得很多不经意的修改并不会导致语法上的错误，甚至在逻辑结果上在小范围内都不会有任何问题。所以，如果你发现你的程序换一个输入，结果就不对了，请首先不要质疑你的编译器&#x2F;IDE&#x2F;操作系统等等—他们一般情况下比你高明多了，先去考虑自己的代码哪里有问题。同时，初学，不要纠结任何软件问题，不要去考验自己，我本人是极其不建议新手去使用VSCode等需要高度自定义的软件的（并没有批评VSCode的意思），一句话：“先让程序跑起来，能跑就行”</p>]]></content>
       
       
       <categories>
@@ -515,6 +515,28 @@
     
     
     <entry>
+      <title>关于</title>
+      <link href="/about/index.html"/>
+      <url>/about/index.html</url>
+      
+        <content type="html"><![CDATA[<p><a href="https://www.baidu.com/">https://www.baidu.com</a></p>]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title></title>
+      <link href="/json-data/tools.json"/>
+      <url>/json-data/tools.json</url>
+      
+        <content type="html"><![CDATA[[{"class_name":"CTF工具","class_desc":"常用在线工具","link_list":[{"name":"CyberChef","link":"https://icyberchef.com/","avatar":"/img/artical_pic.png","descr":"编码万能转换"},{"name":"密码破解","link":"http://www.atoolbox.net/Category.php?Id=27&Page=1","avatar":"/img/artical_pic.png","descr":"基本密码在线解密"},{"name":"正则表达式工具","link":"https://c.runoob.com/front-end/854/?optionGlobl=global","avatar":"/img/artical_pic.png","descr":"正则表达式在线处理"},{"name":"BrainF**k and Ook","link":"https://www.splitbrain.org/services/ook","avatar":"/img/artical_pic.png","descr":"某种玄学的东西"},{"name":"因数分解","link":"http://www.factordb.com/index.php","avatar":"/img/artical_pic.png","descr":"一个因数分解数据库"},{"name":"摩斯电码","link":"https://morsecode.world/international/decoder/audio-decoder-adaptive.html","avatar":"/img/artical_pic.png","descr":"不解释"},{"name":"图像处理","link":"https://onlinetools.com/image","avatar":"/img/artical_pic.png","descr":"图像的各种特殊处理"},{"name":"Java在线逆向","link":"http://javare.cn","avatar":"/img/artical_pic.png","descr":"可以class文件..."},{"name":"Awesome-Hacking","link":"https://blog.csdn.net/ZYC88888/article/details/113663486","avatar":"/img/artical_pic.png","descr":"CTF工具库"}]},{"class_name":"转换工具","class_desc":"格式转换的一些小工具","link_list":[{"name":"pdf转换工具","link":"https://www.alltoall.net/","avatar":"/img/artical_pic.png","descr":"文档在线转换"},{"name":"音频格式转换工具","link":"http://ncm.miidj.com/","avatar":"/img/artical_pic.png","descr":"方便使用播放器"},{"name":"操作系统文件格式转换","link":"http://tools.bugscaner.com/text/textconvert.html","avatar":"/img/artical_pic.png","descr":"在线文档格式windows unix macintosh互相转换"}]},{"class_name":"网络工具","class_desc":"网络相关的工具和资源","link_list":[{"name":"测速网","link":"https://www.speedtest.cn/","avatar":"/img/artical_pic.png","descr":"网速测试"},{"name":"Clash","link":"https://github.com/Dreamacro/clash/releases","avatar":"/img/artical_pic.png","descr":"Clash下载直达"},{"name":"虚拟手机号","link":"https://sms-activate.org/cn/getNumber","avatar":"/img/artical_pic.png","descr":"虚拟手机号服务"},{"name":"机场","link":"https://www.mojie.mx/#/login","avatar":"/img/artical_pic.png","descr":"懂?"}]},{"class_name":"其他工具","class_desc":"其他各种工具","link_list":[{"name":"文本对比工具","link":"https://tool.p2hp.com/tool-online-difftext/","avatar":"/img/artical_pic.png","descr":"在线文本对比"},{"name":"大数运算器","link":"https://goodcalculators.com/big-number-calculator/","avatar":"/img/artical_pic.png","descr":"高精度大数在线运算"},{"name":"阶乘运算器","link":"https://zh.numberempire.com/factorialcalculator.php","avatar":"/img/artical_pic.png","descr":"阶乘计算"}]}]]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>分类导航</title>
       <link href="/categories/index.html"/>
       <url>/categories/index.html</url>
@@ -526,11 +548,11 @@
     
     
     <entry>
-      <title>关于</title>
-      <link href="/about/index.html"/>
-      <url>/about/index.html</url>
+      <title>在线工具</title>
+      <link href="/tools/index.html"/>
+      <url>/tools/index.html</url>
       
-        <content type="html"><![CDATA[<p><a href="https://www.baidu.com/">https://www.baidu.com</a></p>]]></content>
+        <content type="html"><![CDATA[]]></content>
       
     </entry>
     
@@ -553,28 +575,6 @@
       <url>/link/index.html</url>
       
         <content type="html"><![CDATA[]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>在线工具</title>
-      <link href="/tools/index.html"/>
-      <url>/tools/index.html</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title></title>
-      <link href="/json-data/tools.json"/>
-      <url>/json-data/tools.json</url>
-      
-        <content type="html"><![CDATA[[{"class_name":"CTF工具","class_desc":"常用在线工具","link_list":[{"name":"CyberChef","link":"https://icyberchef.com/","avatar":"/img/artical_pic.png","descr":"编码万能转换"},{"name":"密码破解","link":"http://www.atoolbox.net/Category.php?Id=27&Page=1","avatar":"/img/artical_pic.png","descr":"基本密码在线解密"},{"name":"正则表达式工具","link":"https://c.runoob.com/front-end/854/?optionGlobl=global","avatar":"/img/artical_pic.png","descr":"正则表达式在线处理"},{"name":"BrainF**k and Ook","link":"https://www.splitbrain.org/services/ook","avatar":"/img/artical_pic.png","descr":"某种玄学的东西"},{"name":"因数分解","link":"http://www.factordb.com/index.php","avatar":"/img/artical_pic.png","descr":"一个因数分解数据库"},{"name":"摩斯电码","link":"https://morsecode.world/international/decoder/audio-decoder-adaptive.html","avatar":"/img/artical_pic.png","descr":"不解释"},{"name":"图像处理","link":"https://onlinetools.com/image","avatar":"/img/artical_pic.png","descr":"图像的各种特殊处理"},{"name":"Java在线逆向","link":"http://javare.cn","avatar":"/img/artical_pic.png","descr":"可以class文件..."},{"name":"Awesome-Hacking","link":"https://blog.csdn.net/ZYC88888/article/details/113663486","avatar":"/img/artical_pic.png","descr":"CTF工具库"}]},{"class_name":"转换工具","class_desc":"格式转换的一些小工具","link_list":[{"name":"pdf转换工具","link":"https://www.alltoall.net/","avatar":"/img/artical_pic.png","descr":"文档在线转换"},{"name":"音频格式转换工具","link":"http://ncm.miidj.com/","avatar":"/img/artical_pic.png","descr":"方便使用播放器"},{"name":"操作系统文件格式转换","link":"http://tools.bugscaner.com/text/textconvert.html","avatar":"/img/artical_pic.png","descr":"在线文档格式windows unix macintosh互相转换"}]},{"class_name":"网络工具","class_desc":"网络相关的工具和资源","link_list":[{"name":"测速网","link":"https://www.speedtest.cn/","avatar":"/img/artical_pic.png","descr":"网速测试"},{"name":"Clash","link":"https://github.com/Dreamacro/clash/releases","avatar":"/img/artical_pic.png","descr":"Clash下载直达"},{"name":"虚拟手机号","link":"https://sms-activate.org/cn/getNumber","avatar":"/img/artical_pic.png","descr":"虚拟手机号服务"},{"name":"机场","link":"https://www.mojie.mx/#/login","avatar":"/img/artical_pic.png","descr":"懂?"}]},{"class_name":"其他工具","class_desc":"其他各种工具","link_list":[{"name":"文本对比工具","link":"https://tool.p2hp.com/tool-online-difftext/","avatar":"/img/artical_pic.png","descr":"在线文本对比"},{"name":"大数运算器","link":"https://goodcalculators.com/big-number-calculator/","avatar":"/img/artical_pic.png","descr":"高精度大数在线运算"},{"name":"阶乘运算器","link":"https://zh.numberempire.com/factorialcalculator.php","avatar":"/img/artical_pic.png","descr":"阶乘计算"}]}]]]></content>
       
     </entry>
     
