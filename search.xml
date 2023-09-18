@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>贪心算法思想</title>
+      <link href="/2023/09/18/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E7%AE%97%E6%B3%95/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95%E6%A6%82%E8%BF%B0/"/>
+      <url>/2023/09/18/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E7%AE%97%E6%B3%95/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95%E6%A6%82%E8%BF%B0/</url>
+      
+        <content type="html"><![CDATA[<h1 id="什么是贪心"><a href="#什么是贪心" class="headerlink" title="什么是贪心"></a>什么是贪心</h1><h2 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h2><p>总是做出<strong>当前</strong>最好的选择,期望通过<strong>局部</strong>最优选择得到<strong>全局</strong>最优的解决方案</p><p>即从问题的初始解开始一步一步选择当前最优,逐步逼近问题的目标,即使得不到最优解也能得到其近似</p><h2 id="本质"><a href="#本质" class="headerlink" title="本质"></a>本质</h2><h3 id="使用条件"><a href="#使用条件" class="headerlink" title="使用条件"></a>使用条件</h3><p>贪心选择性质:原问题的整体最优解可以分解为一系列相似的局部最优解,每一步的选择都依赖于前面的选择,但不依赖于未作出的选择</p><h3 id="最优子结构性质"><a href="#最优子结构性质" class="headerlink" title="最优子结构性质"></a>最优子结构性质</h3><p>当一个问题的最优解包含其子问题的最优解时，称此问题具有最优子结构性质</p><p>原问题S&#x3D; {a1,a2 ,…,ai,…,an }，通过贪心选择选出一个当前最优解{ai}之后，</p><p>转化为求解子问题S -{ai }，如果原问题的最优解包含子问题的最优解，则说明该问题满足最优子结构性质</p><p>​<img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20230918020525646.png" alt="image-20230918020525646" style="zoom:50%;" /></p><h2 id="求解步骤"><a href="#求解步骤" class="headerlink" title="求解步骤"></a>求解步骤</h2><p>选择贪心策略—以什么标准做出选择</p><p>局部最优解—根据贪心策略一步步地得到局部最优解</p><p>全局最优解—合并所有局部最优解—&gt;得到原问题规模(?)的全局最优解</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>RSA</title>
       <link href="/2023/09/17/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/RSA/"/>
       <url>/2023/09/17/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/RSA/</url>
@@ -337,9 +362,9 @@
       
         <tags>
             
-            <tag> makefile </tag>
-            
             <tag> tools </tag>
+            
+            <tag> makefile </tag>
             
         </tags>
       
@@ -364,9 +389,9 @@
       
         <tags>
             
-            <tag> tools </tag>
-            
             <tag> GDB </tag>
+            
+            <tag> tools </tag>
             
         </tags>
       
@@ -476,17 +501,6 @@
     
     
     <entry>
-      <title>分类导航</title>
-      <link href="/categories/index.html"/>
-      <url>/categories/index.html</url>
-      
-        <content type="html"><![CDATA[<p>hello world</p>]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title></title>
       <link href="/json-data/tools.json"/>
       <url>/json-data/tools.json</url>
@@ -525,6 +539,17 @@
       <url>/tools/index.html</url>
       
         <content type="html"><![CDATA[]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>分类导航</title>
+      <link href="/categories/index.html"/>
+      <url>/categories/index.html</url>
+      
+        <content type="html"><![CDATA[<p>hello world</p>]]></content>
       
     </entry>
     
