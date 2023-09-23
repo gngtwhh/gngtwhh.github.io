@@ -566,9 +566,9 @@
       
         <tags>
             
-            <tag> makefile </tag>
-            
             <tag> tools </tag>
+            
+            <tag> makefile </tag>
             
         </tags>
       
@@ -593,9 +593,9 @@
       
         <tags>
             
-            <tag> tools </tag>
-            
             <tag> GDB </tag>
+            
+            <tag> tools </tag>
             
         </tags>
       
