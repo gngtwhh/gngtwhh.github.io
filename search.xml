@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>WriteUp-XSCTF2023决赛</title>
+      <link href="/2023-11-06-94308b8e4bb3/"/>
+      <url>/2023-11-06-94308b8e4bb3/</url>
+      
+        <content type="html"><![CDATA[<p>只做出来2道题QWQ</p><h1 id="学到的知识点"><a href="#学到的知识点" class="headerlink" title="学到的知识点"></a>学到的知识点</h1><h2 id="C-try…catch"><a href="#C-try…catch" class="headerlink" title="C++ try…catch"></a>C++ try…catch</h2><p>C++逆向那道题中有一个函数在运行时引发了一个异常,最后的处理函数是一个Xor()函数,将flag进行了一次特定的异或加密.找了很久才找到,最后看汇编找跳转才找到…不过最后还是不是特别清楚c++的异常机制,毕竟c++编译器底层做的事太多了.</p><h2 id="CRC32校验"><a href="#CRC32校验" class="headerlink" title="CRC32校验"></a>CRC32校验</h2><p>貌似…是…Crackme那道题是有一个CRC32的校验.</p><h1 id="Reverse"><a href="#Reverse" class="headerlink" title="Reverse"></a>Reverse</h1><h2 id="esab64"><a href="#esab64" class="headerlink" title="esab64"></a>esab64</h2><p>这道题是c++逆向,没有提供pdb文件之前,代码比较混乱,但是还是能分析的,后续提示更新了pdb文件后更加清晰.</p><p>总之就是对flag进行了一遍变表base64编码,然后每四个字符一组进行翻转,就是最终的密文.</p><p>分析如下(pdb文件提供之前的分析):</p><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20231106160411279.png" alt="image-20231106160411279" style="zoom:50%;" /><p>反序后再变表base64解码,很简单,但是逆向解码出来后发现乱码:</p><p><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20231106160643056.png" alt="image-20231106160643056"></p><p>后续提示去分析c++ try…catch,说明程序中某个地方故意引发了异常,在处理异常的时候进行了一些额外的加密.</p><p>去考虑代码,这个额外加密一定在base64之前,因为分析发现(甚至经过了大量的调试验证),最终密文检验确实是base64并反序的密文和真正的密文按顺序比较:</p><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20231106161422267.png" alt="image-20231106161422267" style="zoom:50%;" /><p>动态调试分析,手动提取出每次比较的两个寄存器值,发现确实就是变表base64(反转过的)的结果依次比较,没有任何问题.</p><p>动调前的准备工作:有反调试,patch掉:</p><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20231106161959207.png" alt="image-20231106161959207" style="zoom:50%;" /><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20231106162029511.png" alt="image-20231106162029511" style="zoom: 33%;" /><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20231106162112078.png" alt="image-20231106162112078" style="zoom:50%;" /><p>另外还有,为了逐个检查比较的字符,还需要对检查密文匹配的循环里的if语句进行修改,让其不会退出循环:</p><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20231106162337894.png" alt="image-20231106162337894" style="zoom:50%;" /><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20231106162510282.png" alt="image-20231106162510282" style="zoom: 33%;" /><p>这样就可以进行调试了,最终只剩下那个异常处理的问题了.</p><p>在提供了pdb文件后,代码高度还原为c++代码,那个神秘函数名也还原为Exception():</p><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20231106162721729.png" alt="image-20231106162721729" style="zoom:33%;" /><p>但是进去分析伪代码什么都没有,于是从汇编下手,但是由于知识所限,寻找了很久才找到:</p><p>从Exception()函数的汇编进去,发现push了一个结构体<code>stru_FF3CC8</code>,进去看发现有两个标号<code>$LN5</code>,<code>$LN6</code>:</p><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20231106163916637.png" alt="image-20231106163916637" style="zoom:50%;" /><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20231106164039570.png" alt="image-20231106164039570" style="zoom:50%;" /><p>跳转回去查看,最终找到一个”隐藏”的Xor()函数:</p><p><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20231106164218206.png" alt="image-20231106164218206"></p><p>(可能分析的不是很对,这里好像就是已经进入函数了?)</p><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20231106164316316.png" alt="image-20231106164316316" style="zoom:50%;" /><p>代码很简单,我们直接对解密的乱码再如上进行一遍对应的异或即可.</p><p>最终的解密代码如下:</p><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Visit https://www.lddgo.net/string/pyc-compile-decompile for more information</span></span><br><span class="line"><span class="comment"># Version : Python 3.7</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">from</span> string <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">decrypt2</span>():</span><br><span class="line">    <span class="comment"># 方法2</span></span><br><span class="line">    <span class="comment"># str1 = &#x27;UYP7wQcTBee0Z6V3t66TAbJK+YCKWZPhVpf3R5P4ZHcEWVP5yiXFXHr4W4OBmT==&#x27;</span></span><br><span class="line">    <span class="comment"># 4个字符一组，反转:</span></span><br><span class="line">    str1 = <span class="string">&#x27;7PYUTcQw0eeB3V6ZT66tKJbAKCY+hPZW3fpV4P5REcHZ5PVWFXiy4rHXBO4WTm==&#x27;</span></span><br><span class="line">    string1 = <span class="string">&#x27;ABCDEFQRSTUVWXYPGHIJKLMNOZabcdefghijklmnopqrstuvwxyz0123456789+/&#x27;</span></span><br><span class="line">    string2 = <span class="string">&#x27;m2jrJbkftp1KoBFNZhwE56OysH0z473T8VRW9l/PGixgdM+UeQCaDucXIYSnLvqA&#x27;</span></span><br><span class="line">    flag = base64.b64decode(str1.translate(<span class="built_in">str</span>.maketrans(string2, string1)))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 上面的解密结果有一点问题?</span></span><br><span class="line">    <span class="comment"># 最终用在线网站进行解密导出,并进行合理猜测得出flag</span></span><br><span class="line">    <span class="comment"># 乱码,甚至爆破都发现没有任何哪3个字符能编码出7PYU</span></span><br><span class="line">    flag = <span class="string">b&#x27;v~o\x7flRk\x0c\x0dz\x15P&#125;UH,A\x7f/.nFt#xraru&quot;OfPRxc;zWp6w5g#|&#x27;</span></span><br><span class="line">    <span class="built_in">print</span>(flag)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">46</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="built_in">chr</span>(flag[i] ^ (<span class="built_in">len</span>(flag) - i)), end=<span class="string">&#x27;&#x27;</span>)</span><br><span class="line"></span><br><span class="line">decrypt2()</span><br><span class="line"></span><br></pre></td></tr></table></figure><p>不过中间可能漏了一些字符之类的,总之经过”合理猜测”,最终得出flag.</p><h2 id="中毒白块儿"><a href="#中毒白块儿" class="headerlink" title="中毒白块儿"></a>中毒白块儿</h2><p>这题直接把检测游戏结束的函数里的代码删了就行…相当于开无敌挂…</p><p><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20231106164912110.png" alt="image-20231106164912110"></p><p><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20231106164928927.png" alt="image-20231106164928927"></p><p>然后再去运行,跑一会儿随便点点就出flag了.</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Writeup </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> CTF </tag>
+            
+            <tag> RE </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>C语言教程-12_4-函数的高级用法及特性</title>
       <link href="/2023-11-01-93a0ed753aa8/"/>
       <url>/2023-11-01-93a0ed753aa8/</url>
@@ -1281,22 +1308,22 @@
     
     
     <entry>
-      <title>分类导航</title>
-      <link href="/categories/index.html"/>
-      <url>/categories/index.html</url>
+      <title>我的影子</title>
+      <link href="/link/index.html"/>
+      <url>/link/index.html</url>
       
-        <content type="html"><![CDATA[<p>hello world</p>]]></content>
+        <content type="html"><![CDATA[]]></content>
       
     </entry>
     
     
     
     <entry>
-      <title>我的影子</title>
-      <link href="/link/index.html"/>
-      <url>/link/index.html</url>
+      <title>分类导航</title>
+      <link href="/categories/index.html"/>
+      <url>/categories/index.html</url>
       
-        <content type="html"><![CDATA[]]></content>
+        <content type="html"><![CDATA[<p>hello world</p>]]></content>
       
     </entry>
     
