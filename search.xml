@@ -4,6 +4,37 @@
   
     
     <entry>
+      <title>实现ADT接口的思想</title>
+      <link href="/2023-12-04-e2c452607f06/"/>
+      <url>/2023-12-04-e2c452607f06/</url>
+      
+        <content type="html"><![CDATA[<h1 id="创建adt对象的接口">创建ADT对象的接口</h1><p>有2种方法和一种不好的方法</p><h2 id="主调函数传递二级指针">主调函数传递二级指针</h2><p>假设我们有</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span>&#123;</span></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;ADT_TYPE;</span><br></pre></td></tr></table></figure><p>想要在main()函数中创建一个ADT_TYPE类型的对象,那么可以这样实现接口:</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">create_ADT_TYPE</span><span class="params">(ADT_TYPE** objp)</span>&#123;</span><br><span class="line">    ADT_TYPE *temp = (ADT_TYPE*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(ADT_TYPE)); <span class="comment">// malloc</span></span><br><span class="line">    <span class="comment">// init ADT object</span></span><br><span class="line">    *objp = temp; <span class="comment">// Point *objp to temp</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span>&#123;</span><br><span class="line">    ADT_TYPE * obj;</span><br><span class="line">    create_ADT_TYPE(&amp;obj);</span><br><span class="line">    <span class="comment">// other operations</span></span><br><span class="line">    free_ADT_TYPE(obj);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>main()调用create_ADT_TYPE()时传递obj的指针,也就是一个二级指针,以达到在create_ADT_TYPE()直接修改obj指向的目的.</p><h2 id="接口函数返回对象指针">接口函数返回对象指针</h2><p>同样假设有:</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span>&#123;</span></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;ADT_TYPE;</span><br></pre></td></tr></table></figure><p>想要在main()函数中创建一个ADT_TYPE类型的对象,那么可以这样实现接口:</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">ADT_TYPE* <span class="title function_">create_ADT_TYPE</span><span class="params">(<span class="type">void</span>)</span>&#123;</span><br><span class="line">    ADT_TYPE *temp = (ADT_TYPE*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(ADT_TYPE)); <span class="comment">// malloc</span></span><br><span class="line">    <span class="comment">// init ADT object</span></span><br><span class="line">   <span class="keyword">return</span> temp;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span>&#123;</span><br><span class="line">    ADT_TYPE * obj;</span><br><span class="line">    obj = create_ADT_TYPE();</span><br><span class="line">    <span class="comment">// other operations</span></span><br><span class="line">    free_ADT_TYPE(obj);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h1 id="需要返回复合结果的操作接口">需要返回复合结果的操作接口</h1>]]></content>
+      
+      
+      <categories>
+          
+          <category> 数据结构及算法 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 算法 </tag>
+            
+            <tag> 数据结构 </tag>
+            
+            <tag> 线性表 </tag>
+            
+            <tag> ADT </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>AVL树</title>
       <link href="/2023-12-01-27f7ad92dc6b/"/>
       <url>/2023-12-01-27f7ad92dc6b/</url>
@@ -1370,9 +1401,9 @@
       
         <tags>
             
-            <tag> makefile </tag>
-            
             <tag> tools </tag>
+            
+            <tag> makefile </tag>
             
         </tags>
       
@@ -1397,9 +1428,9 @@
       
         <tags>
             
-            <tag> tools </tag>
-            
             <tag> GDB </tag>
+            
+            <tag> tools </tag>
             
         </tags>
       
