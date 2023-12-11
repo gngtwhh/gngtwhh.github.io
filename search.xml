@@ -1581,11 +1581,11 @@
     
     
     <entry>
-      <title></title>
-      <link href="/json-data/tools.json"/>
-      <url>/json-data/tools.json</url>
+      <title>关于</title>
+      <link href="/about/index.html"/>
+      <url>/about/index.html</url>
       
-        <content type="html"><![CDATA[[{"class_name":"CTF工具","class_desc":"常用在线工具","link_list":[{"name":"CyberChef","link":"https://icyberchef.com/","avatar":"/img/artical_pic.png","descr":"编码万能转换"},{"name":"密码破解","link":"http://www.atoolbox.net/Category.php?Id=27&Page=1","avatar":"/img/artical_pic.png","descr":"基本密码在线解密"},{"name":"正则表达式工具","link":"https://c.runoob.com/front-end/854/?optionGlobl=global","avatar":"/img/artical_pic.png","descr":"正则表达式在线处理"},{"name":"BrainF**k and Ook","link":"https://www.splitbrain.org/services/ook","avatar":"/img/artical_pic.png","descr":"某种玄学的东西"},{"name":"因数分解","link":"http://www.factordb.com/index.php","avatar":"/img/artical_pic.png","descr":"一个因数分解数据库"},{"name":"摩斯电码","link":"https://morsecode.world/international/decoder/audio-decoder-adaptive.html","avatar":"/img/artical_pic.png","descr":"不解释"},{"name":"图像处理","link":"https://onlinetools.com/image","avatar":"/img/artical_pic.png","descr":"图像的各种特殊处理"},{"name":"Java在线逆向","link":"http://javare.cn","avatar":"/img/artical_pic.png","descr":"可以class文件..."},{"name":"Awesome-Hacking","link":"https://blog.csdn.net/ZYC88888/article/details/113663486","avatar":"/img/artical_pic.png","descr":"CTF工具库"}]},{"class_name":"转换工具","class_desc":"格式转换的一些小工具","link_list":[{"name":"pdf转换工具","link":"https://www.alltoall.net/","avatar":"/img/artical_pic.png","descr":"文档在线转换"},{"name":"音频格式转换工具","link":"http://ncm.miidj.com/","avatar":"/img/artical_pic.png","descr":"方便使用播放器"},{"name":"操作系统文件格式转换","link":"http://tools.bugscaner.com/text/textconvert.html","avatar":"/img/artical_pic.png","descr":"在线文档格式windows unix macintosh互相转换"}]},{"class_name":"网络工具","class_desc":"网络相关的工具和资源","link_list":[{"name":"测速网","link":"https://www.speedtest.cn/","avatar":"/img/artical_pic.png","descr":"网速测试"},{"name":"Clash","link":"https://github.com/Dreamacro/clash/releases","avatar":"/img/artical_pic.png","descr":"Clash下载直达"},{"name":"虚拟手机号","link":"https://sms-activate.org/cn/getNumber","avatar":"/img/artical_pic.png","descr":"虚拟手机号服务"},{"name":"机场","link":"https://www.mojie.mx/#/login","avatar":"/img/artical_pic.png","descr":"懂?"}]},{"class_name":"其他工具","class_desc":"其他各种工具","link_list":[{"name":"文本对比工具","link":"https://tool.p2hp.com/tool-online-difftext/","avatar":"/img/artical_pic.png","descr":"在线文本对比"},{"name":"大数运算器","link":"https://goodcalculators.com/big-number-calculator/","avatar":"/img/artical_pic.png","descr":"高精度大数在线运算"},{"name":"阶乘运算器","link":"https://zh.numberempire.com/factorialcalculator.php","avatar":"/img/artical_pic.png","descr":"阶乘计算"}]},{"class_name":"创作与AI工具","class_desc":"AI,文档,表格,图像等创作工具","link_list":[{"name":"ChatGPT","link":"https://chat.openai.com/","avatar":"/img/ChatGPT.webp","descr":"学习的好帮手"},{"name":"在线作图工具","link":"https://www.processon.com/","avatar":"/img/artical_pic.png","descr":"免费在线流程图思维导图"}]},{"class_name":"技术文档","class_desc":"各种语言,框架,工具的文档","link_list":[{"name":"C/C++参考手册","link":"https://zh.cppreference.com/mwiki/index.php?title=%E9%A6%96%E9%A1%B5&variant=zh-cn","avatar":"/img/Logo/C_and_CPP.jpg","descr":"C和C++语言的在线参考手册"},{"name":"GTK文档","link":"https://www.gtk.org/docs/installations/windows/","avatar":"/img/Logo/logo-gtk-sm.png","descr":"GTK库的文档"},{"name":"Windows API 索引","link":"https://learn.microsoft.com/zh-cn/windows/win32/apiindex/windows-api-list","avatar":"/img/Logo/Microsoft.png","descr":"Windows API 的文档"}]}]]]></content>
+        <content type="html"><![CDATA[<p><a href="https://www.baidu.com">https://www.baidu.com</a></p>]]></content>
       
     </entry>
     
@@ -1603,22 +1603,22 @@
     
     
     <entry>
-      <title>我的影子</title>
-      <link href="/link/index.html"/>
-      <url>/link/index.html</url>
+      <title></title>
+      <link href="/json-data/tools.json"/>
+      <url>/json-data/tools.json</url>
       
-        <content type="html"><![CDATA[]]></content>
+        <content type="html"><![CDATA[[{"class_name":"CTF工具","class_desc":"常用在线工具","link_list":[{"name":"CyberChef","link":"https://icyberchef.com/","avatar":"/img/artical_pic.png","descr":"编码万能转换"},{"name":"密码破解","link":"http://www.atoolbox.net/Category.php?Id=27&Page=1","avatar":"/img/artical_pic.png","descr":"基本密码在线解密"},{"name":"正则表达式工具","link":"https://c.runoob.com/front-end/854/?optionGlobl=global","avatar":"/img/artical_pic.png","descr":"正则表达式在线处理"},{"name":"BrainF**k and Ook","link":"https://www.splitbrain.org/services/ook","avatar":"/img/artical_pic.png","descr":"某种玄学的东西"},{"name":"因数分解","link":"http://www.factordb.com/index.php","avatar":"/img/artical_pic.png","descr":"一个因数分解数据库"},{"name":"摩斯电码","link":"https://morsecode.world/international/decoder/audio-decoder-adaptive.html","avatar":"/img/artical_pic.png","descr":"不解释"},{"name":"图像处理","link":"https://onlinetools.com/image","avatar":"/img/artical_pic.png","descr":"图像的各种特殊处理"},{"name":"Java在线逆向","link":"http://javare.cn","avatar":"/img/artical_pic.png","descr":"可以class文件..."},{"name":"Awesome-Hacking","link":"https://blog.csdn.net/ZYC88888/article/details/113663486","avatar":"/img/artical_pic.png","descr":"CTF工具库"}]},{"class_name":"转换工具","class_desc":"格式转换的一些小工具","link_list":[{"name":"pdf转换工具","link":"https://www.alltoall.net/","avatar":"/img/artical_pic.png","descr":"文档在线转换"},{"name":"音频格式转换工具","link":"http://ncm.miidj.com/","avatar":"/img/artical_pic.png","descr":"方便使用播放器"},{"name":"操作系统文件格式转换","link":"http://tools.bugscaner.com/text/textconvert.html","avatar":"/img/artical_pic.png","descr":"在线文档格式windows unix macintosh互相转换"}]},{"class_name":"网络工具","class_desc":"网络相关的工具和资源","link_list":[{"name":"测速网","link":"https://www.speedtest.cn/","avatar":"/img/artical_pic.png","descr":"网速测试"},{"name":"Clash","link":"https://github.com/Dreamacro/clash/releases","avatar":"/img/artical_pic.png","descr":"Clash下载直达"},{"name":"虚拟手机号","link":"https://sms-activate.org/cn/getNumber","avatar":"/img/artical_pic.png","descr":"虚拟手机号服务"},{"name":"机场","link":"https://www.mojie.mx/#/login","avatar":"/img/artical_pic.png","descr":"懂?"}]},{"class_name":"其他工具","class_desc":"其他各种工具","link_list":[{"name":"文本对比工具","link":"https://tool.p2hp.com/tool-online-difftext/","avatar":"/img/artical_pic.png","descr":"在线文本对比"},{"name":"大数运算器","link":"https://goodcalculators.com/big-number-calculator/","avatar":"/img/artical_pic.png","descr":"高精度大数在线运算"},{"name":"阶乘运算器","link":"https://zh.numberempire.com/factorialcalculator.php","avatar":"/img/artical_pic.png","descr":"阶乘计算"}]},{"class_name":"创作与AI工具","class_desc":"AI,文档,表格,图像等创作工具","link_list":[{"name":"ChatGPT","link":"https://chat.openai.com/","avatar":"/img/ChatGPT.webp","descr":"学习的好帮手"},{"name":"在线作图工具","link":"https://www.processon.com/","avatar":"/img/artical_pic.png","descr":"免费在线流程图思维导图"}]},{"class_name":"技术文档","class_desc":"各种语言,框架,工具的文档","link_list":[{"name":"C/C++参考手册","link":"https://zh.cppreference.com/mwiki/index.php?title=%E9%A6%96%E9%A1%B5&variant=zh-cn","avatar":"/img/Logo/C_and_CPP.jpg","descr":"C和C++语言的在线参考手册"},{"name":"GTK文档","link":"https://www.gtk.org/docs/installations/windows/","avatar":"/img/Logo/logo-gtk-sm.png","descr":"GTK库的文档"},{"name":"Windows API 索引","link":"https://learn.microsoft.com/zh-cn/windows/win32/apiindex/windows-api-list","avatar":"/img/Logo/Microsoft.png","descr":"Windows API 的文档"}]}]]]></content>
       
     </entry>
     
     
     
     <entry>
-      <title>关于</title>
-      <link href="/about/index.html"/>
-      <url>/about/index.html</url>
+      <title>我的影子</title>
+      <link href="/link/index.html"/>
+      <url>/link/index.html</url>
       
-        <content type="html"><![CDATA[<p><a href="https://www.baidu.com">https://www.baidu.com</a></p>]]></content>
+        <content type="html"><![CDATA[]]></content>
       
     </entry>
     
