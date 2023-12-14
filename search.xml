@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>AES</title>
+      <link href="/2023-12-14-0f0bc19fd9a1/"/>
+      <url>/2023-12-14-0f0bc19fd9a1/</url>
+      
+        <content type="html"><![CDATA[<h1 id="aes概述">AES概述</h1><p>AES(Advanced Encryption Standard)是一种<code>对称密钥</code>的<code>分组加密</code>算法.</p><p>不同于它的前任标准DES，Rijndael使用的是<a href="https://zh.wikipedia.org/wiki/%E4%BB%A3%E6%8D%A2-%E7%BD%AE%E6%8D%A2%E7%BD%91%E7%BB%9C">代换-置换网络</a>，而非<a href="https://zh.wikipedia.org/wiki/Feistel%E6%9E%B6%E6%9E%84">Feistel架构</a>.</p><p>AES分组固定为128bit,即16byte.而密钥长度可以为128bit,192bit或256bit.不同长度的密钥,推荐加密轮次也不同.</p><p>与DES不同,AES维护一个状态矩阵,所有加密轮次结束后,状态矩阵内容即为密文.</p><p>下面描述AES-128.</p><h1 id="aes基本结构">AES基本结构</h1><h2 id="加密轮次">加密轮次</h2><p>作为分组密码,AES的每个分组长度固定,而对于不同长度密钥,有着不同的推荐加密轮次(轮函数的执行次数),如下所示:</p><table><thead><tr><th style="text-align:center">AES</th><th style="text-align:center">密钥长度/字(32bit为1个字)</th><th style="text-align:center">分组长度/字(32bit为1个字)</th><th style="text-align:center">加密轮次</th></tr></thead><tbody><tr><td style="text-align:center">AES-128</td><td style="text-align:center">4</td><td style="text-align:center">4</td><td style="text-align:center">10</td></tr><tr><td style="text-align:center">AES-192</td><td style="text-align:center">6</td><td style="text-align:center">4</td><td style="text-align:center">12</td></tr><tr><td style="text-align:center">AES-256</td><td style="text-align:center">8</td><td style="text-align:center">4</td><td style="text-align:center">14</td></tr></tbody></table><h2 id="加密的结构">加密的结构</h2><p>AES在一个4x4的矩阵上运行,每个元素都是1byte,一共16byte,即一个128bit的分组.</p><p>初始时,这个矩阵内容即为当前分组的明文,填充进这个<code>状态矩阵</code>,顺序从上到下,从做到用,如下所示:</p><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20231214152521877.png" alt="image-20231214152521877" style="zoom:50%;" /><p>每轮加密都是对这个状态矩阵进行几步运算,其中涉及到置换,异或,矩阵乘法等.</p><h2 id="密钥的处理">密钥的处理</h2><p>128位密钥也是以矩阵的形式来处理.需要对其进行扩展,最终扩展为44个字,其中前4个字位初始密钥,后40个字每10个一组依次用于10轮加密.</p><p>首先初始密钥也存储在一个4x4的矩阵:</p><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20231214152734850.png" alt="image-20231214152734850" style="zoom:50%;" /><p>然后每一列的4个字节(byte)合成一个字(word):</p><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20231214152908328.png" alt="image-20231214152908328" style="zoom:50%;" /><p>即<code>W0</code>为<code>K0K1K2K3</code>拼接而成.</p><p>接着根据如下规则产生后面的<code>W4</code>-<code>W43</code>:</p><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20231214153611764.png" alt="image-20231214153611764" style="zoom:50%;" /><ol><li>如果i不是4的倍数,则 <code>W[i] = W[i-4] xor W[i-1]</code></li><li>如果i是4的倍数,则 <code>W[i] = W[i-4] xor T(W[i-1])</code></li></ol><p>其中T()为:</p><p>a. 将4个字节进行<code>循环左旋</code>1个字节.</p><p>b. 然后使用<code>S盒</code>(AES定义的,后面给出)进行变换</p><p>c. 然后与<code>轮常量</code>Rcon[j]异或(图中的<code>j</code>为<code>i/4</code>):</p><p>​<img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20231214154248868.png" alt="image-20231214154248868" style="zoom:50%;" /></p><h2 id="aes的s盒和逆s盒">AES的S盒和逆S盒</h2><p>AES的S盒定义如下:</p><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20231214160148556.png" alt="image-20231214160148556" style="zoom:50%;" /><p>逆S盒:</p><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20231214160426437.png" alt="image-20231214160426437" style="zoom:50%;" /><p>查找时,将输入字节的高4位作为行,低4位作为列进行查找.</p><h2 id="行移位">行移位</h2><p>行移位是一个简单的左循环操作,第0行左移0位(即不移位),第1行左移1位,第2行左移2位,第3行左移3位.</p><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20231214160647204.png" alt="image-20231214160647204" style="zoom:50%;" /><p>其逆变换即为反向的移位.</p><h2 id="列混合">列混合</h2><p>列混合是一个矩阵乘法,有一个固定的矩阵:</p><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20231214160746412.png" alt="image-20231214160746412" style="zoom:50%;" /><p>逆列混合同理:</p><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20231214160803810.png" alt="image-20231214160803810" style="zoom:50%;" /><p>可以验证两个矩阵<code>互逆</code>.</p><h2 id="轮密钥加">轮密钥加</h2><p>轮密钥加实际上就是<code>逐位异或</code>.</p><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20231214160948716.png" alt="image-20231214160948716" style="zoom:50%;" /><h1 id="aes的加解密操作">AES的加解密操作</h1><p>过程如下图:</p><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20231214161107048.png" alt="image-20231214161107048" style="zoom:50%;" /><p>其中的<code>字节代换</code>就是查询S盒的操作,将一个字节输入S盒,输出结果就是查S盒表的结果.<code>逆字节代换</code>同理,使用逆S盒.</p><p>每一轮都使用扩展的对应的四字密钥.</p><p>另外,在第一轮迭代之前,先将明文和原始密钥进行一次异或加密操作.</p><br><p>参考:<a href="https://blog.csdn.net/qq_28205153/article/details/55798628">https://blog.csdn.net/qq_28205153/article/details/55798628</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 加密算法 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> CTF </tag>
+            
+            <tag> Crypto </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>DES</title>
       <link href="/2023-12-13-f76861fd03aa/"/>
       <url>/2023-12-13-f76861fd03aa/</url>
@@ -273,9 +300,9 @@
       
         <tags>
             
-            <tag> Windows </tag>
-            
             <tag> RE </tag>
+            
+            <tag> Windows </tag>
             
             <tag> 逆向工程核心原理 </tag>
             
@@ -1327,11 +1354,11 @@
       
         <tags>
             
+            <tag> Windows </tag>
+            
             <tag> C </tag>
             
             <tag> console </tag>
-            
-            <tag> Windows </tag>
             
         </tags>
       
