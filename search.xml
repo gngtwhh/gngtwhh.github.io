@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>AWD比赛学习</title>
+      <link href="/2023-12-16-8e82fffcfbec/"/>
+      <url>/2023-12-16-8e82fffcfbec/</url>
+      
+        <content type="html"><![CDATA[<h1 id="使用xshell进行ssh连接">使用XShell进行SSH连接</h1><h2 id="linux虚拟机配置">linux虚拟机配置</h2><p>使用VMware16上的ubuntu22进行测试.</p><p>ubuntu配置为NAT模式连接,启动后终端内<code>ping baidu.com</code>检查连接,然后<code>ipconfig</code>命令检查<code>ens33</code>网卡的ip地址:</p><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20231216094701892.png" alt="image-20231216094701892" style="zoom:50%;" /><p>然后在win中cmd尝试ping该ip,检查连通性:</p><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20231216094922622.png" alt="image-20231216094922622" style="zoom:50%;" /><p>然后就可以开启linux的ssh服务:</p><p>首先<code>sudo apt install openssh-server</code>安装SSH.</p><p>然后<code>service  ssh start</code>启动SSH服务即可.</p><p>接着在win下使用XShell(直接安装注册免费账号)连接:</p><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20231216095204170.png" alt="image-20231216095204170" style="zoom: 33%;" /><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20231216095256368.png" alt="image-20231216095256368" style="zoom: 33%;" /><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20231216095332049.png" alt="image-20231216095332049" style="zoom:33%;" /><p>这样即可,然后点击连接会弹出警告,继续即可,然后输入linux中的账号密码(可以保存),就可以连接上了:</p><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20231216095516494.png" alt="image-20231216095516494" style="zoom: 33%;" />]]></content>
+      
+      
+      <categories>
+          
+          <category> others </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> CTF </tag>
+            
+            <tag> AWD </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>AES</title>
       <link href="/2023-12-14-0f0bc19fd9a1/"/>
       <url>/2023-12-14-0f0bc19fd9a1/</url>
@@ -300,9 +327,9 @@
       
         <tags>
             
-            <tag> RE </tag>
-            
             <tag> Windows </tag>
+            
+            <tag> RE </tag>
             
             <tag> 逆向工程核心原理 </tag>
             
@@ -1354,11 +1381,11 @@
       
         <tags>
             
-            <tag> Windows </tag>
-            
             <tag> C </tag>
             
             <tag> console </tag>
+            
+            <tag> Windows </tag>
             
         </tags>
       
@@ -1532,9 +1559,9 @@
       
         <tags>
             
-            <tag> tools </tag>
-            
             <tag> makefile </tag>
+            
+            <tag> tools </tag>
             
         </tags>
       
@@ -1559,9 +1586,9 @@
       
         <tags>
             
-            <tag> GDB </tag>
-            
             <tag> tools </tag>
+            
+            <tag> GDB </tag>
             
         </tags>
       
@@ -1660,17 +1687,6 @@
     
     
     <entry>
-      <title>分类导航</title>
-      <link href="/categories/index.html"/>
-      <url>/categories/index.html</url>
-      
-        <content type="html"><![CDATA[<p>hello world</p>]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>关于</title>
       <link href="/about/index.html"/>
       <url>/about/index.html</url>
@@ -1682,9 +1698,9 @@
     
     
     <entry>
-      <title>我的标签</title>
-      <link href="/tags/index.html"/>
-      <url>/tags/index.html</url>
+      <title>分类导航</title>
+      <link href="/categories/index.html"/>
+      <url>/categories/index.html</url>
       
         <content type="html"><![CDATA[<p>hello world</p>]]></content>
       
@@ -1698,6 +1714,17 @@
       <url>/link/index.html</url>
       
         <content type="html"><![CDATA[]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>我的标签</title>
+      <link href="/tags/index.html"/>
+      <url>/tags/index.html</url>
+      
+        <content type="html"><![CDATA[<p>hello world</p>]]></content>
       
     </entry>
     
