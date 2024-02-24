@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>C语言教程-14_4-共用体</title>
+      <link href="/2024-02-24-f9a5468d726b/"/>
+      <url>/2024-02-24-f9a5468d726b/</url>
+      
+        <content type="html"><![CDATA[<h1 id="union-联合体的声明和使用">union-联合体的声明和使用</h1><p>联合体(或称共用体),是一种数据类型,能够在同一个内存空间中存储不同类型的数据,但不能同时访问.</p><p>定义一个联合体,和结构体类似,一个联合内有多个不同类型的成员,但是使用<code>union</code>关键字:</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">union</span> <span class="title">num</span> &#123;</span></span><br><span class="line">        <span class="type">char</span> c;</span><br><span class="line">        <span class="type">int</span> i;</span><br><span class="line">        <span class="type">double</span> d;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p>与结构体类似,这样就定义了一个联合体类型.接下来就可以使用该类型声明若干联合体变量:</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="class"><span class="keyword">union</span> <span class="title">num</span> &#123;</span></span><br><span class="line">        <span class="type">char</span> c;</span><br><span class="line">        <span class="type">int</span> i;</span><br><span class="line">        <span class="type">double</span> d;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="class"><span class="keyword">union</span> <span class="title">num</span> <span class="title">num1</span>;</span> <span class="comment">// num1为联合体类型num的变量</span></span><br><span class="line">    num1.i = <span class="number">3</span>; <span class="comment">// 把int值3存储在num1中</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,num1.i); <span class="comment">// 输出</span></span><br><span class="line">    num1.c = <span class="string">&#x27;A&#x27;</span>; <span class="comment">// 清除原来的3,把char值&#x27;A&#x27;存储在num1中</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%c\n&quot;</span>,num1.c); <span class="comment">// 输出</span></span><br><span class="line">    num1.d = <span class="number">3.141592</span>; <span class="comment">// 清除原来的&#x27;A&#x27;,把double值3.141592存储在num1中</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%.2lf\n&quot;</span>,num1.d); <span class="comment">// 输出</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>同样,也可以声明联合体指针,联合体数组等.</p><h1 id="联合体成员的初始化与赋值">联合体成员的初始化与赋值</h1><p>有如下几种方法:</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">union</span> <span class="title">num1</span>,<span class="title">num2</span>;</span></span><br><span class="line">num1.i = <span class="number">3</span>; <span class="comment">// 直接赋值其指定成员</span></span><br><span class="line">num2 = num1; <span class="comment">// 用另一个联合体变量来赋值</span></span><br><span class="line"><span class="class"><span class="keyword">union</span> <span class="title">num3</span> =</span> &#123;<span class="string">&#x27;A&#x27;</span>&#125;; <span class="comment">// 初始化联合体的成员c(即第一个成员)</span></span><br><span class="line"><span class="class"><span class="keyword">union</span> <span class="title">num4</span> =</span> &#123;.i = <span class="number">12</span>&#125;; <span class="comment">// C99,使用指定初始化器,本例中指定初始化成员i</span></span><br></pre></td></tr></table></figure><h1 id="访问联合体成员的问题">访问联合体成员的问题</h1><p>与结构体不同,联合体的各个成员都共用同一段内存,这意味着当对于一个类型的成员赋值后,其他类型的成员存储的值将不再有效.此时如果直接访问其他成员,结果是<code>未定义的</code>.</p><p>联合体的各个成员的类型所占用的内存大小各不相同,联合体只大到足够保存其内最大的成员(例如上例中的double d,其他成员被分配于该最大成员中某一部分相同的字节中.而不是像结构体那样每个成员都有自己的空间.</p><p>注:末尾也可能添加额外的填充字符.</p><p>总结需要注意的有2点:</p><ol><li><p>访问联合体的某个特定成员之前,请确保它被正确赋值.</p></li><li><p>如果在访问某个特定成员(A)之前,对另一个成员(B)赋值了,那么该特定成员(A)的值<code>应该</code>被认为是被破坏的,它(A)不应被访问.</p><p>换句话说,即使在某个实现中,该内存中原来的(部分)数据仍然未变,也不能认为他们还是有效的,因为他们是共用体的一部分,应该认为其已经损坏.</p></li><li><p>对某一成员(A)赋值后,直接访问另个成员(B),结果是未定义的,得到的任何结果都是不可信的(或者说是不可靠的).</p></li></ol><br><p>联合体比较简单,需要注意不要错误地访问未赋值的成员.</p><p align=right>——WAHAHA 2024.2.24 我还在火车上~</p><br><br><p>上一篇:<a href="../2024-02-13-23c9a8f7f871/">C语言教程-14_3-使用位域进行位操作</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> C语言教程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> C </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Windows窗口</title>
       <link href="/2024-02-21-98c4a84379b6/"/>
       <url>/2024-02-21-98c4a84379b6/</url>
@@ -116,7 +141,7 @@
       <link href="/2024-02-13-23c9a8f7f871/"/>
       <url>/2024-02-13-23c9a8f7f871/</url>
       
-        <content type="html"><![CDATA[<h1 id="引入问题">引入问题</h1><p>假设我们需要管理一些文件,其中除了文件的其他信息,我们还需要管理文件的权限,共有以下3种权限:</p><ul><li>是否可读—r</li><li>是否可写—w</li><li>是否可执行—x</li></ul><p>每个文件的以上3种权限都不同,现在我们需要设置一个结构体来管理文件.</p><p>一种方法是使用3个<code>unsigned int</code>类型的变量作为标志来存储这些权限信息:</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">file_t</span> &#123;</span></span><br><span class="line">    <span class="type">char</span> * file_name;</span><br><span class="line">    <span class="type">size_t</span> file_size;</span><br><span class="line">    ... <span class="comment">// 其他文件信息</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span> r,w,x; <span class="comment">// 分别记录3种权限</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>显然是可以的,但是一个<code>unsigned int</code>类型的成员就占用4字节空间(64位平台),3个成员就占用了12个字节,而实际上我们需要的仅仅是3个bit的标志位!</p><p>位段可以一定程度上节省空间,另一方面可以简化对位标志的操作.</p><p>C语言提供了<code>位域(或译位段)</code>来允许我们按位来定义成员并操作.</p><h1 id="位域的声明和使用">位域的声明和使用</h1><p><code>位域</code>是一种特殊的结构体,该结构体的成员是<code>signed int</code>或<code>unsigned int</code>类型变量中的一组位(bit),我们仍然使用<code>struct</code>关键字来定义一个位域,并指定每一个成员所占用的位数.</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">permission</span> &#123;</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span> r : <span class="number">1</span>;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span> w : <span class="number">1</span>;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span> x : <span class="number">1</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p>上述结构体位域有3个位域成员,分别为r,w,x,他们根据定义分别在结构体中占用1bit的空间,共占用3bit空间.</p><p>我们可以像访问结构体成员那样来访问各个位段成员,但是需要注意赋的值不能超过位段成员的存储范围,例如3bit(unsigned)的位段成员范围为[0,2^3-1].</p><p>例如如下代码说明文件file1的属性为只读,即仅可以读取,不能写入和执行:</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">permission</span> <span class="title">file1</span>;</span></span><br><span class="line">file1.r = <span class="number">1</span>; <span class="comment">// 允许读取</span></span><br><span class="line">file1.w = <span class="number">0</span>; <span class="comment">// 不允许写入</span></span><br><span class="line">file1.x = <span class="number">0</span>; <span class="comment">// 不允许执行</span></span><br></pre></td></tr></table></figure><h1 id="位域的兼容性与占用空间">位域的兼容性与占用空间</h1><h2 id="兼容性与实现问题">兼容性与实现问题</h2><p>位段有许多兼容性和实现问题:</p><ol><li>位段成员如果未显式使用<code>signed int</code>或<code>unsigned int</code>声明,则它究竟被解释为有符号还是无符号数是由编译器决定的.</li><li><code>int</code>被解释为有符号还是无符号也是实现问题.</li><li>位段成员的最大位长度,许多编译器将其限制在整型值的长度内.(注意32位和16位的整型值长度就不一样)</li><li>位段的成员在内存中的分布情况也是未定义的,取决于具体的实现.</li><li>当一个位段成员较大,无法放在前面所剩余的位中,编译器可能将其放在下一个内存位置对齐,也可能紧挨在前一个位段成员后面,造成重叠.</li><li>是否允许除<code>int</code>,<code>unsigned int</code>外类型的位域是未定义的.</li></ol><p>第5点即:位域是否能越过分配单元边界,这是未定义的.</p><h2 id="占用空间">占用空间</h2><p>位域整体是向整型类型对齐的. <strong>PS:可能有误</strong></p><p>但是由于位域成员的各种基于实现的行为,无法说明位域成员的准确表现.不过我们有2种显式的填充和对齐方法:</p><p>使用未命名的字段来填充未命名的空间;使用未命名的0宽度的字段来迫使下一个字段向下一个整数对齐:</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">s</span>&#123;</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span> f1 : <span class="number">1</span>;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span>    : <span class="number">2</span>;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span> f2 : <span class="number">1</span>;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span>    : <span class="number">0</span>;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span> f3 : <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>其中f1和f2之间有2bit的空位,f3将存储在(即对齐)下一个<code>unsigned int</code>的位置处(注意其在这一段内存中的位置仍旧是未定义的).</p><h1 id="优缺点">优缺点</h1><p>位域的各种用途完全可以使用对应的位操作来替代,但是使用位域显然大大简化了操作—我们将他们视为结构体的成员.</p><p>尽管如此,位域在底层仍然无法避免对应的位偏移等操作,它只是对我们屏蔽了而已.</p><p>另一方面,位域有着一系列未定义的行为,亦即由实现决定,需要考虑其兼容性问题.</p><p>同时,如果需要的标志位的总长度很少,例如上面例子的3bit(r/w/x),可能并不能起到节省空间的作用—例如可以将这3bit的标志位压缩于一个<code>unsigned char</code>变量中.</p><p>总之,在使用位域之前,一定要把位域简化代码的优点和其移植性弱的缺点相权衡!</p><br><p>本章简单讲解了<code>位域</code>,除了一些底层的代码,一般使用并不多,了解即可.</p><p align=right>——WAHAHA 2024.2.24 于火车上完成</p><p align=right>开学了QWQ</p><br><br><p>上一篇:<a href="../2024-02-09-aaafa05fda1d">C语言教程-14_2-结构体与指针</a></p>]]></content>
+        <content type="html"><![CDATA[<h1 id="引入问题">引入问题</h1><p>假设我们需要管理一些文件,其中除了文件的其他信息,我们还需要管理文件的权限,共有以下3种权限:</p><ul><li>是否可读—r</li><li>是否可写—w</li><li>是否可执行—x</li></ul><p>每个文件的以上3种权限都不同,现在我们需要设置一个结构体来管理文件.</p><p>一种方法是使用3个<code>unsigned int</code>类型的变量作为标志来存储这些权限信息:</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">file_t</span> &#123;</span></span><br><span class="line">    <span class="type">char</span> * file_name;</span><br><span class="line">    <span class="type">size_t</span> file_size;</span><br><span class="line">    ... <span class="comment">// 其他文件信息</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span> r,w,x; <span class="comment">// 分别记录3种权限</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>显然是可以的,但是一个<code>unsigned int</code>类型的成员就占用4字节空间(64位平台),3个成员就占用了12个字节,而实际上我们需要的仅仅是3个bit的标志位!</p><p>位段可以一定程度上节省空间,另一方面可以简化对位标志的操作.</p><p>C语言提供了<code>位域(或译位段)</code>来允许我们按位来定义成员并操作.</p><h1 id="位域的声明和使用">位域的声明和使用</h1><p><code>位域</code>是一种特殊的结构体,该结构体的成员是<code>signed int</code>或<code>unsigned int</code>类型变量中的一组位(bit),我们仍然使用<code>struct</code>关键字来定义一个位域,并指定每一个成员所占用的位数.</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">permission</span> &#123;</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span> r : <span class="number">1</span>;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span> w : <span class="number">1</span>;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span> x : <span class="number">1</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p>上述结构体位域有3个位域成员,分别为r,w,x,他们根据定义分别在结构体中占用1bit的空间,共占用3bit空间.</p><p>我们可以像访问结构体成员那样来访问各个位段成员,但是需要注意赋的值不能超过位段成员的存储范围,例如3bit(unsigned)的位段成员范围为[0,2^3-1].</p><p>例如如下代码说明文件file1的属性为只读,即仅可以读取,不能写入和执行:</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">permission</span> <span class="title">file1</span>;</span></span><br><span class="line">file1.r = <span class="number">1</span>; <span class="comment">// 允许读取</span></span><br><span class="line">file1.w = <span class="number">0</span>; <span class="comment">// 不允许写入</span></span><br><span class="line">file1.x = <span class="number">0</span>; <span class="comment">// 不允许执行</span></span><br></pre></td></tr></table></figure><h1 id="位域的兼容性与占用空间">位域的兼容性与占用空间</h1><h2 id="兼容性与实现问题">兼容性与实现问题</h2><p>位段有许多兼容性和实现问题:</p><ol><li>位段成员如果未显式使用<code>signed int</code>或<code>unsigned int</code>声明,则它究竟被解释为有符号还是无符号数是由编译器决定的.</li><li><code>int</code>被解释为有符号还是无符号也是实现问题.</li><li>位段成员的最大位长度,许多编译器将其限制在整型值的长度内.(注意32位和16位的整型值长度就不一样)</li><li>位段的成员在内存中的分布情况也是未定义的,取决于具体的实现.</li><li>当一个位段成员较大,无法放在前面所剩余的位中,编译器可能将其放在下一个内存位置对齐,也可能紧挨在前一个位段成员后面,造成重叠.</li><li>是否允许除<code>int</code>,<code>unsigned int</code>外类型的位域是未定义的.</li></ol><p>第5点即:位域是否能越过分配单元边界,这是未定义的.</p><h2 id="占用空间">占用空间</h2><p>位域整体是向整型类型对齐的. <strong>PS:可能有误</strong></p><p>但是由于位域成员的各种基于实现的行为,无法说明位域成员的准确表现.不过我们有2种显式的填充和对齐方法:</p><p>使用未命名的字段来填充未命名的空间;使用未命名的0宽度的字段来迫使下一个字段向下一个整数对齐:</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">s</span>&#123;</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span> f1 : <span class="number">1</span>;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span>    : <span class="number">2</span>;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span> f2 : <span class="number">1</span>;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span>    : <span class="number">0</span>;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span> f3 : <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>其中f1和f2之间有2bit的空位,f3将存储在(即对齐)下一个<code>unsigned int</code>的位置处(注意其在这一段内存中的位置仍旧是未定义的).</p><h1 id="优缺点">优缺点</h1><p>位域的各种用途完全可以使用对应的位操作来替代,但是使用位域显然大大简化了操作—我们将他们视为结构体的成员.</p><p>尽管如此,位域在底层仍然无法避免对应的位偏移等操作,它只是对我们屏蔽了而已.</p><p>另一方面,位域有着一系列未定义的行为,亦即由实现决定,需要考虑其兼容性问题.</p><p>同时,如果需要的标志位的总长度很少,例如上面例子的3bit(r/w/x),可能并不能起到节省空间的作用—例如可以将这3bit的标志位压缩于一个<code>unsigned char</code>变量中.</p><p>总之,在使用位域之前,一定要把位域简化代码的优点和其移植性弱的缺点相权衡!</p><br><p>本章简单讲解了<code>位域</code>,除了一些底层的代码,一般使用并不多,了解即可.</p><p align=right>——WAHAHA 2024.2.24 于火车上完成</p><p align=right>开学了QWQ</p><br><br><p>上一篇:<a href="../2024-02-09-aaafa05fda1d">C语言教程-14_2-结构体与指针</a></p><p>下一篇:<a href="../2024-02-24-f9a5468d726b">C语言教程-14_4-共用体</a></p>]]></content>
       
       
       <categories>
@@ -2487,22 +2512,22 @@
     
     
     <entry>
-      <title>分类导航</title>
-      <link href="/categories/index.html"/>
-      <url>/categories/index.html</url>
+      <title>关于</title>
+      <link href="/about/index.html"/>
+      <url>/about/index.html</url>
       
-        <content type="html"><![CDATA[<p>hello world</p>]]></content>
+        <content type="html"><![CDATA[<p><a href="https://www.baidu.com">https://www.baidu.com</a></p>]]></content>
       
     </entry>
     
     
     
     <entry>
-      <title>关于</title>
-      <link href="/about/index.html"/>
-      <url>/about/index.html</url>
+      <title>分类导航</title>
+      <link href="/categories/index.html"/>
+      <url>/categories/index.html</url>
       
-        <content type="html"><![CDATA[<p><a href="https://www.baidu.com">https://www.baidu.com</a></p>]]></content>
+        <content type="html"><![CDATA[<p>hello world</p>]]></content>
       
     </entry>
     
@@ -2520,11 +2545,11 @@
     
     
     <entry>
-      <title>我的标签</title>
-      <link href="/tags/index.html"/>
-      <url>/tags/index.html</url>
+      <title>我的影子</title>
+      <link href="/link/index.html"/>
+      <url>/link/index.html</url>
       
-        <content type="html"><![CDATA[<p>hello world</p>]]></content>
+        <content type="html"><![CDATA[]]></content>
       
     </entry>
     
@@ -2542,11 +2567,11 @@
     
     
     <entry>
-      <title>我的影子</title>
-      <link href="/link/index.html"/>
-      <url>/link/index.html</url>
+      <title>我的标签</title>
+      <link href="/tags/index.html"/>
+      <url>/tags/index.html</url>
       
-        <content type="html"><![CDATA[]]></content>
+        <content type="html"><![CDATA[<p>hello world</p>]]></content>
       
     </entry>
     
