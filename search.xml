@@ -8,7 +8,7 @@
       <link href="/2024-03-07-93287487d0a5/"/>
       <url>/2024-03-07-93287487d0a5/</url>
       
-        <content type="html"><![CDATA[<h1 id="栈概述">栈概述</h1><p>栈(stack)可以认为是一种特殊的线性表,因为他仍然满足线性表的特点:</p><ul><li>存在一个唯一的没有前驱的(头)数据元素.(注意与具体实现中的&quot;头结点&quot;有别)</li><li>存在一个唯一的没有后继的(尾)数据元素.</li><li>除此之外,其他每一个数据元素均有一个直接前驱和一个直接后继数据元素.</li></ul><p>下面这是2种线性表,即<code>顺序表</code>和<code>链表</code>:</p><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20240306170538627.png" alt="image-20240306170538627" style="zoom:50%;" /><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20240306165216730.png" alt="image-20240306165216730" style="zoom:50%;" /><p>这两种表允许在表中的任何位置操作,栈则不同,栈只允许在表的一端(称为栈顶)操作,而且一般只允许<code>插入</code>和<code>删除</code>这2种操作.</p><p>我们可以建立这样的栈的<code>逻辑结构</code>:</p><p>顺序栈</p><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20240307141121499.png" alt="image-20240307141121499" style="zoom:50%;" /><p>所有的插入,删除操作均只能在top一端进行,基于这种操作限制,栈属于<code>FILO原则</code>,即<code>First In Last Out</code>.</p><p>我们可以将栈想象一个箱子,我们每次都只能放一个物品进去,并逐渐堆叠,最先放入的物品会被压在最下面,最新放入的物品将会在最上面.(所谓的压箱底)</p><p>想要拿出之前放入的物品,则必须先将后放入的所有的物品拿出来.另一方面,最新(即最后)放入的物品在最上面,取出时也是最先拿出;最早放入的物品在最下面,取出时则要最后拿出.</p><p>这样的特性则是<code>FILO</code>.</p><p>另外有<code>FIFO</code>原则,队列—两头操作.</p><h1 id="栈的状态">栈的状态</h1><p>作为一个栈ADT:</p><p>栈有3种状态:栈空,栈非空,栈满.</p><p>我们需要使用一些方法来判断当前栈的状态.</p><p>假设我们的栈有如下信息:----<code>属性</code></p><ul><li>top指针: 指示栈顶位置</li><li>bottom指针: 指示栈底</li><li>size值: 栈当前的元素个数</li><li>max_size值: 栈的最大容量—<code>顺序栈</code>需要—使用数组(realloc),而链栈(一般)则不需要</li></ul><h2 id="栈非空">栈非空</h2><p>如前所述,栈顶指针top永远指向当前栈中的第一个元素,bottom指示栈底.</p><p>我们可以让bottom指针不指向任何有效元素,那么如果栈非空,则top指向某个有效元素,bottom不指向任何元素,例如将其置为<code>NULL</code>(或者0).</p><p>那么栈非空,等价于<code>top!=bottom</code></p><h2 id="栈空">栈空</h2><p>与栈非空相反,栈空时,top显然无法指向任何有效元素,当然此时bottom仍然可以让它指向NULL.</p><p>容易想到,top等于bottom时,可以认为栈空.</p><p>那么栈空,等价于<code>top==bottom</code>//都指向NULL/0</p><h2 id="栈满">栈满</h2><p>该状态仅适用于<code>顺序栈</code>,即基于顺序表实现的栈,此时栈一般存储于栈区(与现在讨论的栈不同),它有空间限制,因此需要保证栈当前元素个数不超过最大容量.</p><p>那么栈满,等价于<code>size==max_size</code></p><h1 id="栈的操作">栈的操作</h1><h2 id="压栈-push">压栈-push</h2><p>就是所谓的向栈中插入元素.</p><p>向栈顶插入元素的操作,通常被形象地称为<code>压栈</code>/入栈.因为原来的元素被堆叠(压)在新元素的下面.</p><p>在一切操作之前,必须检查当前栈的状态—如果栈满,则不应该执行压栈.</p><p>由于栈顶永远指向当前栈顶的有效元素,并且当栈空时top指向NULL.</p><p>所以,我们应该先让top指针指向一个有效的内存空间,用于存储新元素,这个操作类似于<code>++top</code>.</p><p>然后,就可以把新元素的值赋值进去.</p><p>最后,将当前元素个数+1,即<code>++size</code>.</p><h2 id="出栈-pop">出栈-pop</h2><p>从栈顶弹出元素的操作,被称作<code>出栈</code>.</p><p>在一切操作之前,必须检查当前栈的状态—如果栈空,则不应该执行出栈.</p><p>检查无误后,则可以出栈,同样,top指向当前栈顶元素,将该元素从栈中移除,不过一般会将元素值返回,用于处理.</p><p>一般,先备份该值,然后将元素空间销毁,例如使用free()进行空间释放.</p><p>然后将top指针下移,下一个元素成为新的栈顶,或者弹出最后一个元素后,top指向NULL.</p><p>同样,需要<code>--size</code>.</p><p>最后,将元素值返回.</p><h2 id="销毁栈-destroy">销毁栈-destroy</h2><p>很简单,不断地出栈,直到栈空即可.</p><p>最后,可能要将栈的实例销毁.</p><h2 id="获取状态信息">获取状态信息</h2><p>这些方法都只需要返回对应的状态信息即可,例如栈当前的元素个数<code>get_size()</code>,当前栈顶元素值<code>get_top()</code>.</p>]]></content>
+        <content type="html"><![CDATA[<h1 id="栈概述">栈概述</h1><p>栈(stack)可以认为是一种特殊的线性表,因为他仍然满足线性表的特点:</p><ul><li>存在一个唯一的没有前驱的(头)数据元素.(注意与具体实现中的&quot;头结点&quot;有别)</li><li>存在一个唯一的没有后继的(尾)数据元素.</li><li>除此之外,其他每一个数据元素均有一个直接前驱和一个直接后继数据元素.</li></ul><p>下面这是2种线性表,即<code>顺序表</code>和<code>链表</code>:</p><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20240306170538627.png" alt="image-20240306170538627" style="zoom:50%;" /><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20240306165216730.png" alt="image-20240306165216730" style="zoom:50%;" /><p>这两种表允许在表中的任何位置操作,栈则不同,栈只允许在表的一端(称为栈顶)操作,而且一般只允许<code>插入</code>和<code>删除</code>这2种操作.</p><p>我们可以建立这样的栈的<code>逻辑结构</code>:</p><p>顺序栈</p><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20240307141121499.png" alt="image-20240307141121499" style="zoom:50%;" /><p>所有的插入,删除操作均只能在top一端进行,基于这种操作限制,栈属于<code>FILO原则</code>,即<code>First In Last Out</code>.</p><p>我们可以将栈想象一个箱子,我们每次都只能放一个物品进去,并逐渐堆叠,最先放入的物品会被压在最下面,最新放入的物品将会在最上面.(所谓的压箱底)</p><p>想要拿出之前放入的物品,则必须先将后放入的所有的物品拿出来.另一方面,最新(即最后)放入的物品在最上面,取出时也是最先拿出;最早放入的物品在最下面,取出时则要最后拿出.</p><p>这样的特性则是<code>FILO</code>.</p><p>另外有<code>FIFO</code>原则,队列—两头操作.</p><h1 id="栈的状态">栈的状态</h1><p>作为一个栈ADT:</p><p>栈有3种状态:栈空,栈非空,栈满.</p><p>我们需要使用一些方法来判断当前栈的状态.</p><p>假设我们的栈有如下信息:----<code>属性</code></p><ul><li>top指针: 指示栈顶位置</li><li>bottom指针: 指示栈底</li><li>size值: 栈当前的元素个数</li><li>max_size值: 栈的最大容量—<code>顺序栈</code>需要—使用数组(realloc),而链栈(一般)则不需要</li></ul><h2 id="栈非空">栈非空</h2><p>如前所述,栈顶指针top永远指向当前栈中的第一个元素,bottom指示栈底.</p><p>我们可以让bottom指针不指向任何有效元素,那么如果栈非空,则top指向某个有效元素,bottom不指向任何元素,例如将其置为<code>NULL</code>(或者0).</p><p>那么栈非空,等价于<code>top!=bottom</code></p><h2 id="栈空">栈空</h2><p>与栈非空相反,栈空时,top显然无法指向任何有效元素,当然此时bottom仍然可以让它指向NULL.</p><p>容易想到,top等于bottom时,可以认为栈空.</p><p>那么栈空,等价于<code>top==bottom</code>//都指向NULL/0</p><h2 id="栈满">栈满</h2><p>该状态仅适用于<code>顺序栈</code>,即基于顺序表实现的栈,此时栈一般存储于栈区(与现在讨论的栈不同),它有空间限制,因此需要保证栈当前元素个数不超过最大容量.</p><p>那么栈满,等价于<code>size==max_size</code></p><h1 id="栈的操作">栈的操作</h1><h2 id="压栈-push">压栈-push</h2><p>就是所谓的向栈中插入元素.</p><p>向栈顶插入元素的操作,通常被形象地称为<code>压栈</code>/入栈.因为原来的元素被堆叠(压)在新元素的下面.</p><p>在一切操作之前,必须检查当前栈的状态—如果栈满,则不应该执行压栈.</p><p>由于栈顶永远指向当前栈顶的有效元素,并且当栈空时top指向NULL.</p><p>所以,我们应该先让top指针指向一个有效的内存空间,用于存储新元素,这个操作类似于<code>++top</code>.</p><p>然后,就可以把新元素的值赋值进去.</p><p>最后,将当前元素个数+1,即<code>++size</code>.</p><h2 id="出栈-pop">出栈-pop</h2><p>从栈顶弹出元素的操作,被称作<code>出栈</code>.</p><p>在一切操作之前,必须检查当前栈的状态—如果栈空,则不应该执行出栈.</p><p>检查无误后,则可以出栈,同样,top指向当前栈顶元素,将该元素从栈中移除,不过一般会将元素值返回,用于处理.</p><p>一般,先备份该值,然后将元素空间销毁(用于链栈),例如使用free()进行空间释放.</p><p>然后将top指针下移,下一个元素成为新的栈顶,或者弹出最后一个元素后,top指向NULL.</p><p>同样,需要<code>--size</code>.</p><p>最后,将元素值返回.</p><h2 id="销毁栈-destroy-free">销毁栈-destroy/free</h2><p>很简单,不断地出栈,直到栈空即可.</p><p>最后,可能要将栈的实例销毁.</p><h2 id="获取状态信息">获取状态信息</h2><p>这些方法都只需要返回对应的状态信息即可,例如栈当前的元素个数<code>get_size()</code>,当前栈顶元素值<code>get_top()</code>.</p><h1 id="堆栈">堆栈</h1><p>计算机的堆栈,就是栈,每一个元素的大小不同,因为每个元素都是一个函数栈帧.</p><p>递归—压栈.</p><p>计算机的堆区和栈区.</p><p>堆区和数据结构的堆 没有任何关系!没有任何鸡毛的关系. heap</p>]]></content>
       
       
       <categories>
@@ -31,13 +31,25 @@
     
     
     <entry>
-      <title></title>
+      <title>C语言教程-15_1-动态内存分配</title>
       <link href="/2024-03-05-3aebb4efa9ab/"/>
       <url>/2024-03-05-3aebb4efa9ab/</url>
       
         <content type="html"><![CDATA[]]></content>
       
       
+      <categories>
+          
+          <category> C语言教程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> C </tag>
+            
+        </tags>
       
     </entry>
     
@@ -935,9 +947,9 @@
       
         <tags>
             
-            <tag> CTF </tag>
-            
             <tag> AWD </tag>
+            
+            <tag> CTF </tag>
             
         </tags>
       
@@ -1560,13 +1572,13 @@
             
             <tag> RE </tag>
             
-            <tag> PWN </tag>
+            <tag> Web </tag>
             
             <tag> Crypto </tag>
             
-            <tag> Misc </tag>
+            <tag> PWN </tag>
             
-            <tag> Web </tag>
+            <tag> Misc </tag>
             
         </tags>
       
@@ -2613,17 +2625,6 @@
     
     
     <entry>
-      <title>我的标签</title>
-      <link href="/tags/index.html"/>
-      <url>/tags/index.html</url>
-      
-        <content type="html"><![CDATA[<p>hello world</p>]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>分类导航</title>
       <link href="/categories/index.html"/>
       <url>/categories/index.html</url>
@@ -2646,22 +2647,33 @@
     
     
     <entry>
-      <title>在线工具</title>
-      <link href="/tools/index.html"/>
-      <url>/tools/index.html</url>
+      <title></title>
+      <link href="/json-data/tools.json"/>
+      <url>/json-data/tools.json</url>
       
-        <content type="html"><![CDATA[]]></content>
+        <content type="html"><![CDATA[[{"class_name":"CTF工具","class_desc":"常用在线工具","link_list":[{"name":"CyberChef","link":"https://icyberchef.com/","avatar":"/img/artical_pic.png","descr":"编码万能转换"},{"name":"密码破解","link":"http://www.atoolbox.net/Category.php?Id=27&Page=1","avatar":"/img/artical_pic.png","descr":"基本密码在线解密"},{"name":"正则表达式工具","link":"https://c.runoob.com/front-end/854/?optionGlobl=global","avatar":"/img/artical_pic.png","descr":"正则表达式在线处理"},{"name":"BrainF**k and Ook","link":"https://www.splitbrain.org/services/ook","avatar":"/img/artical_pic.png","descr":"某种玄学的东西"},{"name":"因数分解","link":"http://www.factordb.com/index.php","avatar":"/img/artical_pic.png","descr":"一个因数分解数据库"},{"name":"摩斯电码","link":"https://morsecode.world/international/decoder/audio-decoder-adaptive.html","avatar":"/img/artical_pic.png","descr":"不解释"},{"name":"图像处理","link":"https://onlinetools.com/image","avatar":"/img/artical_pic.png","descr":"图像的各种特殊处理"},{"name":"Java在线逆向","link":"http://javare.cn","avatar":"/img/artical_pic.png","descr":"可以class文件..."},{"name":"Awesome-Hacking","link":"https://blog.csdn.net/ZYC88888/article/details/113663486","avatar":"/img/artical_pic.png","descr":"CTF工具库"}]},{"class_name":"转换工具","class_desc":"格式转换的一些小工具","link_list":[{"name":"pdf转换工具","link":"https://www.alltoall.net/","avatar":"/img/artical_pic.png","descr":"文档在线转换"},{"name":"音频格式转换工具","link":"http://ncm.miidj.com/","avatar":"/img/artical_pic.png","descr":"方便使用播放器"},{"name":"操作系统文件格式转换","link":"http://tools.bugscaner.com/text/textconvert.html","avatar":"/img/artical_pic.png","descr":"在线文档格式windows unix macintosh互相转换"}]},{"class_name":"网络工具","class_desc":"网络相关的工具和资源","link_list":[{"name":"测速网","link":"https://www.speedtest.cn/","avatar":"/img/artical_pic.png","descr":"网速测试"},{"name":"Clash","link":"https://github.com/Dreamacro/clash/releases","avatar":"/img/artical_pic.png","descr":"Clash下载直达"},{"name":"虚拟手机号","link":"https://sms-activate.org/cn/getNumber","avatar":"/img/artical_pic.png","descr":"虚拟手机号服务"},{"name":"机场","link":"https://www.mojie.mx/#/login","avatar":"/img/artical_pic.png","descr":"懂?"}]},{"class_name":"其他工具","class_desc":"其他各种工具","link_list":[{"name":"文本对比工具","link":"https://tool.p2hp.com/tool-online-difftext/","avatar":"/img/artical_pic.png","descr":"在线文本对比"},{"name":"大数运算器","link":"https://goodcalculators.com/big-number-calculator/","avatar":"/img/artical_pic.png","descr":"高精度大数在线运算"},{"name":"阶乘运算器","link":"https://zh.numberempire.com/factorialcalculator.php","avatar":"/img/artical_pic.png","descr":"阶乘计算"}]},{"class_name":"创作与AI工具","class_desc":"AI,文档,表格,图像等创作工具","link_list":[{"name":"ChatGPT","link":"https://chat.openai.com/","avatar":"/img/ChatGPT.webp","descr":"学习的好帮手"},{"name":"在线作图工具","link":"https://www.processon.com/","avatar":"/img/artical_pic.png","descr":"免费在线流程图思维导图"}]},{"class_name":"技术文档","class_desc":"各种语言,框架,工具的文档","link_list":[{"name":"C/C++参考手册","link":"https://zh.cppreference.com/mwiki/index.php?title=%E9%A6%96%E9%A1%B5&variant=zh-cn","avatar":"/img/Logo/C_and_CPP.jpg","descr":"C和C++语言的在线参考手册"},{"name":"GTK文档","link":"https://www.gtk.org/docs/installations/windows/","avatar":"/img/Logo/logo-gtk-sm.png","descr":"GTK库的文档"},{"name":"Windows API 索引","link":"https://learn.microsoft.com/zh-cn/windows/win32/apiindex/windows-api-list","avatar":"/img/Logo/Microsoft.png","descr":"Windows API 的文档"}]}]]]></content>
       
     </entry>
     
     
     
     <entry>
-      <title></title>
-      <link href="/json-data/tools.json"/>
-      <url>/json-data/tools.json</url>
+      <title>我的标签</title>
+      <link href="/tags/index.html"/>
+      <url>/tags/index.html</url>
       
-        <content type="html"><![CDATA[[{"class_name":"CTF工具","class_desc":"常用在线工具","link_list":[{"name":"CyberChef","link":"https://icyberchef.com/","avatar":"/img/artical_pic.png","descr":"编码万能转换"},{"name":"密码破解","link":"http://www.atoolbox.net/Category.php?Id=27&Page=1","avatar":"/img/artical_pic.png","descr":"基本密码在线解密"},{"name":"正则表达式工具","link":"https://c.runoob.com/front-end/854/?optionGlobl=global","avatar":"/img/artical_pic.png","descr":"正则表达式在线处理"},{"name":"BrainF**k and Ook","link":"https://www.splitbrain.org/services/ook","avatar":"/img/artical_pic.png","descr":"某种玄学的东西"},{"name":"因数分解","link":"http://www.factordb.com/index.php","avatar":"/img/artical_pic.png","descr":"一个因数分解数据库"},{"name":"摩斯电码","link":"https://morsecode.world/international/decoder/audio-decoder-adaptive.html","avatar":"/img/artical_pic.png","descr":"不解释"},{"name":"图像处理","link":"https://onlinetools.com/image","avatar":"/img/artical_pic.png","descr":"图像的各种特殊处理"},{"name":"Java在线逆向","link":"http://javare.cn","avatar":"/img/artical_pic.png","descr":"可以class文件..."},{"name":"Awesome-Hacking","link":"https://blog.csdn.net/ZYC88888/article/details/113663486","avatar":"/img/artical_pic.png","descr":"CTF工具库"}]},{"class_name":"转换工具","class_desc":"格式转换的一些小工具","link_list":[{"name":"pdf转换工具","link":"https://www.alltoall.net/","avatar":"/img/artical_pic.png","descr":"文档在线转换"},{"name":"音频格式转换工具","link":"http://ncm.miidj.com/","avatar":"/img/artical_pic.png","descr":"方便使用播放器"},{"name":"操作系统文件格式转换","link":"http://tools.bugscaner.com/text/textconvert.html","avatar":"/img/artical_pic.png","descr":"在线文档格式windows unix macintosh互相转换"}]},{"class_name":"网络工具","class_desc":"网络相关的工具和资源","link_list":[{"name":"测速网","link":"https://www.speedtest.cn/","avatar":"/img/artical_pic.png","descr":"网速测试"},{"name":"Clash","link":"https://github.com/Dreamacro/clash/releases","avatar":"/img/artical_pic.png","descr":"Clash下载直达"},{"name":"虚拟手机号","link":"https://sms-activate.org/cn/getNumber","avatar":"/img/artical_pic.png","descr":"虚拟手机号服务"},{"name":"机场","link":"https://www.mojie.mx/#/login","avatar":"/img/artical_pic.png","descr":"懂?"}]},{"class_name":"其他工具","class_desc":"其他各种工具","link_list":[{"name":"文本对比工具","link":"https://tool.p2hp.com/tool-online-difftext/","avatar":"/img/artical_pic.png","descr":"在线文本对比"},{"name":"大数运算器","link":"https://goodcalculators.com/big-number-calculator/","avatar":"/img/artical_pic.png","descr":"高精度大数在线运算"},{"name":"阶乘运算器","link":"https://zh.numberempire.com/factorialcalculator.php","avatar":"/img/artical_pic.png","descr":"阶乘计算"}]},{"class_name":"创作与AI工具","class_desc":"AI,文档,表格,图像等创作工具","link_list":[{"name":"ChatGPT","link":"https://chat.openai.com/","avatar":"/img/ChatGPT.webp","descr":"学习的好帮手"},{"name":"在线作图工具","link":"https://www.processon.com/","avatar":"/img/artical_pic.png","descr":"免费在线流程图思维导图"}]},{"class_name":"技术文档","class_desc":"各种语言,框架,工具的文档","link_list":[{"name":"C/C++参考手册","link":"https://zh.cppreference.com/mwiki/index.php?title=%E9%A6%96%E9%A1%B5&variant=zh-cn","avatar":"/img/Logo/C_and_CPP.jpg","descr":"C和C++语言的在线参考手册"},{"name":"GTK文档","link":"https://www.gtk.org/docs/installations/windows/","avatar":"/img/Logo/logo-gtk-sm.png","descr":"GTK库的文档"},{"name":"Windows API 索引","link":"https://learn.microsoft.com/zh-cn/windows/win32/apiindex/windows-api-list","avatar":"/img/Logo/Microsoft.png","descr":"Windows API 的文档"}]}]]]></content>
+        <content type="html"><![CDATA[<p>hello world</p>]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>在线工具</title>
+      <link href="/tools/index.html"/>
+      <url>/tools/index.html</url>
+      
+        <content type="html"><![CDATA[]]></content>
       
     </entry>
     
