@@ -4,11 +4,38 @@
   
     
     <entry>
+      <title>队列</title>
+      <link href="/2024-03-08-685514233b15/"/>
+      <url>/2024-03-08-685514233b15/</url>
+      
+        <content type="html"><![CDATA[<h1 id="概述">概述</h1><p>队列(queue)可以认为是一种特殊的线性表,因为他仍然满足线性表的特点:</p><ul><li>存在一个唯一的没有前驱的(头)数据元素.(注意与具体实现中的&quot;头结点&quot;有别)</li><li>存在一个唯一的没有后继的(尾)数据元素.</li><li>除此之外,其他每一个数据元素均有一个直接前驱和一个直接后继数据元素.</li></ul><p>如前所述,链表和顺序表可以在表中的任何位置操作数据;栈只能在栈顶操作数据.</p><p>队列的操作则是:只允许在表的头部和尾部操作数据,并且表(队)头只能<code>弹出</code>元素(出队),表(队)尾只能<code>插入</code>元素(入队).当然,可以获取队头的元素值.</p><br><p>数据结构上的队列和日常生活中的排队是一致的,要遵循&quot;先来后到&quot;的原则,也就是满足了所谓的<code>FIFO</code>原则.</p><p>另外,和现实生活不同,队列中的元素(不是队头)一般是不允许进行插入(现实生活当然也不能插队doge)和删除(现实生活可以取消排队自行离开)的.因为我们只能操作队头和队尾.</p><h1 id="队列的实现">队列的实现</h1><h2 id="基于数组">基于数组</h2><p>假设我们的队列有如下信息:----<code>属性</code></p><ul><li>front指针: 指示队头位置</li><li>tail指针: 指示队尾</li><li>size值: 栈当前的元素个数</li><li>max_size值: 队列的最大容量—<code>循环队列</code>需要—使用数组(realloc),而链栈(一般)则不需要</li></ul><p>其中,<code>tail不指向任何有效元素</code>,我们稍后将会讲解为何需要这样做!</p><h3 id="队列的状态">队列的状态</h3><p>有如下3种状态:</p><h4 id="队列空">队列空</h4><p>由于tail不指向任何有效元素,front永远指向队头元素(除非队空),那么显然可以(和栈类似)指定:</p><p>队列为空,等价于<code>front==tail</code></p><h4 id="队列非空">队列非空</h4><p>与队列空互斥,则有:</p><p>队列非空,等价于<code>front!=tail</code></p><h4 id="队列满">队列满</h4><p>仅适用于数组实现(循环)队列,由于数组有长度上限,因此队列会满!</p><p>队列满,等价于<code>size==max_size</code></p><p>关于max_size如何定义需要另外讨论.</p><h3 id="指针的指向问题">指针的指向问题</h3><p>我们使用front指针来指向队头元素;用tail指向队尾元素的下一个空间.</p><p>这样设计tail指针的指向,是为了避免<code>假溢出</code>问题,同时解决判断队列状态的歧义问题.</p><h3 id="假溢出问题">假溢出问题</h3><p>由于数组的长度固定,如果简单地在末尾插入,在头部删除,整个队列就会在数组中逐渐向后&quot;平移&quot;,前面的元素空间都会被浪费掉,直到到达数组末尾,导致无法插入元素,即发生了溢出,但是此时前面的很多元素空间很可能都是空的!</p><p>假溢出的情况发生图:</p><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20240308134938989.png" alt="image-20240308134938989" style="zoom:50%;" /><p>这种溢出叫做<code>假溢出</code>,即队列无法插入任何元素,但是实际上仍然有空间可用!</p><p>为了解决这个问题,我们需要想办法让队列在到达数组末尾时,新入队的元素能够存储到数组开头被出队的空间中,从整个数组来看,就像是一个圆圈,这样的实现称为<code>循环队列</code>.循环队列是从存储实现方式上看的,但是从队列ADT的角度来看,整个队列仍然只能从队头出队,从队尾入队.</p><p>循环队列的入队逻辑图如下:</p><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20240308134858929.png" alt="image-20240308134858929" style="zoom:50%;" /><p>你可能有点懵,那么不妨把数组当成一条&quot;蛇&quot;,把他拧成一个圆圈再看看呢?</p><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20240308140746679.png" alt="image-20240308140746679" style="zoom:50%;" /><p>也就是说,通过某种手段,让tail在递增时,如果发生越界,则让他回到0的位置,继续递增.</p><h3 id="队列的状态判定">队列的状态判定</h3><h4 id="队空和队列有一个元素">队空和队列有一个元素</h4><p>前面说了,该实现中,用tail指向队尾元素的下一个空间,这是为了防止状态判断发生歧义.</p><p>想一下,如果我们让tail指向队尾元素:</p><p>假设有2个队列a,b.其中a有1个元素,b为空,那么队列的图示如下:</p><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20240308141900284.png" alt="image-20240308141900284" style="zoom:50%;" /><p>显然这2种状态如果使用指针来判断是否为空就会发生歧义.</p><p>当然也有解决方案—我们直接用size和max_size来判断是否为空即可.</p><br><p>不过设计程序的一个原则就是:尽可能避免各种潜在的歧义.</p><p>从这个角度去考虑,这里选择将tail的指针后移,这样就能区分出2种状态了:</p><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20240308142159345.png" alt="image-20240308142159345" style="zoom:50%;" /><h4 id="队满的判定">队满的判定</h4><p>同样,既然选择&quot;用tail指向队尾元素的下一个空间&quot;,那么避免&quot;队空&quot;和&quot;队满&quot;的歧义,我们需要人为地&quot;浪费&quot;一个空间,即front指针的前一个位置.</p><p>假设有2个队列a,b.其中a为空,b为满:</p><p>这是不浪费的情况:</p><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20240308142718861.png" alt="image-20240308142718861" style="zoom:50%;" /><p>这是人为浪费一个空间的情况:</p><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20240308142949393.png" alt="image-20240308142949393" style="zoom:50%;" /><p>显然后者无歧义.</p><br><p>至于&quot;让tail指向队尾元素&quot;的实现,也是可以的,这里使用&quot;让tail指向队尾元素的下一个空间&quot;的实现.</p><h3 id="队列的操作">队列的操作</h3><h4 id="入队-push">入队-push</h4><p>先判断队列是否已满.</p><p>由于tail指向当前队尾元素的下一个位置,所以直接复制元素进去,然后将tail递增即可,注意考虑回绕.</p><p>注意<code>size++</code>.</p><h4 id="出队-pop">出队-pop</h4><p>先判断队列是否为空.</p><p>(可能)需要将队首元素值备份并返回,然后直接将front递增即可.</p><p>注意<code>size--</code>.</p><h4 id="销毁队列-destory">销毁队列-destory</h4><p>(可能)将存储表的数组free掉.</p><p>然后将队列的实例销毁.</p><h4 id="获取状态信息">获取状态信息</h4><p>这些方法都只需要返回对应的状态信息即可,例如队列当前的元素个数<code>get_size()</code>,当前队头元素值<code>get_front()</code>.</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 数据结构及算法 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 数据结构 </tag>
+            
+            <tag> 队列 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>栈</title>
       <link href="/2024-03-07-93287487d0a5/"/>
       <url>/2024-03-07-93287487d0a5/</url>
       
-        <content type="html"><![CDATA[<h1 id="栈概述">栈概述</h1><p>栈(stack)可以认为是一种特殊的线性表,因为他仍然满足线性表的特点:</p><ul><li>存在一个唯一的没有前驱的(头)数据元素.(注意与具体实现中的&quot;头结点&quot;有别)</li><li>存在一个唯一的没有后继的(尾)数据元素.</li><li>除此之外,其他每一个数据元素均有一个直接前驱和一个直接后继数据元素.</li></ul><p>下面这是2种线性表,即<code>顺序表</code>和<code>链表</code>:</p><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20240306170538627.png" alt="image-20240306170538627" style="zoom:50%;" /><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20240306165216730.png" alt="image-20240306165216730" style="zoom:50%;" /><p>这两种表允许在表中的任何位置操作,栈则不同,栈只允许在表的一端(称为栈顶)操作,而且一般只允许<code>插入</code>和<code>删除</code>这2种操作.</p><p>我们可以建立这样的栈的<code>逻辑结构</code>:</p><p>顺序栈</p><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20240307141121499.png" alt="image-20240307141121499" style="zoom:50%;" /><p>所有的插入,删除操作均只能在top一端进行,基于这种操作限制,栈属于<code>FILO原则</code>,即<code>First In Last Out</code>.</p><p>我们可以将栈想象一个箱子,我们每次都只能放一个物品进去,并逐渐堆叠,最先放入的物品会被压在最下面,最新放入的物品将会在最上面.(所谓的压箱底)</p><p>想要拿出之前放入的物品,则必须先将后放入的所有的物品拿出来.另一方面,最新(即最后)放入的物品在最上面,取出时也是最先拿出;最早放入的物品在最下面,取出时则要最后拿出.</p><p>这样的特性则是<code>FILO</code>.</p><p>另外有<code>FIFO</code>原则,队列—两头操作.</p><h1 id="栈的状态">栈的状态</h1><p>作为一个栈ADT:</p><p>栈有3种状态:栈空,栈非空,栈满.</p><p>我们需要使用一些方法来判断当前栈的状态.</p><p>假设我们的栈有如下信息:----<code>属性</code></p><ul><li>top指针: 指示栈顶位置</li><li>bottom指针: 指示栈底</li><li>size值: 栈当前的元素个数</li><li>max_size值: 栈的最大容量—<code>顺序栈</code>需要—使用数组(realloc),而链栈(一般)则不需要</li></ul><h2 id="栈非空">栈非空</h2><p>如前所述,栈顶指针top永远指向当前栈中的第一个元素,bottom指示栈底.</p><p>我们可以让bottom指针不指向任何有效元素,那么如果栈非空,则top指向某个有效元素,bottom不指向任何元素,例如将其置为<code>NULL</code>(或者0).</p><p>那么栈非空,等价于<code>top!=bottom</code></p><h2 id="栈空">栈空</h2><p>与栈非空相反,栈空时,top显然无法指向任何有效元素,当然此时bottom仍然可以让它指向NULL.</p><p>容易想到,top等于bottom时,可以认为栈空.</p><p>那么栈空,等价于<code>top==bottom</code>//都指向NULL/0</p><h2 id="栈满">栈满</h2><p>该状态仅适用于<code>顺序栈</code>,即基于顺序表实现的栈,此时栈一般存储于栈区(与现在讨论的栈不同),它有空间限制,因此需要保证栈当前元素个数不超过最大容量.</p><p>那么栈满,等价于<code>size==max_size</code></p><h1 id="栈的操作">栈的操作</h1><h2 id="压栈-push">压栈-push</h2><p>就是所谓的向栈中插入元素.</p><p>向栈顶插入元素的操作,通常被形象地称为<code>压栈</code>/入栈.因为原来的元素被堆叠(压)在新元素的下面.</p><p>在一切操作之前,必须检查当前栈的状态—如果栈满,则不应该执行压栈.</p><p>由于栈顶永远指向当前栈顶的有效元素,并且当栈空时top指向NULL.</p><p>所以,我们应该先让top指针指向一个有效的内存空间,用于存储新元素,这个操作类似于<code>++top</code>.</p><p>然后,就可以把新元素的值赋值进去.</p><p>最后,将当前元素个数+1,即<code>++size</code>.</p><h2 id="出栈-pop">出栈-pop</h2><p>从栈顶弹出元素的操作,被称作<code>出栈</code>.</p><p>在一切操作之前,必须检查当前栈的状态—如果栈空,则不应该执行出栈.</p><p>检查无误后,则可以出栈,同样,top指向当前栈顶元素,将该元素从栈中移除,不过一般会将元素值返回,用于处理.</p><p>一般,先备份该值,然后将元素空间销毁(用于链栈),例如使用free()进行空间释放.</p><p>然后将top指针下移,下一个元素成为新的栈顶,或者弹出最后一个元素后,top指向NULL.</p><p>同样,需要<code>--size</code>.</p><p>最后,将元素值返回.</p><h2 id="销毁栈-destroy-free">销毁栈-destroy/free</h2><p>很简单,不断地出栈,直到栈空即可.</p><p>最后,可能要将栈的实例销毁.</p><h2 id="获取状态信息">获取状态信息</h2><p>这些方法都只需要返回对应的状态信息即可,例如栈当前的元素个数<code>get_size()</code>,当前栈顶元素值<code>get_top()</code>.</p><h1 id="堆栈">堆栈</h1><p>计算机的堆栈,就是栈,每一个元素的大小不同,因为每个元素都是一个函数栈帧.</p><p>递归—压栈.</p><p>计算机的堆区和栈区.</p><p>堆区和数据结构的堆 没有任何关系!没有任何鸡毛的关系. heap</p>]]></content>
+        <content type="html"><![CDATA[<h1 id="栈概述">栈概述</h1><p>栈(stack)可以认为是一种特殊的线性表,因为他仍然满足线性表的特点:</p><ul><li>存在一个唯一的没有前驱的(头)数据元素.(注意与具体实现中的&quot;头结点&quot;有别)</li><li>存在一个唯一的没有后继的(尾)数据元素.</li><li>除此之外,其他每一个数据元素均有一个直接前驱和一个直接后继数据元素.</li></ul><p>下面这是2种线性表,即<code>顺序表</code>和<code>链表</code>:</p><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20240306170538627.png" alt="image-20240306170538627" style="zoom:50%;" /><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20240306165216730.png" alt="image-20240306165216730" style="zoom:50%;" /><p>这两种表允许在表中的任何位置操作,栈则不同,栈只允许在表的一端(称为栈顶)操作,而且一般只允许<code>插入</code>和<code>删除</code>这2种操作.</p><p>我们可以建立这样的栈的<code>逻辑结构</code>:</p><p>顺序栈</p><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20240307141121499.png" alt="image-20240307141121499" style="zoom:50%;" /><p>所有的插入,删除操作均只能在top一端进行,基于这种操作限制,栈属于<code>FILO原则</code>,即<code>First In Last Out</code>.</p><p>我们可以将栈想象一个箱子,我们每次都只能放一个物品进去,并逐渐堆叠,最先放入的物品会被压在最下面,最新放入的物品将会在最上面.(所谓的压箱底)</p><p>想要拿出之前放入的物品,则必须先将后放入的所有的物品拿出来.另一方面,最新(即最后)放入的物品在最上面,取出时也是最先拿出;最早放入的物品在最下面,取出时则要最后拿出.</p><p>这样的特性则是<code>FILO</code>.</p><p>另外有<code>FIFO</code>原则,队列—两头操作.</p><h1 id="栈的状态">栈的状态</h1><p>作为一个栈ADT:</p><p>栈有3种状态:栈空,栈非空,栈满.</p><p>我们需要使用一些方法来判断当前栈的状态.</p><p>假设我们的栈有如下信息:----<code>属性</code></p><ul><li>top指针: 指示栈顶位置</li><li>bottom指针: 指示栈底</li><li>size值: 栈当前的元素个数</li><li>max_size值: 栈的最大容量—<code>顺序栈</code>需要—使用数组(realloc),而链栈(一般)则不需要</li></ul><h2 id="栈非空">栈非空</h2><p>如前所述,栈顶指针top永远指向当前栈中的第一个元素,bottom指示栈底.</p><p>我们可以让bottom指针不指向任何有效元素,那么如果栈非空,则top指向某个有效元素,bottom不指向任何元素,例如将其置为<code>NULL</code>(或者0).</p><p>那么栈非空,等价于<code>top!=bottom</code></p><h2 id="栈空">栈空</h2><p>与栈非空相反,栈空时,top显然无法指向任何有效元素,当然此时bottom仍然可以让它指向NULL.</p><p>容易想到,top等于bottom时,可以认为栈空.</p><p>那么栈空,等价于<code>top==bottom</code>//都指向NULL/0</p><h2 id="栈满">栈满</h2><p>该状态仅适用于<code>顺序栈</code>,即基于顺序表实现的栈,此时栈一般存储于栈区(与现在讨论的栈不同),它有空间限制,因此需要保证栈当前元素个数不超过最大容量.</p><p>那么栈满,等价于<code>size==max_size</code></p><h1 id="栈的操作">栈的操作</h1><h2 id="压栈-push">压栈-push</h2><p>就是所谓的向栈中插入元素.</p><p>向栈顶插入元素的操作,通常被形象地称为<code>压栈</code>/入栈.因为原来的元素被堆叠(压)在新元素的下面.</p><p>在一切操作之前,必须检查当前栈的状态—如果栈满,则不应该执行压栈.</p><p>由于栈顶永远指向当前栈顶的有效元素,并且当栈空时top指向NULL.</p><p>所以,我们应该先让top指针指向一个有效的内存空间,用于存储新元素,这个操作类似于<code>++top</code>.</p><p>然后,就可以把新元素的值赋值进去.</p><p>最后,将当前元素个数+1,即<code>++size</code>.</p><h2 id="出栈-pop">出栈-pop</h2><p>从栈顶弹出元素的操作,被称作<code>出栈</code>.</p><p>在一切操作之前,必须检查当前栈的状态—如果栈空,则不应该执行出栈.</p><p>检查无误后,则可以出栈,同样,top指向当前栈顶元素,将该元素从栈中移除,不过一般会将元素值返回,用于处理.</p><p>一般,先备份该值,然后将元素空间销毁(用于链栈),例如使用free()进行空间释放.</p><p>然后将top指针下移,下一个元素成为新的栈顶,或者弹出最后一个元素后,top指向NULL.</p><p>同样,需要<code>--size</code>.</p><p>最后,将元素值返回.</p><h2 id="销毁栈-destroy-free">销毁栈-destroy/free</h2><p><s>很简单,不断地出栈,直到栈空即可.</s></p><p>更新:由于是顺序栈,直接free掉数组即可(当然如果本来就是一次性分配整个结构体,而不是再次分配另一段内存,则这步也不需要).</p><p>最后,将栈的实例销毁.</p><h2 id="获取状态信息">获取状态信息</h2><p>这些方法都只需要返回对应的状态信息即可,例如栈当前的元素个数<code>get_size()</code>,当前栈顶元素值<code>get_top()</code>.</p><h1 id="堆栈">堆栈</h1><p>计算机的堆栈,就是栈,每一个元素的大小不同,因为每个元素都是一个函数栈帧.</p><p>递归—压栈.</p><p>计算机的堆区和栈区.</p><p>堆区和数据结构的堆 没有任何关系!没有任何鸡毛的关系. heap</p>]]></content>
       
       
       <categories>
@@ -947,9 +974,9 @@
       
         <tags>
             
-            <tag> AWD </tag>
-            
             <tag> CTF </tag>
+            
+            <tag> AWD </tag>
             
         </tags>
       
@@ -1572,13 +1599,13 @@
             
             <tag> RE </tag>
             
-            <tag> Web </tag>
+            <tag> PWN </tag>
             
             <tag> Crypto </tag>
             
-            <tag> PWN </tag>
-            
             <tag> Misc </tag>
+            
+            <tag> Web </tag>
             
         </tags>
       
@@ -2614,22 +2641,22 @@
     
     
     <entry>
-      <title>关于</title>
-      <link href="/about/index.html"/>
-      <url>/about/index.html</url>
+      <title>分类导航</title>
+      <link href="/categories/index.html"/>
+      <url>/categories/index.html</url>
       
-        <content type="html"><![CDATA[<p><a href="https://www.baidu.com">https://www.baidu.com</a></p>]]></content>
+        <content type="html"><![CDATA[<p>hello world</p>]]></content>
       
     </entry>
     
     
     
     <entry>
-      <title>分类导航</title>
-      <link href="/categories/index.html"/>
-      <url>/categories/index.html</url>
+      <title>关于</title>
+      <link href="/about/index.html"/>
+      <url>/about/index.html</url>
       
-        <content type="html"><![CDATA[<p>hello world</p>]]></content>
+        <content type="html"><![CDATA[<p><a href="https://www.baidu.com">https://www.baidu.com</a></p>]]></content>
       
     </entry>
     
@@ -2658,22 +2685,22 @@
     
     
     <entry>
-      <title>我的标签</title>
-      <link href="/tags/index.html"/>
-      <url>/tags/index.html</url>
+      <title>在线工具</title>
+      <link href="/tools/index.html"/>
+      <url>/tools/index.html</url>
       
-        <content type="html"><![CDATA[<p>hello world</p>]]></content>
+        <content type="html"><![CDATA[]]></content>
       
     </entry>
     
     
     
     <entry>
-      <title>在线工具</title>
-      <link href="/tools/index.html"/>
-      <url>/tools/index.html</url>
+      <title>我的标签</title>
+      <link href="/tags/index.html"/>
+      <url>/tags/index.html</url>
       
-        <content type="html"><![CDATA[]]></content>
+        <content type="html"><![CDATA[<p>hello world</p>]]></content>
       
     </entry>
     
