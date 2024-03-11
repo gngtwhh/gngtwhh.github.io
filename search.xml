@@ -4,11 +4,38 @@
   
     
     <entry>
+      <title>邻接矩阵</title>
+      <link href="/2024-03-09-472eb9282fc5/"/>
+      <url>/2024-03-09-472eb9282fc5/</url>
+      
+        <content type="html"><![CDATA[<p>前置知识:</p><ol><li><p>二维数组</p><h1 id="图概述">图概述</h1></li></ol><h1 id="邻接矩阵概述">邻接矩阵概述</h1><p>邻接矩阵是一种用于表示图的数据结构.在邻接矩阵中,行和列都对应图的顶点,如果两个顶点之间存在一条边,那么对应的矩阵元素就是1（或者是边的权重,对于带权图）,否则就是0.</p><p>矩阵的<code>行</code>和<code>列</code>分别代表一条边的<code>起点</code>和<code>终点</code>,即第<code>i</code>行第<code>j</code>列的元素,代表顶点<code>i</code>到顶点<code>j</code>是否有一条边.</p><p>此外,对于无向图,由于边是双向的,所以第<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span>行第<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>j</mi></mrow><annotation encoding="application/x-tex">j</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.85396em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.05724em;">j</span></span></span></span>列的元素和第<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>j</mi></mrow><annotation encoding="application/x-tex">j</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.85396em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.05724em;">j</span></span></span></span>行第<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span>列的元素是相同的,都表示顶点<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span>和顶点<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>j</mi></mrow><annotation encoding="application/x-tex">j</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.85396em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.05724em;">j</span></span></span></span>之间是否存在边.</p><p>但对于有向图,行和列的意义就有所不同了.如果我们有一条从顶点<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span>指向顶点<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>j</mi></mrow><annotation encoding="application/x-tex">j</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.85396em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.05724em;">j</span></span></span></span>的边,那么在邻接矩阵中,第<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span>行第<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>j</mi></mrow><annotation encoding="application/x-tex">j</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.85396em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.05724em;">j</span></span></span></span>列的元素会是1（或者是边的权重,对于带权图）,而第<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>j</mi></mrow><annotation encoding="application/x-tex">j</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.85396em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.05724em;">j</span></span></span></span>行第<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span>列的元素会是0,除非还存在一条从顶点<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>j</mi></mrow><annotation encoding="application/x-tex">j</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.85396em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.05724em;">j</span></span></span></span>指向顶点<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span>的边.</p><br><p>例如,对于以下图,我们可以创建相应的邻接矩阵：</p><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20231229213940793.png" alt="image-20231229213940793" style="zoom:50%;" /><p>对应的邻接矩阵为：</p><table><thead><tr><th></th><th>A</th><th>B</th><th>C</th><th>D</th></tr></thead><tbody><tr><td>A</td><td>0</td><td>3</td><td>1</td><td>0</td></tr><tr><td>B</td><td>0</td><td>0</td><td>4</td><td>0</td></tr><tr><td>C</td><td>0</td><td>0</td><td>0</td><td>2</td></tr><tr><td>D</td><td>0</td><td>0</td><td>0</td><td>0</td></tr></tbody></table><h1 id="优缺点">优缺点</h1><p>优点:</p><ol><li><p>简单明了</p><p>邻接矩阵的数据结构非常简单,易于理解和实现.</p></li><li><p>方便查询</p><p>通过邻接矩阵,我们可以在常数时间内确定两个顶点之间是否存在边,或者边的权重是多少.</p></li></ol><p>缺点:</p><ol><li><p>空间消耗大</p><p>邻接矩阵的空间复杂度为<code>O(n^2)</code>,其中<code>n</code>为顶点数.因此,对于顶点数非常多,但边数相对较少的<code>稀疏图</code>来说,邻接矩阵可能会浪费大量的空间.</p></li><li><p>添加或删除边的操作复杂</p><p>在邻接矩阵中添加或删除边需要修改矩阵,这可能需要<code>O(n)</code>的时间.</p></li></ol><p>因此,邻接矩阵更适合表示边数相对较多的稠密图.</p><h1 id="代码实现">代码实现</h1><p>可以很容易地使用二维数组来实现它.对于无权图,使用0和1来表示边的存在与否；对于带权图,使用特殊值（例如最大的整数）来表示边的不存在.</p><h2 id="图的属性">图的属性</h2><ol><li>顶点数</li><li>边数</li><li>无穷大的定义</li><li>是否带权重</li></ol><h2 id="图的操作">图的操作</h2><ol><li>创建/销毁一个图实例</li><li>插入一条(有向)边</li><li>删除一条(有向)边</li><li>查找从<code>u</code>到<code>v</code>是否有边,有的话返回其权重(无权图返回1)</li><li>按照起点,打印这个图</li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> 数据结构及算法 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 数据结构 </tag>
+            
+            <tag> 图论 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>队列</title>
       <link href="/2024-03-08-685514233b15/"/>
       <url>/2024-03-08-685514233b15/</url>
       
-        <content type="html"><![CDATA[<h1 id="概述">概述</h1><p>队列(queue)可以认为是一种特殊的线性表,因为他仍然满足线性表的特点:</p><ul><li>存在一个唯一的没有前驱的(头)数据元素.(注意与具体实现中的&quot;头结点&quot;有别)</li><li>存在一个唯一的没有后继的(尾)数据元素.</li><li>除此之外,其他每一个数据元素均有一个直接前驱和一个直接后继数据元素.</li></ul><p>如前所述,链表和顺序表可以在表中的任何位置操作数据;栈只能在栈顶操作数据.</p><p>队列的操作则是:只允许在表的头部和尾部操作数据,并且表(队)头只能<code>弹出</code>元素(出队),表(队)尾只能<code>插入</code>元素(入队).当然,可以获取队头的元素值.</p><br><p>数据结构上的队列和日常生活中的排队是一致的,要遵循&quot;先来后到&quot;的原则,也就是满足了所谓的<code>FIFO</code>原则.</p><p>另外,和现实生活不同,队列中的元素(不是队头)一般是不允许进行插入(现实生活当然也不能插队doge)和删除(现实生活可以取消排队自行离开)的.因为我们只能操作队头和队尾.</p><h1 id="队列的实现">队列的实现</h1><h2 id="基于数组">基于数组</h2><p>假设我们的队列有如下信息:----<code>属性</code></p><ul><li>front指针: 指示队头位置</li><li>tail指针: 指示队尾</li><li>size值: 栈当前的元素个数</li><li>max_size值: 队列的最大容量—<code>循环队列</code>需要—使用数组(realloc),而链栈(一般)则不需要</li></ul><p>其中,<code>tail不指向任何有效元素</code>,我们稍后将会讲解为何需要这样做!</p><h3 id="队列的状态">队列的状态</h3><p>有如下3种状态:</p><h4 id="队列空">队列空</h4><p>由于tail不指向任何有效元素,front永远指向队头元素(除非队空),那么显然可以(和栈类似)指定:</p><p>队列为空,等价于<code>front==tail</code></p><h4 id="队列非空">队列非空</h4><p>与队列空互斥,则有:</p><p>队列非空,等价于<code>front!=tail</code></p><h4 id="队列满">队列满</h4><p>仅适用于数组实现(循环)队列,由于数组有长度上限,因此队列会满!</p><p>队列满,等价于<code>size==max_size</code></p><p>关于max_size如何定义需要另外讨论.</p><h3 id="指针的指向问题">指针的指向问题</h3><p>我们使用front指针来指向队头元素;用tail指向队尾元素的下一个空间.</p><p>这样设计tail指针的指向,是为了避免<code>假溢出</code>问题,同时解决判断队列状态的歧义问题.</p><h3 id="假溢出问题">假溢出问题</h3><p>由于数组的长度固定,如果简单地在末尾插入,在头部删除,整个队列就会在数组中逐渐向后&quot;平移&quot;,前面的元素空间都会被浪费掉,直到到达数组末尾,导致无法插入元素,即发生了溢出,但是此时前面的很多元素空间很可能都是空的!</p><p>假溢出的情况发生图:</p><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20240308134938989.png" alt="image-20240308134938989" style="zoom:50%;" /><p>这种溢出叫做<code>假溢出</code>,即队列无法插入任何元素,但是实际上仍然有空间可用!</p><p>为了解决这个问题,我们需要想办法让队列在到达数组末尾时,新入队的元素能够存储到数组开头被出队的空间中,从整个数组来看,就像是一个圆圈,这样的实现称为<code>循环队列</code>.循环队列是从存储实现方式上看的,但是从队列ADT的角度来看,整个队列仍然只能从队头出队,从队尾入队.</p><p>循环队列的入队逻辑图如下:</p><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20240308134858929.png" alt="image-20240308134858929" style="zoom:50%;" /><p>你可能有点懵,那么不妨把数组当成一条&quot;蛇&quot;,把他拧成一个圆圈再看看呢?</p><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20240308140746679.png" alt="image-20240308140746679" style="zoom:50%;" /><p>也就是说,通过某种手段,让tail在递增时,如果发生越界,则让他回到0的位置,继续递增.</p><h3 id="队列的状态判定">队列的状态判定</h3><h4 id="队空和队列有一个元素">队空和队列有一个元素</h4><p>前面说了,该实现中,用tail指向队尾元素的下一个空间,这是为了防止状态判断发生歧义.</p><p>想一下,如果我们让tail指向队尾元素:</p><p>假设有2个队列a,b.其中a有1个元素,b为空,那么队列的图示如下:</p><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20240308141900284.png" alt="image-20240308141900284" style="zoom:50%;" /><p>显然这2种状态如果使用指针来判断是否为空就会发生歧义.</p><p>当然也有解决方案—我们直接用size和max_size来判断是否为空即可.</p><br><p>不过设计程序的一个原则就是:尽可能避免各种潜在的歧义.</p><p>从这个角度去考虑,这里选择将tail的指针后移,这样就能区分出2种状态了:</p><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20240308142159345.png" alt="image-20240308142159345" style="zoom:50%;" /><h4 id="队满的判定">队满的判定</h4><p>同样,既然选择&quot;用tail指向队尾元素的下一个空间&quot;,那么避免&quot;队空&quot;和&quot;队满&quot;的歧义,我们需要人为地&quot;浪费&quot;一个空间,即front指针的前一个位置.</p><p>假设有2个队列a,b.其中a为空,b为满:</p><p>这是不浪费的情况:</p><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20240308142718861.png" alt="image-20240308142718861" style="zoom:50%;" /><p>这是人为浪费一个空间的情况:</p><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20240308142949393.png" alt="image-20240308142949393" style="zoom:50%;" /><p>显然后者无歧义.</p><br><p>至于&quot;让tail指向队尾元素&quot;的实现,也是可以的,这里使用&quot;让tail指向队尾元素的下一个空间&quot;的实现.</p><h3 id="队列的操作">队列的操作</h3><h4 id="入队-push">入队-push</h4><p>先判断队列是否已满.</p><p>由于tail指向当前队尾元素的下一个位置,所以直接复制元素进去,然后将tail递增即可,注意考虑回绕.</p><p>注意<code>size++</code>.</p><h4 id="出队-pop">出队-pop</h4><p>先判断队列是否为空.</p><p>(可能)需要将队首元素值备份并返回,然后直接将front递增即可.</p><p>注意<code>size--</code>.</p><h4 id="销毁队列-destory">销毁队列-destory</h4><p>(可能)将存储表的数组free掉.</p><p>然后将队列的实例销毁.</p><h4 id="获取状态信息">获取状态信息</h4><p>这些方法都只需要返回对应的状态信息即可,例如队列当前的元素个数<code>get_size()</code>,当前队头元素值<code>get_front()</code>.</p>]]></content>
+        <content type="html"><![CDATA[<h1 id="概述">概述</h1><p>队列(queue)可以认为是一种特殊的线性表,因为他仍然满足线性表的特点:</p><ul><li>存在一个唯一的没有前驱的(头)数据元素.(注意与具体实现中的&quot;头结点&quot;有别)</li><li>存在一个唯一的没有后继的(尾)数据元素.</li><li>除此之外,其他每一个数据元素均有一个直接前驱和一个直接后继数据元素.</li></ul><p>如前所述,链表和顺序表可以在表中的任何位置操作数据;栈只能在栈顶操作数据.</p><p>队列的操作则是:只允许在表的头部和尾部操作数据,并且表(队)头只能<code>弹出</code>元素(出队),表(队)尾只能<code>插入</code>元素(入队).当然,可以获取队头的元素值.</p><br><p>数据结构上的队列和日常生活中的排队是一致的,要遵循&quot;先来后到&quot;的原则,也就是满足了所谓的<code>FIFO</code>原则.</p><p>另外,和现实生活不同,队列中的元素(不是队头)一般是不允许进行插入(现实生活当然也不能插队doge)和删除(现实生活可以取消排队自行离开)的.因为我们只能操作队头和队尾.</p><h1 id="队列的实现">队列的实现</h1><h2 id="基于数组-顺序表">基于数组(顺序表)</h2><p>假设我们的队列有如下信息:----<code>属性</code></p><ul><li>front指针: 指示队头位置</li><li>tail/rear指针: 指示队尾</li><li>size值: 队列当前的元素个数</li><li>max_size值: 队列的最大容量—<code>循环队列</code>需要—使用数组(realloc),而链栈(一般)则不需要</li></ul><p>其中,<code>tail不指向任何有效元素</code>,我们稍后将会讲解为何需要这样做!</p><h3 id="队列的状态">队列的状态</h3><p>有如下3种状态:</p><h4 id="队列空">队列空</h4><p>由于tail不指向任何有效元素,front永远指向队头元素(除非队空),那么显然可以(和栈类似)指定:</p><p>队列为空,等价于<code>front==tail</code></p><h4 id="队列非空">队列非空</h4><p>与队列空互斥,则有:</p><p>队列非空,等价于<code>front!=tail</code></p><h4 id="队列满">队列满</h4><p>仅适用于数组实现(循环)队列,由于数组有长度上限,因此队列会满!</p><p>队列满,等价于<code>size==max_size</code> (初步考虑)</p><p>关于max_size如何定义需要另外讨论.</p><h3 id="指针的指向问题">指针的指向问题</h3><p>我们使用front指针来指向队头元素;用tail指向队尾元素的下一个空间.</p><p>这样设计tail指针的指向,是为了避免<code>假溢出</code>问题,同时解决判断队列状态的歧义问题.</p><h3 id="假溢出问题">假溢出问题</h3><p>由于数组的长度固定,如果简单地在末尾插入,在头部删除,整个队列就会在数组中逐渐向后&quot;平移&quot;,前面的元素空间都会被浪费掉,直到到达数组末尾,导致无法插入元素,即发生了溢出,但是此时前面的很多元素空间很可能都是空的!</p><p>假溢出的情况发生图:</p><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20240308214006859.png" alt="image-20240308214006859" style="zoom:50%;" /><p>这种溢出叫做<code>假溢出</code>,即队列无法插入任何元素,但是实际上仍然有空间可用!</p><p>为了解决这个问题,我们需要想办法让队列在到达数组末尾时,新入队的元素能够存储到数组开头被出队的空间中,从整个数组来看,就像是一个圆圈,这样的实现称为<code>循环队列</code>.循环队列是从存储实现方式上看的,但是从队列ADT的角度来看,整个队列仍然只能从队头出队,从队尾入队.</p><p>循环队列的入队逻辑图如下:</p><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20240308134858929.png" alt="image-20240308134858929" style="zoom:50%;" /><p>你可能有点懵,那么不妨把数组当成一条&quot;蛇&quot;,把他拧成一个圆圈再看看呢?</p><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20240308140746679.png" alt="image-20240308140746679" style="zoom:50%;" /><p>也就是说,通过某种手段,让tail在递增时,如果发生越界,则让他回到0的位置,继续递增.</p><h3 id="队列的状态判定">队列的状态判定</h3><h4 id="队空和队列有一个元素">队空和队列有一个元素</h4><p>前面说了,该实现中,用tail指向队尾元素的下一个空间,这是为了防止状态判断发生歧义.</p><p>想一下,如果我们让tail指向队尾元素:</p><p>假设有2个队列a,b.其中a有1个元素,b为空,那么队列的图示如下:</p><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20240308141900284.png" alt="image-20240308141900284" style="zoom:50%;" /><p>显然这2种状态如果使用指针来判断是否为空就会发生歧义-&gt;不好</p><p>当然也有解决方案—我们直接用size和max_size来判断是否为空即可.</p><br><p>不过设计程序的一个原则就是:尽可能避免各种潜在的歧义.</p><p>从这个角度去考虑,这里选择将tail的指针后移,这样就能区分出2种状态了:</p><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20240308142159345.png" alt="image-20240308142159345" style="zoom:50%;" /><h4 id="队满的判定">队满的判定</h4><p>同样,既然选择&quot;用tail指向队尾元素的下一个空间&quot;,那么避免&quot;队空&quot;和&quot;队满&quot;的歧义,我们需要人为地&quot;浪费&quot;一个空间,即front指针的前一个位置.</p><p>假设有2个队列a,b.其中a为空,b为满:</p><p>这是不浪费的情况:</p><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20240308142718861.png" alt="image-20240308142718861" style="zoom:50%;" /><p>这是人为浪费一个空间的情况:</p><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20240308142949393.png" alt="image-20240308142949393" style="zoom:50%;" /><p>显然后者无歧义.</p><br><p>至于&quot;让tail指向队尾元素&quot;的实现,也是可以的,这里使用&quot;让tail指向队尾元素的下一个空间&quot;的实现.</p><h3 id="队列的操作">队列的操作</h3><h4 id="入队-push">入队-push</h4><p>先判断队列是否已满.</p><p>由于tail指向当前队尾元素的下一个位置,所以直接复制元素进去,然后将tail递增即可,注意考虑回绕.</p><p>注意<code>size++</code>.</p><h4 id="出队-pop">出队-pop</h4><p>先判断队列是否为空.</p><p>(可能)需要将队首元素值备份并返回,然后直接将front递增即可,注意同样要考虑回绕.</p><p>注意<code>size--</code>.</p><h4 id="销毁队列-destory">销毁队列-destory</h4><p>(可能)将存储表的数组free掉.</p><p>然后将队列的实例销毁.</p><h4 id="获取状态信息">获取状态信息</h4><p>这些方法都只需要返回对应的状态信息即可,例如队列当前的元素个数<code>get_size()</code>,当前队头元素值<code>get_front()</code>.</p>]]></content>
       
       
       <categories>
@@ -2663,17 +2690,6 @@
     
     
     <entry>
-      <title>我的影子</title>
-      <link href="/link/index.html"/>
-      <url>/link/index.html</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title></title>
       <link href="/json-data/tools.json"/>
       <url>/json-data/tools.json</url>
@@ -2685,9 +2701,20 @@
     
     
     <entry>
-      <title>在线工具</title>
-      <link href="/tools/index.html"/>
-      <url>/tools/index.html</url>
+      <title>我的标签</title>
+      <link href="/tags/index.html"/>
+      <url>/tags/index.html</url>
+      
+        <content type="html"><![CDATA[<p>hello world</p>]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>我的影子</title>
+      <link href="/link/index.html"/>
+      <url>/link/index.html</url>
       
         <content type="html"><![CDATA[]]></content>
       
@@ -2696,11 +2723,11 @@
     
     
     <entry>
-      <title>我的标签</title>
-      <link href="/tags/index.html"/>
-      <url>/tags/index.html</url>
+      <title>在线工具</title>
+      <link href="/tools/index.html"/>
+      <url>/tools/index.html</url>
       
-        <content type="html"><![CDATA[<p>hello world</p>]]></content>
+        <content type="html"><![CDATA[]]></content>
       
     </entry>
     
