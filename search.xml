@@ -2760,17 +2760,6 @@
     
     
     <entry>
-      <title>分类导航</title>
-      <link href="/categories/index.html"/>
-      <url>/categories/index.html</url>
-      
-        <content type="html"><![CDATA[<p>hello world</p>]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title></title>
       <link href="/json-data/tools.json"/>
       <url>/json-data/tools.json</url>
@@ -2796,6 +2785,17 @@
       <title>我的标签</title>
       <link href="/tags/index.html"/>
       <url>/tags/index.html</url>
+      
+        <content type="html"><![CDATA[<p>hello world</p>]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>分类导航</title>
+      <link href="/categories/index.html"/>
+      <url>/categories/index.html</url>
       
         <content type="html"><![CDATA[<p>hello world</p>]]></content>
       
