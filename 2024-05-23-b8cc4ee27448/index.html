@@ -1,0 +1,330 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>二叉搜索树 | WAHAHA's blog</title><meta name="author" content="WAHAHA"><meta name="copyright" content="WAHAHA"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="二叉搜索树">
+<meta property="og:type" content="article">
+<meta property="og:title" content="二叉搜索树">
+<meta property="og:url" content="https://gngtwhh.github.io/2024-05-23-b8cc4ee27448/index.html">
+<meta property="og:site_name" content="WAHAHA&#39;s blog">
+<meta property="og:description" content="二叉搜索树">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gngtwhh.github.io/img/avatar.jpg">
+<meta property="article:published_time" content="2024-05-23T10:04:22.541Z">
+<meta property="article:modified_time" content="2024-05-23T11:30:38.108Z">
+<meta property="article:author" content="WAHAHA">
+<meta property="article:tag" content="blog, 博客, 算法, 数据结构, CTF">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gngtwhh.github.io/img/avatar.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://gngtwhh.github.io/2024-05-23-b8cc4ee27448/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '二叉搜索树',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-05-23 19:30:38'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="referrer" content="no-referrer-when-downgrade" /><meta name="generator" content="Hexo 6.3.0"><link href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" rel="stylesheet" /></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load',() => { preloader.endLoading() })
+
+  if (false) {
+    document.addEventListener('pjax:send', () => { preloader.initLoading() })
+    document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+  }
+})()</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">109</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">59</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">17</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 文章</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tools/"><i class="fa-fw fas fa-solid fa-wrench"></i><span> 工具</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background: transparent"><nav id="nav"><span id="blog-info"><a href="/" title="WAHAHA's blog"><img class="site-icon" src="/img/logo.png"/></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 文章</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tools/"><i class="fa-fw fas fa-solid fa-wrench"></i><span> 工具</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">二叉搜索树</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-05-23T10:04:22.541Z" title="发表于 2024-05-23 18:04:22">2024-05-23</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-05-23T11:30:38.108Z" title="更新于 2024-05-23 19:30:38">2024-05-23</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E7%AE%97%E6%B3%95/">数据结构及算法</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>9分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="二叉搜索树"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="概述">概述</h1>
+<p><code>查找问题</code>是计算机中非常重要的基础问题，在查找时，还经常需要支持<code>插入</code>和<code>删除</code>，通常这一问题的方法有：</p>
+<table>
+<thead>
+<tr>
+<th>数据结构</th>
+<th>查找</th>
+<th>插入</th>
+<th>删除</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>无序数组</td>
+<td>O(n)</td>
+<td>O(n)</td>
+<td>O(n)</td>
+</tr>
+<tr>
+<td>有序数组</td>
+<td>O(logn)</td>
+<td>O(n)</td>
+<td>O(n)</td>
+</tr>
+</tbody>
+</table>
+<p>尽管使用有序数组可以将查找操作优化到<code>O(logn)</code>，但是在插入和删除时仍然为<code>O(n)</code>。</p>
+<p>使用二叉搜索树可以将三种操作均优化到<code>O(logn)</code>。<br>
+一颗二叉搜索树（Binary Search Tree）满足以下性质：</p>
+<ul>
+<li>他是一颗二叉树</li>
+<li>左子树上所有节点的值都小于其根节点的值</li>
+<li>右子树上所有节点的值都大于其根节点的值</li>
+</ul>
+<p>须要注意的是，二叉搜索树中不允许出现重复值。<br>
+此外，根据其性质，容易知道二叉搜索树的子树也是二叉搜索树。例如，下面这棵树就是一个二叉搜索树：<br>
+<img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/20240523182248.png" alt="image.png|380"><br>
+而这棵树则不是二叉搜索树：<br>
+<img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/20240523182338.png" alt="image.png|388"></p>
+<h1 id="复杂度分析">复杂度分析</h1>
+<p>二叉搜索树在平均情况下，即树保持相对平衡（其左右子树的高度接近）的情况下，插入、删除、操作均为<code>O(logn)</code>，因为此时的树高度接近<code>log(n)</code>，向下搜索的深度不会超过树的高度。</p>
+<p>但是，二叉搜索树在极端情况下，会退化为链表，这种情况很容易发生在顺序插入的数据已经有序的情况下，此时的树是一棵左斜树/右斜树，即只有左子树/右子树：<br>
+<img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/20240523183303.png" alt="image.png|475"><br>
+此时的BSTree高度为<code>n</code>，三种操作均退化为<code>O(n)</code>。</p>
+<p>因此在实际应用中，使用平衡树来优化会有更好的效果。</p>
+<h1 id="三种操作">三种操作</h1>
+<h2 id="查找操作">查找操作</h2>
+<p>很简单，从根节点开始向下迭代寻找key值，有四种情况：</p>
+<ul>
+<li>如果当前节点值大于key，则继续搜索左子树</li>
+<li>如果当前节点值小于key，则继续搜搜右子树</li>
+<li>如果当前节点值等于key，则找到该值，查找成功</li>
+<li>如果当前节点为空（NULL），则该值不存在，查找失败</li>
+</ul>
+<h2 id="插入操作">插入操作</h2>
+<p>同样需要查找，从根节点开始向下根据key值进行迭代，有四种情况：</p>
+<ul>
+<li>如果当前节点值大于key，则继续迭代左子树</li>
+<li>如果当前节点值小于key，则继续迭代右子树</li>
+<li>如果当前节点值等于key，则该值已存在，插入失败</li>
+<li>如果当前节点为空（NULL），则该值不存在，并找到了空位，在此处创建新节点插入key，插入成功</li>
+</ul>
+<h2 id="删除操作">删除操作</h2>
+<p>删除稍复杂些，因为删除节点后必须保证树不断开，并且保持二叉搜索树的性质。<br>
+同样需要查找，从根节点开始向下根据key值进行迭代，有四种情况：</p>
+<ul>
+<li>如果当前节点值大于key，则继续迭代左子树</li>
+<li>如果当前节点值小于key，则继续迭代右子树</li>
+<li>如果当前节点值等于key，则找到该值，此时进行删除，删除成功</li>
+<li>如果当前节点为空（NULL），则该值不存在，删除失败</li>
+</ul>
+<p>删除结点N的方法：</p>
+<ol>
+<li>如果N为叶子节点，则直接将其删除即可</li>
+<li>如果N只有一个子节点（无论左右），则将该子节点直接替换掉N即可</li>
+<li>如果N有两个子节点，那么此时有2种方法，选择其一即可：
+<ol>
+<li>找到N的右子树中的最小节点N2，替换掉N节点；然后，删除该最小节点</li>
+<li>找到N的左子树中的最大节点N2，替换掉N节点；然后，删除该最大节点</li>
+</ol>
+</li>
+</ol>
+<h1 id="代码实现">代码实现</h1>
+<h2 id="c语言实现">C语言实现</h2>
+<p>该代码使用链表来存储二叉树。<br>
+BSTree.h:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//  </span></span><br><span class="line"><span class="comment">// Created by WAHAHA on 2023/10/18.  </span></span><br><span class="line"><span class="comment">//  </span></span><br><span class="line">  </span><br><span class="line"><span class="meta">#<span class="keyword">ifndef</span> ADT_BSTREE_H  </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ADT_BSTREE_H  </span></span><br><span class="line">  </span><br><span class="line"><span class="meta">#<span class="keyword">define</span> bool int  </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> true 1  </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> false 0  </span></span><br><span class="line">  </span><br><span class="line"><span class="keyword">typedef</span> <span class="type">int</span> TreeElementType;  </span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span> &#123;</span>  </span><br><span class="line">    TreeElementType value;  </span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span> *<span class="title">left</span>;</span>  </span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span> *<span class="title">right</span>;</span>  </span><br><span class="line">&#125; TreeNode;  </span><br><span class="line">  </span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span>  </span><br><span class="line">    TreeNode *root;  </span><br><span class="line">    <span class="type">int</span> size;  </span><br><span class="line">&#125; BSTree_t, *BSTree;  </span><br><span class="line">  </span><br><span class="line"><span class="comment">// create and destroy  </span></span><br><span class="line">BSTree <span class="title function_">newBSTree</span><span class="params">(<span class="type">void</span>)</span>;  </span><br><span class="line"><span class="type">static</span> <span class="type">void</span> <span class="title function_">destroyTreeRun</span><span class="params">(TreeNode *node)</span>;  </span><br><span class="line"><span class="type">void</span> <span class="title function_">destroyBSTree</span><span class="params">(BSTree T)</span>;  </span><br><span class="line">  </span><br><span class="line"><span class="comment">// check status  </span></span><br><span class="line"><span class="type">bool</span> <span class="title function_">isEmptyTree</span><span class="params">(BSTree T)</span>;  </span><br><span class="line"><span class="type">int</span> <span class="title function_">treeSize</span><span class="params">(BSTree T)</span>;  </span><br><span class="line">TreeElementType <span class="title function_">findMin</span><span class="params">(BSTree T)</span>;  </span><br><span class="line">TreeElementType <span class="title function_">findMax</span><span class="params">(BSTree T)</span>;  </span><br><span class="line">  </span><br><span class="line"><span class="comment">// operations  </span></span><br><span class="line"><span class="type">bool</span> <span class="title function_">find</span><span class="params">(BSTree T, TreeElementType key)</span>;  </span><br><span class="line"><span class="type">bool</span> <span class="title function_">insert</span><span class="params">(BSTree T, TreeElementType value)</span>;  </span><br><span class="line"><span class="type">bool</span> <span class="title function_">delete</span><span class="params">(BSTree T, TreeElementType value)</span>;  </span><br><span class="line">  </span><br><span class="line"><span class="meta">#<span class="keyword">endif</span> <span class="comment">//ADT_BSTREE_H</span></span></span><br></pre></td></tr></table></figure>
+<p>BSTree.c:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span>  </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span>  </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;BSTree.h&quot;</span>  </span></span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line"><span class="comment">// create and destroy  </span></span><br><span class="line">BSTree <span class="title function_">newBSTree</span><span class="params">(<span class="type">void</span>)</span> &#123;  </span><br><span class="line">    BSTree T = (BSTree) <span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(BSTree_t));  </span><br><span class="line">    <span class="keyword">if</span> (T == <span class="literal">NULL</span>) &#123;  </span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Error: create tree failed.\n&quot;</span>);  </span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;  </span><br><span class="line">    &#125;  </span><br><span class="line">    T-&gt;root = <span class="literal">NULL</span>;  </span><br><span class="line">    T-&gt;size = <span class="number">0</span>;  </span><br><span class="line">    <span class="keyword">return</span> T;  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="type">static</span> <span class="type">void</span> <span class="title function_">destroyTreeRun</span><span class="params">(TreeNode *node)</span> &#123;  </span><br><span class="line">    <span class="keyword">if</span> (node == <span class="literal">NULL</span>) &#123;  </span><br><span class="line">        <span class="keyword">return</span>;  </span><br><span class="line">    &#125;  </span><br><span class="line">    destroyTreeRun(node-&gt;left);  </span><br><span class="line">    destroyTreeRun(node-&gt;right);  </span><br><span class="line">    <span class="built_in">free</span>(node);  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="type">void</span> <span class="title function_">destroyBSTree</span><span class="params">(BSTree T)</span> &#123;  </span><br><span class="line">    destroyTreeRun(T-&gt;root);  </span><br><span class="line">    <span class="built_in">free</span>(T);  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="comment">// check status  </span></span><br><span class="line"><span class="type">bool</span> <span class="title function_">isEmptyTree</span><span class="params">(BSTree T)</span> &#123;  </span><br><span class="line">    <span class="keyword">return</span> T-&gt;size == <span class="number">0</span>;  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="type">int</span> <span class="title function_">treeSize</span><span class="params">(BSTree T)</span> &#123;  </span><br><span class="line">    <span class="keyword">return</span> T-&gt;size;  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line">TreeElementType <span class="title function_">findMin</span><span class="params">(BSTree T)</span> &#123;  </span><br><span class="line">    TreeNode *p = T-&gt;root;  </span><br><span class="line">    <span class="keyword">while</span> (p-&gt;left != <span class="literal">NULL</span>) &#123;  </span><br><span class="line">        p = p-&gt;left;  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="keyword">return</span> p-&gt;value;  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line">TreeElementType <span class="title function_">findMax</span><span class="params">(BSTree T)</span> &#123;  </span><br><span class="line">    TreeNode *p = T-&gt;root;  </span><br><span class="line">    <span class="keyword">while</span> (p-&gt;right != <span class="literal">NULL</span>) &#123;  </span><br><span class="line">        p = p-&gt;right;  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="keyword">return</span> p-&gt;value;  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="comment">// operations  </span></span><br><span class="line"><span class="type">bool</span> <span class="title function_">insert</span><span class="params">(BSTree T, TreeElementType value)</span> &#123;  </span><br><span class="line">    TreeNode *node = (TreeNode *) <span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(TreeNode));  </span><br><span class="line">    <span class="keyword">if</span> (node == <span class="literal">NULL</span>) &#123;  </span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Error: create node failed.\n&quot;</span>);  </span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;  </span><br><span class="line">    &#125;  </span><br><span class="line">    node-&gt;value = value;  </span><br><span class="line">    node-&gt;left = <span class="literal">NULL</span>;  </span><br><span class="line">    node-&gt;right = <span class="literal">NULL</span>;  </span><br><span class="line">  </span><br><span class="line">    <span class="keyword">if</span> (T-&gt;root == <span class="literal">NULL</span>) &#123;  </span><br><span class="line">        T-&gt;root = node;  </span><br><span class="line">        T-&gt;size++;  </span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    TreeNode *p = T-&gt;root;  </span><br><span class="line">    <span class="keyword">while</span> (p != <span class="literal">NULL</span>) &#123;  </span><br><span class="line">        <span class="keyword">if</span> (value &lt; p-&gt;value) &#123;  </span><br><span class="line">            <span class="keyword">if</span> (p-&gt;left == <span class="literal">NULL</span>) &#123;  </span><br><span class="line">                p-&gt;left = node;  </span><br><span class="line">                T-&gt;size++;  </span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;  </span><br><span class="line">            &#125;  </span><br><span class="line">            p = p-&gt;left;  </span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (value &gt; p-&gt;value) &#123;  </span><br><span class="line">            <span class="keyword">if</span> (p-&gt;right == <span class="literal">NULL</span>) &#123;  </span><br><span class="line">                p-&gt;right = node;  </span><br><span class="line">                T-&gt;size++;  </span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;  </span><br><span class="line">            &#125;  </span><br><span class="line">            p = p-&gt;right;  </span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;  </span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;Error: value %d already exists.\n&quot;</span>, value);  </span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="type">bool</span> <span class="title function_">delete</span><span class="params">(BSTree T, TreeElementType value)</span> &#123;  </span><br><span class="line">    TreeNode *p = T-&gt;root;  </span><br><span class="line">    TreeNode *parent = <span class="literal">NULL</span>;  </span><br><span class="line">    <span class="comment">// find the node to delete  </span></span><br><span class="line">    <span class="keyword">while</span> (p != <span class="literal">NULL</span>) &#123;  </span><br><span class="line">        <span class="keyword">if</span> (value &lt; p-&gt;value) &#123;  </span><br><span class="line">            parent = p;  </span><br><span class="line">            p = p-&gt;left;  </span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (value &gt; p-&gt;value) &#123;  </span><br><span class="line">            parent = p;  </span><br><span class="line">            p = p-&gt;right;  </span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;  </span><br><span class="line">            <span class="keyword">break</span>;  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="comment">// if not found  </span></span><br><span class="line">    <span class="keyword">if</span> (p == <span class="literal">NULL</span>) &#123;  </span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Error: value %d not found.\n&quot;</span>, value);  </span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">/* case 1: p is a leaf node */</span>  </span><br><span class="line">    <span class="keyword">if</span> (p-&gt;left == <span class="literal">NULL</span> &amp;&amp; p-&gt;right == <span class="literal">NULL</span>) &#123;  </span><br><span class="line">        <span class="keyword">if</span> (parent == <span class="literal">NULL</span>) &#123;  </span><br><span class="line">            T-&gt;root = <span class="literal">NULL</span>; <span class="comment">// the tree becomes empty  </span></span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (parent-&gt;left == p) &#123;  </span><br><span class="line">            parent-&gt;left = <span class="literal">NULL</span>;  </span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;  </span><br><span class="line">            parent-&gt;right = <span class="literal">NULL</span>;  </span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="built_in">free</span>(p);  </span><br><span class="line">        T-&gt;size--;  </span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">/* case 2: p has only one child */</span>  </span><br><span class="line">    <span class="keyword">if</span> (p-&gt;left == <span class="literal">NULL</span> || p-&gt;right == <span class="literal">NULL</span>) &#123;  </span><br><span class="line">        TreeNode *child = p-&gt;left != <span class="literal">NULL</span> ? p-&gt;left : p-&gt;right;  </span><br><span class="line">        <span class="keyword">if</span> (parent == <span class="literal">NULL</span>) &#123;  </span><br><span class="line">            T-&gt;root = child; <span class="comment">// the tree becomes a single node  </span></span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (parent-&gt;left == p) &#123;  </span><br><span class="line">            parent-&gt;left = child;  </span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;  </span><br><span class="line">            parent-&gt;right = child;  </span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="built_in">free</span>(p);  </span><br><span class="line">        T-&gt;size--;  </span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">/* case 3: p has two children */</span>  </span><br><span class="line">    TreeNode *q = p-&gt;right;  </span><br><span class="line">    TreeNode *q_parent = p;  </span><br><span class="line">    <span class="comment">// find the smallest node in the right subtree of p  </span></span><br><span class="line">    <span class="keyword">while</span> (q-&gt;left != <span class="literal">NULL</span>) &#123;  </span><br><span class="line">        q_parent = q;  </span><br><span class="line">        q = q-&gt;left;  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="comment">// replace p with q  </span></span><br><span class="line">    p-&gt;value = q-&gt;value;  </span><br><span class="line">    <span class="comment">// delete q,q is a leaf node or has only one child---its right child  </span></span><br><span class="line">    <span class="comment">// In effect, the question is shifted to deleting a node with no left child    // It doesn&#x27;t really matter here q-&gt;right is NULL or not    if (q_parent-&gt;left == q) &#123;  </span></span><br><span class="line">        q_parent-&gt;left = q-&gt;right;  </span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;  </span><br><span class="line">        q_parent-&gt;right = q-&gt;right;  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="built_in">free</span>(q);  </span><br><span class="line">    T-&gt;size--;  </span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="type">bool</span> <span class="title function_">find</span><span class="params">(BSTree T, TreeElementType key)</span> &#123;  </span><br><span class="line">    TreeNode *p = T-&gt;root;  </span><br><span class="line">    <span class="keyword">while</span> (p != <span class="literal">NULL</span>) &#123;  </span><br><span class="line">        <span class="keyword">if</span> (key &lt; p-&gt;value) &#123;  </span><br><span class="line">            p = p-&gt;left;  </span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (key &gt; p-&gt;value) &#123;  </span><br><span class="line">            p = p-&gt;right;  </span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;  </span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>测试main.c:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span>  </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span>  </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span>  </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;BSTree.h&quot;</span>  </span></span><br><span class="line">  </span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;  </span><br><span class="line">    <span class="type">int</span> nums[] = &#123;<span class="number">5</span>, <span class="number">3</span>, <span class="number">6</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">0</span>, <span class="number">8</span>, <span class="number">1</span>, <span class="number">7</span>, <span class="number">9</span>&#125;;  </span><br><span class="line">    BSTree T = newBSTree();  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">// test insert()  </span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;insert 10 numbers into BSTree\n&quot;</span>);  </span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; ++i) &#123;  </span><br><span class="line">        insert(T, nums[i]);  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;size: %d\n&quot;</span>, treeSize(T));  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">// test findMin() and findMax()  </span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;min: %d\n&quot;</span>, findMin(T));  </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;max: %d\n&quot;</span>, findMax(T));  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">// test find()  </span></span><br><span class="line">    <span class="type">int</span> key = <span class="number">10</span>;  </span><br><span class="line">    <span class="keyword">if</span> (find(T, key)) &#123;  </span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;find %d\n&quot;</span>, key);  </span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;  </span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;not find %d\n&quot;</span>, key);  </span><br><span class="line">    &#125;  </span><br><span class="line">    key = <span class="number">5</span>;  </span><br><span class="line">    <span class="keyword">if</span> (find(T, key)) &#123;  </span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;find %d\n&quot;</span>, key);  </span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;  </span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;not find %d\n&quot;</span>, key);  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">// test isEmptyTree()  </span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;size: %d\n&quot;</span>, treeSize(T));  </span><br><span class="line">    <span class="keyword">while</span> (!isEmptyTree(T)) &#123;  </span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>, findMin(T));  </span><br><span class="line">        delete(T, findMin(T));  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\nsize: %d\n&quot;</span>, treeSize(T));  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">// test destroyBSTree()  </span></span><br><span class="line">    destroyBSTree(T);  </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果:</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ ./ADT_BinaryTree.exe</span><br><span class="line">insert 10 numbers into BSTree</span><br><span class="line">size: 10</span><br><span class="line">min: 0</span><br><span class="line">max: 9</span><br><span class="line">not find 10</span><br><span class="line">find 5</span><br><span class="line">size: 10</span><br><span class="line">0 1 2 3 4 5 6 7 8 9 </span><br><span class="line">size: 0</span><br><span class="line"></span><br></pre></td></tr></table></figure></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://gngtwhh.github.io">WAHAHA</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://gngtwhh.github.io/2024-05-23-b8cc4ee27448/">https://gngtwhh.github.io/2024-05-23-b8cc4ee27448/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://gngtwhh.github.io" target="_blank">WAHAHA's blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/avatar.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/reward/wechat_reward.jpg" target="_blank"><img class="post-qr-code-img" src="/img/reward/wechat_reward.jpg" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="/img/reward/alipay_reward.png" target="_blank"><img class="post-qr-code-img" src="/img/reward/alipay_reward.png" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-full"><a href="/2024-05-22-c99559972946/" title=""><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info"></div></div></a></div></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">WAHAHA</div><div class="author-info__description">一个爱折腾的蒟蒻</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">109</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">59</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">17</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/gngtwhh" target="_blank" title="Github"><i class="fab fa-brands fa-github"></i></a><a class="social-icon" href="mailto:2784126850@qq.com" target="_blank" title="Email"><i class="fas fa-solid fa-envelope"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A6%82%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90"><span class="toc-number">2.</span> <span class="toc-text">复杂度分析</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E7%A7%8D%E6%93%8D%E4%BD%9C"><span class="toc-number">3.</span> <span class="toc-text">三种操作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E6%89%BE%E6%93%8D%E4%BD%9C"><span class="toc-number">3.1.</span> <span class="toc-text">查找操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%92%E5%85%A5%E6%93%8D%E4%BD%9C"><span class="toc-number">3.2.</span> <span class="toc-text">插入操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E6%93%8D%E4%BD%9C"><span class="toc-number">3.3.</span> <span class="toc-text">删除操作</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="toc-number">4.</span> <span class="toc-text">代码实现</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#c%E8%AF%AD%E8%A8%80%E5%AE%9E%E7%8E%B0"><span class="toc-number">4.1.</span> <span class="toc-text">C语言实现</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024-05-23-b8cc4ee27448/" title="二叉搜索树">二叉搜索树</a><time datetime="2024-05-23T10:04:22.541Z" title="发表于 2024-05-23 18:04:22">2024-05-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024-05-22-c99559972946/" title="无题">无题</a><time datetime="2024-05-22T15:52:42.842Z" title="发表于 2024-05-22 23:52:42">2024-05-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024-04-30-ec7d71d5adb8/" title="C语言教程-16_1-文件与文件操作">C语言教程-16_1-文件与文件操作</a><time datetime="2024-04-30T02:37:16.444Z" title="发表于 2024-04-30 10:37:16">2024-04-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024-04-12-d47dabb568dd/" title="SHA-256">SHA-256</a><time datetime="2024-04-12T01:52:02.710Z" title="发表于 2024-04-12 09:52:02">2024-04-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024-04-11-adedb6b9443b/" title="MD4">MD4</a><time datetime="2024-04-11T06:23:07.273Z" title="发表于 2024-04-11 14:23:07">2024-04-11</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2024 By WAHAHA</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Hi, welcome to my <a href="https://gngtwhh.github.io/">blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><div class="js-pjax"><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://wahahablog.netlify.app/.netlify/functions/twikoo',
+      region: '',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://wahahablog.netlify.app/.netlify/functions/twikoo',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      countELement.textContent = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-show-text.min.js" data-mobile="false" data-text="C语言,是世界上,最美的,语言" data-fontsize="15px" data-random="false" async="async"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
