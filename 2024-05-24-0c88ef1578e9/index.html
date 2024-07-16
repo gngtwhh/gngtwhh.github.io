@@ -7,7 +7,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://gngtwhh.github.io/img/avatar.jpg">
 <meta property="article:published_time" content="2024-05-23T17:47:02.665Z">
-<meta property="article:modified_time" content="2024-05-30T04:17:05.682Z">
+<meta property="article:modified_time" content="2024-06-30T16:11:07.596Z">
 <meta property="article:author" content="WAHAHA">
 <meta property="article:tag" content="Algorithm">
 <meta name="twitter:card" content="summary">
@@ -58,7 +58,7 @@
   isHome: false,
   isHighlightShrink: false,
   isToc: true,
-  postUpdate: '2024-05-30 12:17:05'
+  postUpdate: '2024-07-01 00:11:07'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -183,7 +183,7 @@
     document.addEventListener('pjax:send', () => { preloader.initLoading() })
     document.addEventListener('pjax:complete', () => { preloader.endLoading() })
   }
-})()</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">112</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">64</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">18</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 文章</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tools/"><i class="fa-fw fas fa-solid fa-wrench"></i><span> 工具</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background: transparent"><nav id="nav"><span id="blog-info"><a href="/" title="WAHAHA's blog"><img class="site-icon" src="/img/logo.png"/></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 文章</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tools/"><i class="fa-fw fas fa-solid fa-wrench"></i><span> 工具</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">KMP算法</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-05-23T17:47:02.665Z" title="发表于 2024-05-24 01:47:02">2024-05-24</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-05-30T04:17:05.682Z" title="更新于 2024-05-30 12:17:05">2024-05-30</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">3.8k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>14分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="KMP算法"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="概述">概述</h1>
+})()</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">112</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">64</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">18</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 文章</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tools/"><i class="fa-fw fas fa-solid fa-wrench"></i><span> 工具</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background: transparent"><nav id="nav"><span id="blog-info"><a href="/" title="WAHAHA's blog"><img class="site-icon" src="/img/logo.png"/></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 文章</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tools/"><i class="fa-fw fas fa-solid fa-wrench"></i><span> 工具</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">KMP算法</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-05-23T17:47:02.665Z" title="发表于 2024-05-24 01:47:02">2024-05-24</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-06-30T16:11:07.596Z" title="更新于 2024-07-01 00:11:07">2024-07-01</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">3.9k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>14分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="KMP算法"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="概述">概述</h1>
 <p>字符串匹配算法需要维护2个指针,分别为指向主串的<code>i</code>和指向模式串的<code>j</code>.<br>
 设主串的长度为<code>n</code>, 模式串的长度为<code>m</code>.</p>
 <h2 id="暴力匹配低效的原因">暴力匹配低效的原因</h2>
@@ -194,7 +194,7 @@
 这样的回溯导致暴力匹配的时间复杂度为<code>O(n*m)</code>, 非常低效.</li>
 </ul>
 <h2 id="kmp尝试改进的思路">KMP尝试改进的思路</h2>
-<p>与暴力相比, KMP试图尝试利用已经搜索过的<code>主串信息</code>. 先不管模式串, 因为模式串是固定的, 关于为止的主串, 我们最坏情况下需要将整个主串扫描一遍, 这需要<code>O(n)</code>, 暴力方法在回溯<code>i</code>的过程中, 有着大量的字符被不止一次地重复扫描, 这是其效率低下的一个重要原因; 而另一个原因是, 每次重新匹配都需要让<code>j</code>归零, 但实际上很多情况下, 前面的部分根本不需要重新匹配, 因为扫描过的主串靠后面的位置很有可能与模式串前面相同.</p>
+<p>与暴力相比, KMP试图尝试利用已经搜索过的<code>主串信息</code>. 先不管模式串, 因为模式串是固定的, 对于主串, 我们至少要将整个主串扫描一遍, 这需要<code>O(n)</code>, 然而暴力方法在回溯<code>i</code>的过程中, 有着大量的字符被不止一次地重复扫描, 这是其效率低下的一个重要原因; 而另一个原因是, 每次重新匹配都需要让<code>j</code>归零, 但实际上很多情况下, 前面的部分根本不需要重新匹配, 因为扫描过的主串靠后面的位置很有可能与模式串前面相同.</p>
 <p>改进的思路之一为: 尝试以某种方式将之前已经扫描过的主串信息&quot;记录&quot;下来, 让<code>i</code>无需再次回溯, 换言之, <code>i</code>指针永不回头.</p>
 <p>而改进的思路之二为: 在思路一中, 我们想让<code>i</code>无需回溯, 并且以某种方式(暂时不关心如何记录)记录下来了这种信息, 这些信息中必然包含了&quot;主串中某些位置是和模式串的某些位置是匹配的&quot;这一信息, 尝试提取出它们, 就可以让<code>j</code>指针无需每次重头开始匹配, 而是直接从一个合适的&quot;中间位置&quot;开始进行下一次匹配即可.</p>
 <h2 id="观察一个例子">观察一个例子</h2>
@@ -231,10 +231,11 @@
 <ol>
 <li>最终的结果<code>next[7]</code>为黄横线所对应的2个前后缀.</li>
 <li>根据前面的结果<code>next[6]=3</code>(这里假设他们通过某种方式求解得出, 这里在反推优化方式)得到, 图中2个蓝框对应的前后缀相同.</li>
-<li>根据前面的结果<code>next[3]=1</code>得到, 图中2个实线绿框相同.</li>
-<li>因为<code>next[6]=3</code>, 所以<code>next[3]</code>对应的子串&quot;aba&quot;实际上就是<code>next[6]=3</code>对应的那个前缀部分. 根据next的定义, 图中蓝框相同, 并且实线绿框相同, 因此可以推得: 图中实线绿框和虚线绿框相同.<br>
-<br></li>
+<li>根据前面的结果<code>next[2]=1</code>得到, 图中2个实线绿框相同.</li>
+<li>因为<code>next[6]=3</code>, 所以<code>next[2]</code>对应的子串&quot;aba&quot;(这个子串的长度对应<code>next[6]</code>的值)实际上就是<code>next[6]=3</code>对应的那个前缀部分. 根据next的定义, 图中蓝框相同, 并且实线绿框相同, 因此可以推得: 图中实线绿框和虚线绿框相同.</li>
 </ol>
+<p><strong>注：这里的<code>next[2]</code>就是<code>next[next[6]-1]</code>，减1是出于本文对next数组的定义，如果修改一下next数组的定义（见后文）则无需减1！</strong><br>
+<br></p>
 <p>我们尝试根据这些信息来求解<code>next[7]</code>(当然, 这里是从信息推结果, 反过来理解, 从结果来找出这些信息的规律也是可以的):</p>
 <ol>
 <li>
@@ -247,11 +248,11 @@
 <p>显然, 步骤2中需要的 “<code>s[0,6]</code>中的某个公共前后缀m和n” 就是<code>next[0,6]</code>的职责所在, 而他早已被求出!</p>
 </li>
 <li>
-<p>而另一个很关键的问题是, 如果步骤2匹配失败, 例如图中的蓝框, 那么我们发现图中实线绿框和虚线绿框是相同的,而实线绿框就是&quot;<code>next[6]=3</code>所包含的前缀<code>s[0,2]</code>对应的<code>next[3]</code>前后缀&quot;!</p>
+<p>而另一个很关键的问题是, 如果步骤2匹配失败, 例如图中的蓝框, 那么我们发现图中实线绿框和虚线绿框是相同的,而实线绿框就是&quot;<code>next[6]=3</code>所包含的前缀<code>s[0,2]</code>对应的<code>next[2]</code>前后缀&quot;!</p>
 </li>
 <li>
-<p>我们为其重新着色, 如下图, 原来的问题&quot;匹配下图红框和绿框的扩展&quot;就<strong>转移为</strong>&quot;匹配下图红框和橙框的扩展&quot;, 当然,其中的橙框作为后缀, 其扩展是要连接上<code>s[7]='b'</code>而不是其后面的<code>s[3]</code>! (为了方便观察, 将扩展字符用黑框标识)<br>
-<img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/20240528114523.png" alt="image.png|475"><br>
+<p>我们为其重新着色, 如下图, 原来的问题&quot;匹配下图红框和绿框的扩展&quot;就<strong>转移为</strong>&quot;匹配下图红框和橙框的扩展&quot;, 当然,其中的橙框作为后缀, 其扩展是要连接上<code>s[7]='b'</code>而不是其后面的<code>s[3]</code>! (为了方便观察, 将扩展字符用黑框标识)</p>
+<p><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/20240528114523.png" alt="image.png|475"><br>
 <br></p>
 </li>
 <li>
