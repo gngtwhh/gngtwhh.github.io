@@ -130,9 +130,9 @@
             
             <tag> 数据结构 </tag>
             
-            <tag> 二叉搜索树 </tag>
-            
             <tag> 二叉树 </tag>
+            
+            <tag> 二叉搜索树 </tag>
             
         </tags>
       
@@ -3044,6 +3044,17 @@
     
     
     <entry>
+      <title>分类导航</title>
+      <link href="/categories/index.html"/>
+      <url>/categories/index.html</url>
+      
+        <content type="html"><![CDATA[<p>hello world</p>]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>关于</title>
       <link href="/about/index.html"/>
       <url>/about/index.html</url>
@@ -3080,17 +3091,6 @@
       <title>我的标签</title>
       <link href="/tags/index.html"/>
       <url>/tags/index.html</url>
-      
-        <content type="html"><![CDATA[<p>hello world</p>]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>分类导航</title>
-      <link href="/categories/index.html"/>
-      <url>/categories/index.html</url>
       
         <content type="html"><![CDATA[<p>hello world</p>]]></content>
       
