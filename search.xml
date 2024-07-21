@@ -11,6 +11,12 @@
         <content type="html"><![CDATA[<h1 id="跨域认证">## 跨域认证</h1><p>物联网服务离不开身份认证，常规的方法是：</p><ol><li>用户发送账号密码</li><li>服务器验证通过后，在当前session中保存登录记录，包括用户信息、登录时间等</li><li>服务器向用户返回一个<code>session_id</code>，写入用户的<code>cookie</code></li><li>之后用户每次访问都带上该cookie，服务器根据cookie携带的session_id进行身份识别</li></ol><p>该方法需要服务器保存用户登录信息，如果服务器需要集群，或者是跨域，就必须将session共享。当然，可以考虑将session数据持久化，让服务向持久层请求数据。<br>但是这样的方法会给服务器或持久层带来压力，当用户量很大的时候，需要存储的数据会很大，给内存带来压力。</p><p>另一种解决方案是使用<code>token</code>，由客户端保存服务器分发的<code>token</code>，在请求服务时携带<code>token</code>，由服务端使用对应的算法验证该<code>token</code>是否合法，如果通过则继续提供服务。</p><p><code>JWT</code>就属于使用token方案的一个代表技术。</p><h1 id="jwt概述">JWT概述</h1><p>JWT（JSON Web Token）的原理是：服务器通过第一次认证后，生成一个JSON对象作为token返回给用户，以后的每次请求都携带该JSON对象用于鉴权，而服务器无需再保存session数据，完全靠该JSON对象验证身份。</p><p>由于是由用户存储该JSON对象，为了防止篡改，服务器在其后面会加上签名。</p><h2 id="jwt结构">JWT结构</h2><p>JWT由三部分组成，彼此之间使用<code>.</code>分隔，并且无换行：</p><ol><li>Header：头部</li><li>Payload：负载</li><li>Signature：签名</li></ol><p>Header描述JWT的 <code>元数据</code>，包括<code>签名算法</code>和token的<code>类型</code>：</p><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;alg&quot;</span><span class="punctuation">:</span> <span class="string">&quot;HS256&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;JWT&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure><p>然后使用Base64进行编码</p><p>Payload存放实际需要传递的数据，有如下几个官方字段供选用：</p><ul><li>iss (issuer)：签发人</li><li>exp (expiration time)：过期时间</li><li>sub (subject)：主题</li><li>aud (audience)：受众</li><li>nbf (Not Before)：生效时间</li><li>iat (Issued At)：签发时间</li><li>jti (JWT ID)：编号<br>当然也可以定义私有字段，但是注意JWT默认不加密，请不要放秘密信息在这里。</li></ul><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;sub&quot;</span><span class="punctuation">:</span> <span class="string">&quot;1234567890&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;John Doe&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;admin&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure><p>然后同样使用Base64进行编码</p><p>Signature是对前两个部分的签名，以防止数据篡改：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">HMACSHA256</span>(<span class="title function_">base64UrlEncode</span>(header) + <span class="string">&quot;.&quot;</span> + <span class="title function_">base64UrlEncode</span>(payload), secret)</span><br></pre></td></tr></table></figure><p>三个部分都计算完成后，将其拼接成一个完整的字符串，中间由<code>.</code>连接，然后就可以返回给用户。</p><h2 id="jwt的使用">JWT的使用</h2><p>服务端生成JWT数据后，用户每次请求就都需要携带该JSON数据。<br>例如可以将其放在cookie中自动发送，但是这样不能进行跨域，因此更一般的做法是将其作为http请求的<code>Authorization</code>字段进行发送</p><h2 id="jwt的特点">JWT的特点</h2><ul><li>JWT默认不加密，在未加密的情况下，不要将秘密放在JWT中</li><li>JWT可以在生成初始token后再使用密钥进行一次加密</li><li>JWT无法中途销毁，在其有效时间之前一直保持有效</li><li>JWT包含验证信息，要避免泄露，否则他人可以直接获得其所有权限，所以应该使用https进行传输</li></ul>]]></content>
       
       
+      <categories>
+          
+          <category> 后端技术 </category>
+          
+      </categories>
+      
       
         <tags>
             
@@ -3038,22 +3044,22 @@
     
     
     <entry>
-      <title>分类导航</title>
-      <link href="/categories/index.html"/>
-      <url>/categories/index.html</url>
+      <title>关于</title>
+      <link href="/about/index.html"/>
+      <url>/about/index.html</url>
       
-        <content type="html"><![CDATA[<p>hello world</p>]]></content>
+        <content type="html"><![CDATA[<p><a href="https://www.baidu.com">https://www.baidu.com</a></p>]]></content>
       
     </entry>
     
     
     
     <entry>
-      <title>关于</title>
-      <link href="/about/index.html"/>
-      <url>/about/index.html</url>
+      <title></title>
+      <link href="/json-data/tools.json"/>
+      <url>/json-data/tools.json</url>
       
-        <content type="html"><![CDATA[<p><a href="https://www.baidu.com">https://www.baidu.com</a></p>]]></content>
+        <content type="html"><![CDATA[[{"class_name":"CTF工具","class_desc":"常用在线工具","link_list":[{"name":"CyberChef","link":"https://icyberchef.com/","avatar":"/img/artical_pic.png","descr":"编码万能转换"},{"name":"密码破解","link":"http://www.atoolbox.net/Category.php?Id=27&Page=1","avatar":"/img/artical_pic.png","descr":"基本密码在线解密"},{"name":"正则表达式工具","link":"https://c.runoob.com/front-end/854/?optionGlobl=global","avatar":"/img/artical_pic.png","descr":"正则表达式在线处理"},{"name":"BrainF**k and Ook","link":"https://www.splitbrain.org/services/ook","avatar":"/img/artical_pic.png","descr":"某种玄学的东西"},{"name":"因数分解","link":"http://www.factordb.com/index.php","avatar":"/img/artical_pic.png","descr":"一个因数分解数据库"},{"name":"摩斯电码","link":"https://morsecode.world/international/decoder/audio-decoder-adaptive.html","avatar":"/img/artical_pic.png","descr":"不解释"},{"name":"图像处理","link":"https://onlinetools.com/image","avatar":"/img/artical_pic.png","descr":"图像的各种特殊处理"},{"name":"Java在线逆向","link":"http://javare.cn","avatar":"/img/artical_pic.png","descr":"可以class文件..."},{"name":"Awesome-Hacking","link":"https://blog.csdn.net/ZYC88888/article/details/113663486","avatar":"/img/artical_pic.png","descr":"CTF工具库"}]},{"class_name":"转换工具","class_desc":"格式转换的一些小工具","link_list":[{"name":"pdf转换工具","link":"https://www.alltoall.net/","avatar":"/img/artical_pic.png","descr":"文档在线转换"},{"name":"音频格式转换工具","link":"http://ncm.miidj.com/","avatar":"/img/artical_pic.png","descr":"方便使用播放器"},{"name":"操作系统文件格式转换","link":"http://tools.bugscaner.com/text/textconvert.html","avatar":"/img/artical_pic.png","descr":"在线文档格式windows unix macintosh互相转换"}]},{"class_name":"网络工具","class_desc":"网络相关的工具和资源","link_list":[{"name":"测速网","link":"https://www.speedtest.cn/","avatar":"/img/artical_pic.png","descr":"网速测试"},{"name":"Clash","link":"https://github.com/Dreamacro/clash/releases","avatar":"/img/artical_pic.png","descr":"Clash下载直达"},{"name":"虚拟手机号","link":"https://sms-activate.org/cn/getNumber","avatar":"/img/artical_pic.png","descr":"虚拟手机号服务"},{"name":"机场","link":"https://www.mojie.mx/#/login","avatar":"/img/artical_pic.png","descr":"懂?"}]},{"class_name":"其他工具","class_desc":"其他各种工具","link_list":[{"name":"文本对比工具","link":"https://tool.p2hp.com/tool-online-difftext/","avatar":"/img/artical_pic.png","descr":"在线文本对比"},{"name":"大数运算器","link":"https://goodcalculators.com/big-number-calculator/","avatar":"/img/artical_pic.png","descr":"高精度大数在线运算"},{"name":"阶乘运算器","link":"https://zh.numberempire.com/factorialcalculator.php","avatar":"/img/artical_pic.png","descr":"阶乘计算"}]},{"class_name":"创作与AI工具","class_desc":"AI,文档,表格,图像等创作工具","link_list":[{"name":"ChatGPT","link":"https://chat.openai.com/","avatar":"/img/ChatGPT.webp","descr":"学习的好帮手"},{"name":"在线作图工具","link":"https://www.processon.com/","avatar":"/img/artical_pic.png","descr":"免费在线流程图思维导图"}]},{"class_name":"技术文档","class_desc":"各种语言,框架,工具的文档","link_list":[{"name":"C/C++参考手册","link":"https://zh.cppreference.com/mwiki/index.php?title=%E9%A6%96%E9%A1%B5&variant=zh-cn","avatar":"/img/Logo/C_and_CPP.jpg","descr":"C和C++语言的在线参考手册"},{"name":"GTK文档","link":"https://www.gtk.org/docs/installations/windows/","avatar":"/img/Logo/logo-gtk-sm.png","descr":"GTK库的文档"},{"name":"Windows API 索引","link":"https://learn.microsoft.com/zh-cn/windows/win32/apiindex/windows-api-list","avatar":"/img/Logo/Microsoft.png","descr":"Windows API 的文档"}]}]]]></content>
       
     </entry>
     
@@ -3082,22 +3088,22 @@
     
     
     <entry>
-      <title>我的影子</title>
-      <link href="/link/index.html"/>
-      <url>/link/index.html</url>
+      <title>分类导航</title>
+      <link href="/categories/index.html"/>
+      <url>/categories/index.html</url>
       
-        <content type="html"><![CDATA[]]></content>
+        <content type="html"><![CDATA[<p>hello world</p>]]></content>
       
     </entry>
     
     
     
     <entry>
-      <title></title>
-      <link href="/json-data/tools.json"/>
-      <url>/json-data/tools.json</url>
+      <title>我的影子</title>
+      <link href="/link/index.html"/>
+      <url>/link/index.html</url>
       
-        <content type="html"><![CDATA[[{"class_name":"CTF工具","class_desc":"常用在线工具","link_list":[{"name":"CyberChef","link":"https://icyberchef.com/","avatar":"/img/artical_pic.png","descr":"编码万能转换"},{"name":"密码破解","link":"http://www.atoolbox.net/Category.php?Id=27&Page=1","avatar":"/img/artical_pic.png","descr":"基本密码在线解密"},{"name":"正则表达式工具","link":"https://c.runoob.com/front-end/854/?optionGlobl=global","avatar":"/img/artical_pic.png","descr":"正则表达式在线处理"},{"name":"BrainF**k and Ook","link":"https://www.splitbrain.org/services/ook","avatar":"/img/artical_pic.png","descr":"某种玄学的东西"},{"name":"因数分解","link":"http://www.factordb.com/index.php","avatar":"/img/artical_pic.png","descr":"一个因数分解数据库"},{"name":"摩斯电码","link":"https://morsecode.world/international/decoder/audio-decoder-adaptive.html","avatar":"/img/artical_pic.png","descr":"不解释"},{"name":"图像处理","link":"https://onlinetools.com/image","avatar":"/img/artical_pic.png","descr":"图像的各种特殊处理"},{"name":"Java在线逆向","link":"http://javare.cn","avatar":"/img/artical_pic.png","descr":"可以class文件..."},{"name":"Awesome-Hacking","link":"https://blog.csdn.net/ZYC88888/article/details/113663486","avatar":"/img/artical_pic.png","descr":"CTF工具库"}]},{"class_name":"转换工具","class_desc":"格式转换的一些小工具","link_list":[{"name":"pdf转换工具","link":"https://www.alltoall.net/","avatar":"/img/artical_pic.png","descr":"文档在线转换"},{"name":"音频格式转换工具","link":"http://ncm.miidj.com/","avatar":"/img/artical_pic.png","descr":"方便使用播放器"},{"name":"操作系统文件格式转换","link":"http://tools.bugscaner.com/text/textconvert.html","avatar":"/img/artical_pic.png","descr":"在线文档格式windows unix macintosh互相转换"}]},{"class_name":"网络工具","class_desc":"网络相关的工具和资源","link_list":[{"name":"测速网","link":"https://www.speedtest.cn/","avatar":"/img/artical_pic.png","descr":"网速测试"},{"name":"Clash","link":"https://github.com/Dreamacro/clash/releases","avatar":"/img/artical_pic.png","descr":"Clash下载直达"},{"name":"虚拟手机号","link":"https://sms-activate.org/cn/getNumber","avatar":"/img/artical_pic.png","descr":"虚拟手机号服务"},{"name":"机场","link":"https://www.mojie.mx/#/login","avatar":"/img/artical_pic.png","descr":"懂?"}]},{"class_name":"其他工具","class_desc":"其他各种工具","link_list":[{"name":"文本对比工具","link":"https://tool.p2hp.com/tool-online-difftext/","avatar":"/img/artical_pic.png","descr":"在线文本对比"},{"name":"大数运算器","link":"https://goodcalculators.com/big-number-calculator/","avatar":"/img/artical_pic.png","descr":"高精度大数在线运算"},{"name":"阶乘运算器","link":"https://zh.numberempire.com/factorialcalculator.php","avatar":"/img/artical_pic.png","descr":"阶乘计算"}]},{"class_name":"创作与AI工具","class_desc":"AI,文档,表格,图像等创作工具","link_list":[{"name":"ChatGPT","link":"https://chat.openai.com/","avatar":"/img/ChatGPT.webp","descr":"学习的好帮手"},{"name":"在线作图工具","link":"https://www.processon.com/","avatar":"/img/artical_pic.png","descr":"免费在线流程图思维导图"}]},{"class_name":"技术文档","class_desc":"各种语言,框架,工具的文档","link_list":[{"name":"C/C++参考手册","link":"https://zh.cppreference.com/mwiki/index.php?title=%E9%A6%96%E9%A1%B5&variant=zh-cn","avatar":"/img/Logo/C_and_CPP.jpg","descr":"C和C++语言的在线参考手册"},{"name":"GTK文档","link":"https://www.gtk.org/docs/installations/windows/","avatar":"/img/Logo/logo-gtk-sm.png","descr":"GTK库的文档"},{"name":"Windows API 索引","link":"https://learn.microsoft.com/zh-cn/windows/win32/apiindex/windows-api-list","avatar":"/img/Logo/Microsoft.png","descr":"Windows API 的文档"}]}]]]></content>
+        <content type="html"><![CDATA[]]></content>
       
     </entry>
     
