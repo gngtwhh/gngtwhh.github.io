@@ -29,13 +29,25 @@
     
     
     <entry>
-      <title></title>
+      <title>C语言教程-1_1-计算机基础概述</title>
       <link href="/2024-08-15-76a8c85896e3/"/>
       <url>/2024-08-15-76a8c85896e3/</url>
       
         <content type="html"><![CDATA[<h1 id="什么是计算机">什么是计算机</h1><blockquote><p>虽然在这里参考《计算机组成原理》一书也许有点为时尚早。。。</p></blockquote><p>一般意义下，<code>计算机</code>是一种能够接受输入信息，并进行处理产生输出结果的机器。<br>生活中常见的台式电脑、笔记本电脑、平板、手机都是计算机。</p><h2 id="冯-诺依曼计算机">冯·诺依曼计算机</h2><p>现在应用的大多数计算机遵循 <code>冯·诺依曼体系结构</code> ，即 <code>冯·诺依曼计算机</code> ，全称为 <code>冯·诺依曼存储程序数字计算机</code> ，其最大的特点是 <code>将程序存储起来，并且程序和数据保存在相同的存储器中，并不加以区分</code>。<br>除此之外，其他类型的计算机还有诸如模拟计算机、神经计算机、量子计算机、生化计算机等，它们处理信息的方式与存储程序计算机完全不同，这些概念不在本教程讨论范围内。</p><p>冯·诺依曼计算机有如下基本结构：<br><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/20240815111340.png" alt="image.png|650"><br>5大组成分别负责以下职责：</p><ul><li>存储器：用于存储程序指令和数据</li><li>运算器：负责执行所有的算术运算和逻辑运算</li><li>控制器：管理指令的执行流程，控制程序运行</li><li>输入设备：用于向计算机输入信息（主要包括键盘和鼠标）</li><li>输出设备：用于输出计算机的运行结果（包括图形、文字、声音等各种形式）</li></ul><p>下图是存储程序计算机的结构图（截自《计算机组成原理》）：<br><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/20240815104955.png" alt="image.png|450"></p><p>需要注意的是，现代计算机和传统的冯·诺依曼计算机有着不小的差别，例如现代计算机将运算器和控制器集成为 <code>CPU</code>等，这些内容并不是我们现在关注的重点，它们应该放到计算机组成原理课程上去学习。</p><h2 id="软件和硬件">软件和硬件</h2><p>一个完整的计算机系统由硬件系统和软件系统组成。</p><ul><li>软件系统：由在硬件上运行的程序和程序所操作的数据组成，包括系统软件（负责系统控制）和应用软件（负责实际应用计算）</li><li>硬件系统：组成计算机的各种物理设备，包括处理器、内存、硬盘、电源等等各种设备<br>在一般的程序开发中，我们更多地关注软件系统，而一定程度上忽略硬件系统的组成细节。</li></ul><h1 id="计算机的发展历史">计算机的发展历史</h1><ol><li>在电子计算机之前：算盘、机械计算器，主要用于算数运算，不能进行编程。</li><li>1642年，法国数学家布莱兹·帕斯卡（Blaise Pascal）发明了帕斯卡计算器，能够借助发条执行加减运算，仍然不能进行编程。</li><li>差分机：英国数学家查尔斯·巴贝奇（Charles Babbage）设计了差分机，能够自动计算构造数学表所需多项式的值。</li><li>分析机：巴贝奇设计了分析机，具有重要的历史地位，被认为是<code>通用计算机</code>的先驱。</li><li>机电式计算机：仍使用机械部件，但是使用电控制，典型的机器有马克 I 号等。</li><li>早期电子计算机：大名鼎鼎的ENIAC，是一台十进制真空管计算机，只能通过硬连线编程。</li><li>微机与PC机：再之后，计算机体量逐渐缩小，直到如今的家用电脑（微型机）。</li></ol><h1 id="什么是计算机程序">什么是计算机程序</h1><p>计算机程序是构成计算机软件系统的组成部分，计算机程序运行在硬件设备上。<br>计算机输入信息、处理计算信息、输出信息的所有过程全部依靠各种计算机程序进行控制。</p><ul><li>系统程序：对计算机系统进行控制，以保证系统的正常工作，并对应用程序的运行进行支持。</li><li>应用程序：负责完成计算机实际需要进行处理的任务，例如科学计算、音视频渲染、文件处理等任务。</li></ul><p>计算机程序需要程序员进行编写，编写好的程序就可以在特定的计算机（硬件）上运行并产生结果。</p><h1 id="什么是计算机语言">什么是计算机语言</h1><p>和人们写作一样，编写计算机程序同样需要使用特定的语言，这类语言称为 <code>编程语言</code>。（人们交流的语言是 <code>自然语言</code>）<br>随着计算机发展，编程语言也从 <code>机器语言</code>、<code>汇编语言</code>、<code>高级语言</code>逐步发展。</p><h2 id="机器语言">机器语言</h2><p>最早由于电子计算机的特点，特定的计算机指令必须由一串二进制代码表示，这样计算机才能进行识别并执行代码。<br>因此计算机程序就由二进制代码直接构成（例如高电平1低电平0，符合电路特点）。为了编写可以运行的程序，就必须根据特定的硬件电路去直接构造二进制代码。</p><p>这种由二进制串构成的代码被称为 <code>机器语言</code>，程序员需要根据计算机硬件支持的指令来直接构造程序，这个过程异常复杂，并且机器代码与特定硬件直接关联，几乎不可移植。</p><h2 id="汇编语言">汇编语言</h2><p>为了解决机器语言的问题，将二进制代码进行符号化，即将某一串二进制指令由一串符号（英文单词、数字）进行代替，例如 <code>add ax,1</code> 表示将 ax 寄存器的值加1。</p><p>这样，程序员无需直接构造二进制程序，可以使用汇编语言提供的“助记符”来编写程序，然后由特定的程序来转换成可运行的二进制程序。</p><h2 id="高级语言">高级语言</h2><p>尽管汇编语言大大简化了程序编写，但是它仍然十分低级，程序员仍然需要亲自考虑计算机的运行逻辑，效率依然低下，同时仍然有大量汇编指令需要记忆，移植性也依然很低。</p><p>人们希望能够将注意力更多地集中到解决问题本身，而不需要将程序设计的大量时间浪费在考虑操作计算机的运行逻辑上，高级编程语言就此出现。</p><p>所谓高级语言，指的是语法非常接近自然语言的编程语言，高级语言的表达更接近于一个正常人的思维。程序员可以根据自己的逻辑进行程序的编写。在程序编写完成后，使用特定的程序将其“翻译”为机器语言即可。</p><p>高级语言隐藏了计算机运行时复杂的底层逻辑和过程，让程序员能够将注意力更多地放在需要解决的问题本身上，大大提高了效率，而随着计算机的发展，编程语言也在不断地更新、演化。</p><p>本教程所讲述的 <code>C语言</code> 就是高级语言（其语法接近自然语言）的一种，也是最为重要的一门语言。</p>]]></content>
       
       
+      <categories>
+          
+          <category> C语言教程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> C </tag>
+            
+        </tags>
       
     </entry>
     
@@ -3377,17 +3389,6 @@
     
     
     <entry>
-      <title>分类导航</title>
-      <link href="/categories/index.html"/>
-      <url>/categories/index.html</url>
-      
-        <content type="html"><![CDATA[<p>hello world</p>]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>关于</title>
       <link href="/about/index.html"/>
       <url>/about/index.html</url>
@@ -3399,11 +3400,11 @@
     
     
     <entry>
-      <title>我的影子</title>
-      <link href="/link/index.html"/>
-      <url>/link/index.html</url>
+      <title>分类导航</title>
+      <link href="/categories/index.html"/>
+      <url>/categories/index.html</url>
       
-        <content type="html"><![CDATA[]]></content>
+        <content type="html"><![CDATA[<p>hello world</p>]]></content>
       
     </entry>
     
@@ -3421,11 +3422,11 @@
     
     
     <entry>
-      <title></title>
-      <link href="/json-data/tools.json"/>
-      <url>/json-data/tools.json</url>
+      <title>我的影子</title>
+      <link href="/link/index.html"/>
+      <url>/link/index.html</url>
       
-        <content type="html"><![CDATA[[{"class_name":"CTF工具","class_desc":"常用在线工具","link_list":[{"name":"CyberChef","link":"https://icyberchef.com/","avatar":"/img/artical_pic.png","descr":"编码万能转换"},{"name":"密码破解","link":"http://www.atoolbox.net/Category.php?Id=27&Page=1","avatar":"/img/artical_pic.png","descr":"基本密码在线解密"},{"name":"正则表达式工具","link":"https://c.runoob.com/front-end/854/?optionGlobl=global","avatar":"/img/artical_pic.png","descr":"正则表达式在线处理"},{"name":"BrainF**k and Ook","link":"https://www.splitbrain.org/services/ook","avatar":"/img/artical_pic.png","descr":"某种玄学的东西"},{"name":"因数分解","link":"http://www.factordb.com/index.php","avatar":"/img/artical_pic.png","descr":"一个因数分解数据库"},{"name":"摩斯电码","link":"https://morsecode.world/international/decoder/audio-decoder-adaptive.html","avatar":"/img/artical_pic.png","descr":"不解释"},{"name":"图像处理","link":"https://onlinetools.com/image","avatar":"/img/artical_pic.png","descr":"图像的各种特殊处理"},{"name":"Java在线逆向","link":"http://javare.cn","avatar":"/img/artical_pic.png","descr":"可以class文件..."},{"name":"Awesome-Hacking","link":"https://blog.csdn.net/ZYC88888/article/details/113663486","avatar":"/img/artical_pic.png","descr":"CTF工具库"}]},{"class_name":"转换工具","class_desc":"格式转换的一些小工具","link_list":[{"name":"pdf转换工具","link":"https://www.alltoall.net/","avatar":"/img/artical_pic.png","descr":"文档在线转换"},{"name":"音频格式转换工具","link":"http://ncm.miidj.com/","avatar":"/img/artical_pic.png","descr":"方便使用播放器"},{"name":"操作系统文件格式转换","link":"http://tools.bugscaner.com/text/textconvert.html","avatar":"/img/artical_pic.png","descr":"在线文档格式windows unix macintosh互相转换"}]},{"class_name":"网络工具","class_desc":"网络相关的工具和资源","link_list":[{"name":"测速网","link":"https://www.speedtest.cn/","avatar":"/img/artical_pic.png","descr":"网速测试"},{"name":"Clash","link":"https://github.com/Dreamacro/clash/releases","avatar":"/img/artical_pic.png","descr":"Clash下载直达"},{"name":"虚拟手机号","link":"https://sms-activate.org/cn/getNumber","avatar":"/img/artical_pic.png","descr":"虚拟手机号服务"},{"name":"机场","link":"https://www.mojie.mx/#/login","avatar":"/img/artical_pic.png","descr":"懂?"}]},{"class_name":"其他工具","class_desc":"其他各种工具","link_list":[{"name":"文本对比工具","link":"https://tool.p2hp.com/tool-online-difftext/","avatar":"/img/artical_pic.png","descr":"在线文本对比"},{"name":"大数运算器","link":"https://goodcalculators.com/big-number-calculator/","avatar":"/img/artical_pic.png","descr":"高精度大数在线运算"},{"name":"阶乘运算器","link":"https://zh.numberempire.com/factorialcalculator.php","avatar":"/img/artical_pic.png","descr":"阶乘计算"}]},{"class_name":"创作与AI工具","class_desc":"AI,文档,表格,图像等创作工具","link_list":[{"name":"ChatGPT","link":"https://chat.openai.com/","avatar":"/img/ChatGPT.webp","descr":"学习的好帮手"},{"name":"在线作图工具","link":"https://www.processon.com/","avatar":"/img/artical_pic.png","descr":"免费在线流程图思维导图"}]},{"class_name":"技术文档","class_desc":"各种语言,框架,工具的文档","link_list":[{"name":"C/C++参考手册","link":"https://zh.cppreference.com/mwiki/index.php?title=%E9%A6%96%E9%A1%B5&variant=zh-cn","avatar":"/img/Logo/C_and_CPP.jpg","descr":"C和C++语言的在线参考手册"},{"name":"GTK文档","link":"https://www.gtk.org/docs/installations/windows/","avatar":"/img/Logo/logo-gtk-sm.png","descr":"GTK库的文档"},{"name":"Windows API 索引","link":"https://learn.microsoft.com/zh-cn/windows/win32/apiindex/windows-api-list","avatar":"/img/Logo/Microsoft.png","descr":"Windows API 的文档"}]}]]]></content>
+        <content type="html"><![CDATA[]]></content>
       
     </entry>
     
@@ -3437,6 +3438,17 @@
       <url>/tools/index.html</url>
       
         <content type="html"><![CDATA[]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title></title>
+      <link href="/json-data/tools.json"/>
+      <url>/json-data/tools.json</url>
+      
+        <content type="html"><![CDATA[[{"class_name":"CTF工具","class_desc":"常用在线工具","link_list":[{"name":"CyberChef","link":"https://icyberchef.com/","avatar":"/img/artical_pic.png","descr":"编码万能转换"},{"name":"密码破解","link":"http://www.atoolbox.net/Category.php?Id=27&Page=1","avatar":"/img/artical_pic.png","descr":"基本密码在线解密"},{"name":"正则表达式工具","link":"https://c.runoob.com/front-end/854/?optionGlobl=global","avatar":"/img/artical_pic.png","descr":"正则表达式在线处理"},{"name":"BrainF**k and Ook","link":"https://www.splitbrain.org/services/ook","avatar":"/img/artical_pic.png","descr":"某种玄学的东西"},{"name":"因数分解","link":"http://www.factordb.com/index.php","avatar":"/img/artical_pic.png","descr":"一个因数分解数据库"},{"name":"摩斯电码","link":"https://morsecode.world/international/decoder/audio-decoder-adaptive.html","avatar":"/img/artical_pic.png","descr":"不解释"},{"name":"图像处理","link":"https://onlinetools.com/image","avatar":"/img/artical_pic.png","descr":"图像的各种特殊处理"},{"name":"Java在线逆向","link":"http://javare.cn","avatar":"/img/artical_pic.png","descr":"可以class文件..."},{"name":"Awesome-Hacking","link":"https://blog.csdn.net/ZYC88888/article/details/113663486","avatar":"/img/artical_pic.png","descr":"CTF工具库"}]},{"class_name":"转换工具","class_desc":"格式转换的一些小工具","link_list":[{"name":"pdf转换工具","link":"https://www.alltoall.net/","avatar":"/img/artical_pic.png","descr":"文档在线转换"},{"name":"音频格式转换工具","link":"http://ncm.miidj.com/","avatar":"/img/artical_pic.png","descr":"方便使用播放器"},{"name":"操作系统文件格式转换","link":"http://tools.bugscaner.com/text/textconvert.html","avatar":"/img/artical_pic.png","descr":"在线文档格式windows unix macintosh互相转换"}]},{"class_name":"网络工具","class_desc":"网络相关的工具和资源","link_list":[{"name":"测速网","link":"https://www.speedtest.cn/","avatar":"/img/artical_pic.png","descr":"网速测试"},{"name":"Clash","link":"https://github.com/Dreamacro/clash/releases","avatar":"/img/artical_pic.png","descr":"Clash下载直达"},{"name":"虚拟手机号","link":"https://sms-activate.org/cn/getNumber","avatar":"/img/artical_pic.png","descr":"虚拟手机号服务"},{"name":"机场","link":"https://www.mojie.mx/#/login","avatar":"/img/artical_pic.png","descr":"懂?"}]},{"class_name":"其他工具","class_desc":"其他各种工具","link_list":[{"name":"文本对比工具","link":"https://tool.p2hp.com/tool-online-difftext/","avatar":"/img/artical_pic.png","descr":"在线文本对比"},{"name":"大数运算器","link":"https://goodcalculators.com/big-number-calculator/","avatar":"/img/artical_pic.png","descr":"高精度大数在线运算"},{"name":"阶乘运算器","link":"https://zh.numberempire.com/factorialcalculator.php","avatar":"/img/artical_pic.png","descr":"阶乘计算"}]},{"class_name":"创作与AI工具","class_desc":"AI,文档,表格,图像等创作工具","link_list":[{"name":"ChatGPT","link":"https://chat.openai.com/","avatar":"/img/ChatGPT.webp","descr":"学习的好帮手"},{"name":"在线作图工具","link":"https://www.processon.com/","avatar":"/img/artical_pic.png","descr":"免费在线流程图思维导图"}]},{"class_name":"技术文档","class_desc":"各种语言,框架,工具的文档","link_list":[{"name":"C/C++参考手册","link":"https://zh.cppreference.com/mwiki/index.php?title=%E9%A6%96%E9%A1%B5&variant=zh-cn","avatar":"/img/Logo/C_and_CPP.jpg","descr":"C和C++语言的在线参考手册"},{"name":"GTK文档","link":"https://www.gtk.org/docs/installations/windows/","avatar":"/img/Logo/logo-gtk-sm.png","descr":"GTK库的文档"},{"name":"Windows API 索引","link":"https://learn.microsoft.com/zh-cn/windows/win32/apiindex/windows-api-list","avatar":"/img/Logo/Microsoft.png","descr":"Windows API 的文档"}]}]]]></content>
       
     </entry>
     
