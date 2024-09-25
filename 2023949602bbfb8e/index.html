@@ -1,0 +1,471 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>C语言教程-3_1-数据类型 | WAHAHA's blog</title><meta name="author" content="WAHAHA"><meta name="copyright" content="WAHAHA"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="程序需要处理信息,信息的存储离不开数据的存储">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C语言教程-3_1-数据类型">
+<meta property="og:url" content="https://gngtwhh.github.io/2023949602bbfb8e/index.html">
+<meta property="og:site_name" content="WAHAHA&#39;s blog">
+<meta property="og:description" content="程序需要处理信息,信息的存储离不开数据的存储">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gngtwhh.github.io/img/avatar.jpg">
+<meta property="article:published_time" content="2023-09-20T05:15:05.541Z">
+<meta property="article:modified_time" content="2024-09-25T15:03:54.595Z">
+<meta property="article:author" content="WAHAHA">
+<meta property="article:tag" content="C">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gngtwhh.github.io/img/avatar.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://gngtwhh.github.io/2023949602bbfb8e/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'C语言教程-3_1-数据类型',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-09-25 23:03:54'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="referrer" content="no-referrer-when-downgrade" /><meta name="generator" content="Hexo 6.3.0"><link href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" rel="stylesheet" /></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load',() => { preloader.endLoading() })
+
+  if (false) {
+    document.addEventListener('pjax:send', () => { preloader.initLoading() })
+    document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+  }
+})()</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">126</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">74</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">18</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 文章</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tools/"><i class="fa-fw fas fa-solid fa-wrench"></i><span> 工具</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background: transparent"><nav id="nav"><span id="blog-info"><a href="/" title="WAHAHA's blog"><img class="site-icon" src="/img/logo.png"/></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 文章</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tools/"><i class="fa-fw fas fa-solid fa-wrench"></i><span> 工具</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">C语言教程-3_1-数据类型</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-09-20T05:15:05.541Z" title="发表于 2023-09-20 13:15:05">2023-09-20</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-09-25T15:03:54.595Z" title="更新于 2024-09-25 23:03:54">2024-09-25</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/C%E8%AF%AD%E8%A8%80%E6%95%99%E7%A8%8B/">C语言教程</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">8.6k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>28分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="C语言教程-3_1-数据类型"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="为什么要有数据类型">为什么要有数据类型</h1>
+<p>​	如果你能想到这个问题,那么恭喜你意识到了低级语言和高级语言的区别.机器语言自然不必多说,到了汇编语言,仍然没有发展出数据类型这个概念–一切都是按照二进制串逐字节进行处理的.也就是说,在汇编语言的角度,无论这个数据是什么(无论是小数,整数,还是字符串),统统视为二进制串,程序员需要自己去识别考虑自己现在正在处理什么数据,去编写对应的处理代码.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">; 8086汇编</span><br><span class="line">; 定义两个数据段,我们只能将其视为一个个的字节(或字)去进行处理,没有其他的类型可以识别,</span><br><span class="line">; 各个数据段的意义及操作全凭程序员自己处理</span><br><span class="line">assume cs:code</span><br><span class="line">data1 segment</span><br><span class="line">    db 1,2,3,4,5           </span><br><span class="line">data1 ends</span><br><span class="line">data2 segment</span><br><span class="line">    db 6,7,8,9,10</span><br><span class="line">data2 ends</span><br></pre></td></tr></table></figure>
+<p>​	很容易就能想到这样的开发方式的困难与繁琐.那么随后出现的高级语言,不仅在语法上接近自然语言,在对数据存储的角度,也考虑的十分周到,C语言中出现了(并不是第一个)基本数据类型,用以识别不同类型的数据,从而在底层进行不同的处理—例如浮点数和整数的底层存储原理完全不同,但是它们都共享同一个加法运算符<code>+</code>进行加法运算.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="comment">// 整数和浮点数都直接使用+运算符</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> integerNum = <span class="number">5</span>,integerNum2 = <span class="number">6</span>;</span><br><span class="line">    <span class="type">float</span> floatNum = <span class="number">2.5</span>,floatNum2 = <span class="number">3.5</span>;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> i_result = integerNum + integerNum2;</span><br><span class="line">	<span class="type">float</span> f_result =  floatNum + floatNum2;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;整数和:%d\n&quot;</span>, i_result);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;浮点数和:%f\n&quot;</span>, f_result);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>​	也就是说,数据类型方便了我们在编程的时候进行不同数据的区分,而且编译器也能根据数据类型的不同从而进行一定程度的代码检查,从而避免错误的数据处理—然而这种检查是有限的,因为C语言相对还是比较宽松的,一些隐式转换(后面介绍,例如将int类型的值自动提升为float单精度浮点型)C语言是默认允许的.</p>
+<p>​	C语言给了C开发者最大限度的自由度,C语言认为避免这些潜在的错误是程序员的事情,而不是为了安全进行限制.越学到后面,尤其是学习了其他高级语言,就越能体会到C语言那极高的自由度,同时,这也给C程序带来了不小的安全问题,例如安全竞赛的PWN方向的很多部分的关键都是利用了C函数的栈溢出漏洞进行攻击.所以,在编写C程序的时候,更应该比其他语言编写者加倍小心,因为C编译器可能并不会给你足够多的报错信息让你进行纠正—同样,越是学的多,越能体会得到这个问题.</p>
+<h1 id="c语言支持的数据类型">C语言支持的数据类型</h1>
+<p>C语言支持的数据类型有如下几种:</p>
+<p>​	<code>4种数据类型----整型(整数),浮点型(小数),字符型(字符),特殊(数组,结构体,指针,枚举,联合)</code></p>
+<p>不同的数据类型用来存储不同类型的值,并且彼此之间可以进行一定程度上的转换.</p>
+<h2 id="整型">整型</h2>
+<p>作为数据类型,都有不同的存储范围</p>
+<p>​	我们知道有1字节=8位(二进制位)</p>
+<p>​	整型的各种数据范围都是2的幂次方,根据编写的程序所要处理的问题规模的不同,我们可以选择合适的类型.</p>
+<p>那么对于整型的所有可选的类型有:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">signed</span> <span class="type">short</span> 短整型 <span class="number">2</span>字节/<span class="number">16</span>位 <span class="number">-2</span>^<span class="number">15</span>~<span class="number">2</span>^<span class="number">15</span><span class="number">-1</span></span><br><span class="line"><span class="type">signed</span> <span class="type">int</span> 整型 <span class="number">4</span>字节/<span class="number">32</span>位 <span class="number">-2</span>^<span class="number">31</span>~<span class="number">2</span>^<span class="number">31</span><span class="number">-1</span> </span><br><span class="line"><span class="type">signed</span> <span class="type">long</span> 长整型 <span class="number">4</span>字节/<span class="number">32</span>位</span><br><span class="line"><span class="type">signed</span> <span class="type">long</span> <span class="type">long</span> 超长整型 <span class="number">8</span>字节/<span class="number">64</span>位</span><br></pre></td></tr></table></figure>
+<p>上面的所有的类型前面都有一个signed关键字,代表这个类型是有符号的(正负号),这个关键字是默认的,也就是说可以忽略,默认创建的变量都是有符号的.</p>
+<p>那么同理,对应就有一系列无符号类型(只要把signed替换为unsigned),例如:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">unsigned</span> <span class="type">long</span> <span class="type">long</span> 无符号超长整型 <span class="number">8</span>字节 大小比<span class="type">long</span> <span class="type">long</span> 翻了一倍</span><br><span class="line"></span><br><span class="line"><span class="type">unsigned</span> <span class="type">short</span>;(如果程序只需要考虑正数)</span><br></pre></td></tr></table></figure>
+<p>接下来讨论的<strong>数据范围</strong>的事情就要涉及到一点底层的知识了(其实没多少,需要自己去看补码的知识—见<code>CSAPP(《深入理解计算机系统》)</code>):</p>
+<p>我们知道对于同样的一字节有:</p>
+<p><strong>只表示正数</strong></p>
+<p>1字节—8个bit位—最多能唯一表示0~255(正数)这些数<br>
+00000000 原码<br>
+0/1 两种状态的全部组合有 2^8=256种状态</p>
+<p><strong>同时表示正负数</strong></p>
+<p>首先来看一个问题:</p>
+<p>​	我们有1字节,想要最大限度的存储整数—带一个符号signed位+剩下7位有效数字,那么对于0这个数有:</p>
+<p>​		0 0000000 +0</p>
+<p>​		1 0000000 -0</p>
+<p>​	可以发现,如果我们仅仅简单的将各个数的二进制表示来存储的话,那么就会遇到这个问题,即00000000和10000000这两个编码都表示0,且一个是+0,一个是-0,显然从数学上是完全相等的,但是问题就在于,在计算机中,一个数的编码必须是唯一的,那么我们必须要解决这个正负零的问题,解决的方法就是将10000000解释为其他数,我们引入补码这种表示方法,将10000000解释为-128:</p>
+<p>​		0 0000000 +0<br>
+​		1 0000000 -128 计算机补码</p>
+<p>我们将256中状态分成几部分:<br>
+256=128(负数)+127(正数)+1(原点0)<br>
+也就是说我们实际上能够存储的整数范围就是-128~127</p>
+<p>其实就是 128=2^7—8位数实际上只有7位用来存储真正的数</p>
+<p>同理16位—15位有数<br>
+0 0000000 00000000 -2^15~2^15-1</p>
+<p>那么可以推出对于k位有符号数,其存储范围是-2^(k-1)~2^(k-1)-1</p>
+<p><code>注:这里只讨论了数据范围,暂时没有讨论补码的问题,感兴趣可以去看CSAPP中的相关章节,或者觉得看不懂百度也行,具体(预计)会在位运算进行讨论</code></p>
+<h2 id="浮点数">浮点数</h2>
+<p>无法精确存储!!!无法精确存储!!!无法精确存储!!!重要的事情说3遍!!!</p>
+<p>浮点数的存储比整数要复杂的多,这并不是C语言的特性,而是计算机对浮点数的存储方式与整数完全不同.现在的浮点数存储已经标准化,都遵循IEEE的标准(具体内容可以自行查询).</p>
+<p>那么由于浮点数存储方式的特殊性(基于科学计数法),导致其虽然总体范围较大,但是却无法精确表示.</p>
+<p><strong>重要的关键点</strong>:C语言中的浮点数(或者说IEEE标准的浮点数)无法精确表示0,无法精确表示无限小数,但可以表示无穷大和NaN(not a number)</p>
+<p>C语言的浮点数主要有两种:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">double</span> 双精度浮点型 <span class="number">8</span>字节/<span class="number">64</span>位 精度<span class="number">16</span> 最多小数点后<span class="number">6</span>位</span><br><span class="line"><span class="type">float</span> 单精度浮点型 <span class="number">4</span>字节/<span class="number">32</span>位 精度<span class="number">8</span> 最多小数点后<span class="number">6</span>位</span><br></pre></td></tr></table></figure>
+<p>还有一种用的很少的<code>long double</code>,在现在的机器中精度更高,但是过去是用于解决兼容性问题引入的</p>
+<p>讨论到浮点数,这里举一个例子:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;math.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">	<span class="type">double</span> num2 = <span class="number">0.1</span> + <span class="number">0.1</span> + <span class="number">0.1</span>; <span class="comment">// num2是一个double类型的变量,并将三个0.1相加的值赋值给它</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%.17f&quot;</span>,num2); <span class="comment">// 输出num2的值,并保留17位小数</span></span><br><span class="line">	<span class="comment">// 输出 0.30000000000000004</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以看出实际上浮点数是无法精确存储的,但是越接近0,分布越密集,也就越精确</p>
+<p>ps:笔者对浮点数的了解也比较有限,正在学习中,目前还没有特别深刻的认识(学习漏洞之一,但是实际编程确实会认真考虑到相关问题)</p>
+<h2 id="字符型">字符型</h2>
+<p>字符只有2种:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(<span class="type">signed</span>)<span class="type">char</span> 注意:极个别编译器默认为<span class="type">unsigned</span> <span class="type">char</span> 字符类型 <span class="number">1</span>字节 实际上就类似是一个<span class="number">1</span>字节的<span class="type">int</span></span><br><span class="line"><span class="type">unsigned</span> <span class="type">char</span></span><br></pre></td></tr></table></figure>
+<p>字符实际上存的是字符的ASCII码值(正整数)— -128~127<br>
+-128------------0-------------127(环—溢出问题)<br>
+char可以用于算术运算—因为实际上就是个数字</p>
+<h3 id="ascii码">ASCII码</h3>
+<p>机器只认识二进制数据,并不认识一个个给我们看的字符,这意味着我们需要把各种字符对应地转换为一个数字.</p>
+<p><code>ASCII码</code>就是最常用的,针对拉丁字符(英文字符)的编码,一共有128个,即2^7个二进制位就能完全表示.</p>
+<p>char变量存储一个字符,也就是存储其对应的ASCII码,由于一个char变量占用1个字节,有8个二进制位,所以足以存储一个码值,同时需要注意的是,由于2^8=256,所以最高位不会被使用,这意味着我们可能将其正常用于符号位.</p>
+<p>事实上,一般情况下,<code>char</code>类型实际上等价于<code>signed char</code>类型.</p>
+<p>ASCII码表请百度查找.</p>
+<h3 id="如何存储一个字符">如何存储一个字符</h3>
+<p>char实际上存储的是字符的ASCII码,这也是他可以参与整数运算的原因.</p>
+<p>但是,我们仍然可以直观地将一个字符赋值给char变量.</p>
+<p>C语言中,单个的字符需要用一对<code>''</code>来包括起来,他们是一个整体,例如字符A在C语言中表示为<code>'A'</code>.</p>
+<p>也就是说,我们简单地将字符加上一对<code>''</code>即可将其赋值给一个char变量:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">	<span class="comment">// 也就是说,我们简单地将字符加上一对`&#x27;&#x27;`即可将其赋值给一个char变量:</span></span><br><span class="line">    <span class="type">char</span> c = <span class="string">&#x27;a&#x27;</span>;<span class="comment">// c中存储的是字符&#x27;a&#x27;的ASCII码,即97(十进制)</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%c\n&quot;</span>, c); <span class="comment">// 输出 a ,并没有输出97和字符两边的单引号</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其中,printf中使用<code>%c</code>来输出一个字符,如果我们仍然使用<code>%d</code>,即输出整数的方式来输出一个字符,那么会输出其ASCII码:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">char</span> c = <span class="string">&#x27;a&#x27;</span>;<span class="comment">// c中存储的是字符&#x27;a&#x27;的ASCII码,即97(十进制)</span></span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, c); <span class="comment">// 输出 97</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>那么反过来,我们当然可以将一个0~127的整数作为ASCII码赋值给char变量,甚至将一个整数在printf中以<code>%c</code>来解释:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> i = <span class="number">97</span>; <span class="comment">// 97 是 a 的 ASCII 码</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%c\n&quot;</span>, i); <span class="comment">// 输出 a</span></span><br><span class="line">    <span class="comment">// 98是字符 b 的 ASCII 码,我们直接将其按%c---即字符---输出</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%c\n&quot;</span>, <span class="number">98</span>); <span class="comment">// 输出字符 b</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="使用转义字符来处理特殊字符">使用转义字符来处理特殊字符</h3>
+<p>但不是所有的字符都能直接放在单引号内,例如单引号本身:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="comment">// 但不是所有的字符都能直接放在单引号内,例如单引号本身:</span></span><br><span class="line">    <span class="comment">// char c = &#x27;&#x27;&#x27;; // 错误</span></span><br><span class="line">    <span class="comment">// 正确的做法是使用转义字符:</span></span><br><span class="line">    <span class="type">char</span> c = <span class="string">&#x27;\&#x27;&#x27;</span>; <span class="comment">// 正确</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%c\n&quot;</span>, c); <span class="comment">// 输出单引号这个字符 &#x27;</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>对于这些字符,我们需要使用转义字符来表示,即将其转义为一般的字符,而不是作为C语言语法的一部分.</p>
+<p>要想使用一个转义字符,只需要简单地在想表示的字符前加一个反斜杠<code>\</code>即可,例如上面的单引号就可以这样表示:</p>
+<p><code>'\''</code>,这是一个整体,仅仅表示一个单引号</p>
+<p>同时,由于反斜杠用于转义,所以它本身也是一个特殊字符,同样,我们在其前面加上一个<code>\</code>来转义它:</p>
+<p><code>'\\'</code>,同样,这是一个整体,仅仅表示一个反斜杠</p>
+<p>有关转义字符还有很多,例如字符串使用一对<code>&quot;&quot;</code>来包括,这时候字符串内部出现的<code>&quot;</code>自然也需要转义.</p>
+<p>另一方面,有一些不可见字符,即空白字符,也需要转义,例如<code>'\n'</code>代表一个换行,<code>'\t'</code>代表一个制表符(通常等价于4个空格).</p>
+<p>我们甚至可以将数字放到字符中,尽管单个的字符我们可以直接用一个数值来表示,但是如果是字符串,这将非常重要!</p>
+<p>转义字符如下:</p>
+<p>​	<img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20231007011552875.png" alt="image-20231007011552875" style="zoom:45%;" /></p>
+<h3 id="字符常量">字符常量</h3>
+<p>同时还有一个很多书不会提到,或者说讲的不明确的问题,那就是字符常量到底和int一不一样,这里举一个代码例子,要用到sizeof运算符:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">char</span> c=<span class="string">&#x27;a&#x27;</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;char c: %u\n&quot;</span>,<span class="keyword">sizeof</span>(c));</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;char: %u\n&quot;</span>, <span class="keyword">sizeof</span>(<span class="type">char</span>));</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;int: %u\n&quot;</span>, <span class="keyword">sizeof</span>(<span class="type">int</span>));</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;\&#x27;a\&#x27;: %u\n&quot;</span>, <span class="keyword">sizeof</span>(<span class="string">&#x27;a&#x27;</span>));</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;\&#x27;a\&#x27;+1: %u\n&quot;</span>, <span class="keyword">sizeof</span>(<span class="string">&#x27;a&#x27;</span> + <span class="number">1</span>));</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;\&#x27;a\&#x27;+1: %u\n&quot;</span>, <span class="keyword">sizeof</span>(<span class="string">&#x27;a&#x27;</span> + <span class="string">&#x27;a&#x27;</span>));</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">输出结果:</span></span><br><span class="line"><span class="comment">char: 1</span></span><br><span class="line"><span class="comment">int: 4</span></span><br><span class="line"><span class="comment">&#x27;a&#x27;: 1</span></span><br><span class="line"><span class="comment">&#x27;a&#x27;+1: 4</span></span><br><span class="line"><span class="comment">&#x27;a&#x27;+1: 4</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<p>这里使用sizeof关键字计算操作数的大小(宽度),也就是占用几字节.</p>
+<p>可以发现,单个字符常量/单个字符变量都占用1字节,而int常量(变量)占用4字节</p>
+<p>但是,一旦char加入了和int整型的运算,那么结果的大小就会立即变成4字节</p>
+<p>甚至只是两个字符常量进行相加(字符对应的ASCII码值相加,而不是连接),结果也立即提升为4字节</p>
+<p>所以我们可以证实:<code>在C语言中,单个的字符常量是1个字节,但是一旦参与运算,就立即提升为4字节,也就是说被解释为(当做)4字节的int常量参与运算</code></p>
+<p>换句话说,你完全可以把C语言中的字符常量当成int来看待!!!这是一个很重要的特性,很多教材,书中都没有提到,或者讲解的不够清晰.</p>
+<h2 id="其他特殊类型">其他特殊类型</h2>
+<p>其他的特殊类型非常重要,但是这里先不进行讲解,本文的主要目的是要让各位建立起对数据类型及其表示范围的概念,后面的几种类型会单独分章节进行讨论,特别是指针,堪称C语言的灵魂,放在好几章里讲解都不为过,甚至在后面的各种应用都离不开指针.</p>
+<h1 id="c语言的数据">C语言的数据</h1>
+<p>C语言中,数据有两种,即常量和变量;</p>
+<p>还有一种实际上属于变量,但是常常被称为常量,或者常变量的数据,就是在变量声明的适当位置加上const这个关键字;</p>
+<p>另外有一种特殊的常量,叫做宏定义,实际上是一种预处理,只是单纯的文本替换,同样十分重要.</p>
+<h2 id="如何声明一个变量">如何声明一个变量</h2>
+<p>注:有关声明的详细内容可见https://zh.cppreference.com/w/c/language/declarations,其他声明将会在后续知识的讲解中逐渐插入.</p>
+<p>变量,顾名思义,就是可以变化的量,用于在程序中存储不断变化的值,或者用于接受我们输入的值(在运行前不确定).</p>
+<p>并且变量不同于常量,在使用前必须进行声明—提前告知编译器这里需要使用到一个变量(需要进行内存分配).</p>
+<p>如前所述,C语言是静态类型语言,声明一个变量,则必须声明其类型(编译前就必须确定其类型):</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">	<span class="type">int</span> a; <span class="comment">// 正确,a是一个int类型的变量</span></span><br><span class="line">	<span class="type">double</span> pi=<span class="number">3.14</span>; <span class="comment">// 正确,pi是一个double类型的变量,并为其初始化为3.14</span></span><br><span class="line">    <span class="type">float</span> f1=<span class="number">2</span>,f2=<span class="number">3</span>,f3=<span class="number">4</span>; <span class="comment">// 正确,同一条语句中可以声明若干个变量</span></span><br><span class="line">    s; <span class="comment">// 错误,s未定义</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%.2lf&quot;</span>,pi); <span class="comment">// 输出pi的值,且保留2位小数</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="变量的声明方法">变量的声明方法</h3>
+<p>一个变量声明,遵循以下格式:</p>
+<p>​	<code>&lt;类型&gt; &lt;合法的标识符名&gt;;</code></p>
+<p>类型即为上面所述的各种合法的内置类型,或者是自定义的类型(例如结构体类型,枚举类型等等);</p>
+<h3 id="标识符的命名规则">标识符的命名规则</h3>
+<p>这里再重新说明一下:</p>
+<p>标识符即为变量名,在C语言中,标识符的命名有如下几条规则,不遵循这几条规则的标识符均不合法(或者不合适):</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> 标识符必须以字母a-z、 A-Z或下划线开头，后面可跟任意个(可为<span class="number">0</span>)字符，这些字符可以是字母、下划线和数字，其他字符不允许出现在标识符中</span><br><span class="line"><span class="number">2</span> 标识符严格区分大小写字母</span><br><span class="line"><span class="number">3</span> 标识符的长度，c89规定<span class="number">31</span>个字符以内，c99规定<span class="number">63</span>个字符以内(没有哪个疯子超出这个范围吧...)</span><br><span class="line"><span class="number">4</span> C语言中的关键字，有特殊意义，不能作为标识符(例如<span class="keyword">if</span>,<span class="keyword">for</span>,<span class="keyword">while</span>,<span class="keyword">goto</span>,<span class="keyword">return</span>等)</span><br><span class="line"><span class="number">5</span> 自定义标识符最好取具有一定意义的字符串，便于记忆和理解</span><br><span class="line"><span class="number">6</span> 不同平台最好遵循各自的命名规范,例如Windows一般使用驼峰命名法,Linux使用下划线命名法</span><br></pre></td></tr></table></figure>
+<p>不好意思地指出,本人的英语水平不太好,而且各种标识符(包括但不限于变量名,函数名,结构体类型,宏定义等)都习惯下划线命名法,可能较长.但希望宁肯变量名长点,也不要一大堆a,b,c,d,e,f,g之类的扔上去,否则以后回头看代码遭罪的只会是你自己.</p>
+<h3 id="变量从哪里声明">变量从哪里声明</h3>
+<p>这里的知识可能涉及到一点作用域和生命周期的问题,但是这里先不讲解—依旧,知识都是交叉的,在该讲什么的时候就讲什么.</p>
+<p>其实核心的就是一句话:<code>在你使用到该变量之前提前声明好他</code></p>
+<p>例如上面的<code>double pi=3.14;</code>我们需要在后面进行输出其值,所以必须在使用printf之前进行该变量的声明,同时对其进行初始化(初始化为3.14).这里的pi在main函数中声明,所以pi也叫<code>局部变量</code>,换句话说,在其他地方(其他函数中)是不允许使用该变量的(找不到pi),因为pi是main()函数私有的:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">void</span> <span class="title function_">test</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;访问到了pi:%lf&quot;</span>,pi); <span class="comment">// error: &#x27;pi&#x27; was not declared in this scope</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">	<span class="type">double</span> pi=<span class="number">3.14</span>; <span class="comment">// 正确,pi是一个全局的double类型的变量,并为其初始化为3.14,main函数可以访问到</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%.2lf\n&quot;</span>,pi); <span class="comment">// 输出pi的值,且保留2位小数</span></span><br><span class="line">    test();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面这个程序无法通过编译,因为在test函数中无法访问到pi这个变量.</p>
+<p>但是如果我们把pi放在main()函数的前面,同时在任何函数的外面,那么pi就成为了全局变量,任何函数(本源文件内)都有权限访问修改其值,并且pi在程序运行的整个过程一直存在而不会销毁(后面在作用域与生命周期的相关教程会详细解释):</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">double</span> pi; <span class="comment">// 正确,pi是一个全局的double类型的变量,并为其初始化为3.14,main函数可以访问到</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">test</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;访问到了pi:%lf&quot;</span>,test);</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%.2lf\n&quot;</span>,pi); <span class="comment">// 输出pi的值,且保留2位小数</span></span><br><span class="line">    test();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20230921202743779.png" alt="image-20230921202743779" style="zoom:33%;" />	
+<p>这里的示例主要体现了两种pi的作用域的不同,暂未展示生命周期的问题,大家现在只需要知道:如果需要一个变量给所有的函数共享,那么请将他作为全局变量,但是,这种操作一定要慎重,除非迫不得已,最好不要将任何变量声明为全局变量—你有可能会在某个函数中不小心修改(破坏)其值—请绝对不要高估你的实力与判断.</p>
+<h2 id="如何使用一个常量">如何使用一个常量</h2>
+<h3 id="常量和变量的区别">常量和变量的区别</h3>
+<p>其实这个问题很显而易见,常量就是不能(或者说不应该)被修改值的量,从逻辑的角度去想,如果某个要被使用到的值确定不会(甚至是绝对不能)被修改(例如宇宙的普朗克常量),那么何不将其直接作为常量写入呢,这是一种思路,下面按照这个思路来写一个求圆表面积的程序:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">	<span class="type">double</span> r=<span class="number">3</span>; <span class="comment">// 用于存储半径</span></span><br><span class="line">	<span class="type">double</span> c; <span class="comment">// 用于存储面积</span></span><br><span class="line">	c=<span class="number">3.14</span>*r*r;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%lf&quot;</span>,c); <span class="comment">//输出28.260000</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里<code>3.14</code>就是一个浮点型的常量,我们直接将其硬编码到程序中.</p>
+<p>但是有一个问题,如果我们手动指定pi的精度,那么pi就不得不每次进行修改,例如3.14,3.14159,3.1415926535,…如此直接修改程序就显得非常麻烦,而且每一个地方都要进行手动修改,十分繁琐,与其这样,我们还不如将其定义为一个变量.</p>
+<p>但是不得不承认,这里的例子破坏了<code>常量就是不能(或者说不应该)被修改值的量</code>这个前提,但是我们为了说明问题,暂时违反一次…另一方面,我们并不是只有这两种选择,在C中,我们有一种特殊的定义&quot;常量&quot;的方法,那就是<code>宏定义</code>.</p>
+<p>宏定义实际上只是完完全全的文本替换,他类似于你在文本编辑器中&quot;ctrl+h&quot;进行批量的文本替换,我们见如下示例:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> PI 3.14</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">	<span class="type">double</span> r=<span class="number">3</span>; <span class="comment">// 用于存储半径</span></span><br><span class="line">	<span class="type">double</span> c; <span class="comment">// 用于存储面积</span></span><br><span class="line">	c=PI*r*r;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%lf\n&quot;</span>,c); <span class="comment">//输出 28.260000</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;PI的值为:%lf\n&quot;</span>,PI); <span class="comment">//输出 PI的值为:3.140000</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>宏定义的定义格式是这样:</p>
+<p><code>#define &lt;宏名&gt; [要替换的内容,可为空]</code></p>
+<p>那么在上面的代码中,我们将程序中所有的PI全部替换成3.14</p>
+<p>可以发现,宏定义实际上是预处理指令(#号代表预处理),也就是说在编译前宏就已经被替换了,所以说宏只是单纯的文本替换</p>
+<p>另一方面,宏处理是从上向下依次执行的,如果先执行的宏替换之后,替换的地方又出现了后执行的宏需要替换的地方,那么这个地方仍然会被再次进行处理,以此类推,直到所有的宏全部被替换完成.</p>
+<p>关于宏的知识还有其他内容,有的用的比较少,有的现在还不能讲解,读者不妨自行查阅—例如&quot;宏函数&quot;,“拼接宏”,&quot;递归宏&quot;等等高级(抽象)用法,有些其实基本不会用到,而有些会常常用到,需要不断的代码积累.</p>
+<h3 id="常量有哪些">常量有哪些</h3>
+<p><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20230923162631074.png" alt="image-20230923162631074"></p>
+<p>实际上很简单的说,单个的数字(例如<code>123</code>,<code>3</code>等),单个的字符(例如<code>'a'</code>),单个的字符串(例如<code>&quot;hello world&quot;</code>),一些编译器预先定义好的常量(例如<code>NULL,其值是0</code>)这些都是合法的常量(或字面量)</p>
+<h3 id="常量的存储问题">常量的存储问题</h3>
+<p>接下来是常量的存储问题.和变量不同,常量存储在常量存储区,而不是像局部变量存储在栈区,全局,静态变量存储在全局(静态)存储区里等等.</p>
+<p>而且字符串是在一个字符常量区中,而且对字符串常量的引用(注意不是C++的引用,而是指使用),实际上是一个指向字符串第一个字符的字符指针,而且一个C程序共享同一个字符串常量—这意味着如果两个字符指针指向同一个字符串常量,那么在内存中实际只有一个这个字符串常量的副本!!!更重要的是,对一个字符串常量进行修改的行为是未定义的!!!有关字符指针的内容会在指针或字符串的相关章节进行详细的讲解(一般的教材是不会讲的doge)</p>
+<h3 id="介于常量和变量之间-常变量的使用">介于常量和变量之间—常变量的使用</h3>
+<p>常变量实质上就是变量,我们使用一个const关键字对变量进行修饰,让他的值不能够被修改:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> PI 3.14</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> S </span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">	<span class="type">const</span> <span class="type">int</span> num=<span class="number">10</span>; <span class="comment">// num的值不可被修改</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>,num);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>const提供语言层面的保护,编译器会进行一定程度上的识别,如果有修改的行为会进行报错—除了使用指针进行强行修改,但是此时一般程序会直接终止.</p>
+<p>关于const关键字相关的知识将在指针进行更加详细的讲解.</p>
+<p>​												—WAHAHA,2023.9.21</p>
+<h1 id="如何使用数据">如何使用数据</h1>
+<p>在此处,我们先引入最基本的几个运算:<code>加减乘除和赋值</code></p>
+<p>对于数据,必然要进行操作使用,我们可以使用最基本两种操作方式:</p>
+<p>1.变量或常量之间可以进行组合运算,例如<code>加减乘除</code>等,并计算出一个最终的值</p>
+<p>3.把计算出的最终的值<code>赋值</code>给一个<code>左值</code>(后面会介绍到左值,这里简单将左值理解为就是<code>变量</code>)</p>
+<h2 id="变量的初始化">变量的初始化</h2>
+<p>数据的操作处理,主要和变量有关,常量作为辅助.那么一个变量,在进行操作之前,应当给他一个初始的值,我们把这种操作叫做<code>初始化</code>.</p>
+<p>例如,我们想要定义一个pi的浮点型变量,并初始化为3.14,应该这样写:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">float</span> pi = <span class="number">3.14</span>;</span><br></pre></td></tr></table></figure>
+<p>也就是说,我们在声明这个变量的同时,直接在pi这个标识符后面跟一个<code>=</code>运算符,后面再跟其初始值即可.</p>
+<p>这里的<code>=</code>叫做<code>赋值运算符</code>, 它的功能是将其右边的&quot;值&quot;赋值给左边的&quot;变量&quot;.</p>
+<p>另一方面,必须要注意的是,赋值运算符在这里实际上并不是赋值的操作,虽然我们使用了<code>=运算符</code>—这显然很符合我们的思维,但是正如标题所写,这里的操作叫做<code>初始化</code>而非<code>赋值</code>!</p>
+<h2 id="为变量赋值">为变量赋值</h2>
+<p>我们在程序的运行当中,一些变量的值会发生变化,也就是说需要重新给他赋一个新的值,那么这时候的操作就叫做<code>赋值</code>,这里使用的<code>=运算符</code>才是真正的赋值含义.</p>
+<p>这里仅仅先知道我们使用<code>=运算符</code>(C语言中这种用于运算操作的符号统称为运算符)对一个变量进行赋值即可.</p>
+<p>例如,我们定义的一个变量原来是3,此时我们想要将其重新变为4,应该这样写:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> var = <span class="number">3</span>; <span class="comment">// 这里是初始化而非赋值</span></span><br><span class="line">var = <span class="number">4</span>; <span class="comment">// 这里进行赋值</span></span><br></pre></td></tr></table></figure>
+<h2 id="变量-常量间进行运算">变量/常量间进行运算</h2>
+<p>注:由于仅仅学了几种基本类型,我们仅拿四则运算的运算符来举例,实际上C语言支持的运算符远远不仅于此.</p>
+<p>很显然,我们使用<code>+-*/</code>这4个运算符进行<code>四则运算</code>,他们的运算行为和数学意义完全相同,例如如果除数是0则会出现错误.</p>
+<p>例如:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">	<span class="type">int</span> a = <span class="number">3</span>, b = <span class="number">4</span>;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, a + b); <span class="comment">// 计算结果是一个int类型值,因此使用%d输出</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>显然,输出的结果是<code>7</code></p>
+<p>又如:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">	<span class="type">int</span> a = <span class="number">8</span>, b = <span class="number">2</span>;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, a / b);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>显然,输出的结果是<code>4</code></p>
+<br>
+<p>再例如我们想要计算浮点数:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">	<span class="type">double</span> a = <span class="number">3</span>, b = <span class="number">2</span>;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%lf&quot;</span>, a / b); <span class="comment">// 计算结果是一个double类型值,因此使用%lf输出</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>或者使用float(精度要求较低时):</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">	<span class="type">float</span> a = <span class="number">3</span>, b = <span class="number">2</span>;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%f&quot;</span>, a / b); <span class="comment">// 计算结果是一个float类型值,因此使用%f输出</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注:实际上<code>printf()</code>函数会将所有的float类型值<code>提升</code>为double类型,因此用<code>%lf</code>输出float类型值也没有问题.</p>
+<br>
+<p>另外,我们可以连续进行使用:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">	<span class="type">int</span> a = <span class="number">3</span>, b = <span class="number">2</span>, c = <span class="number">5</span>;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, a + b * c); <span class="comment">// 输出结果为13</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>从这里我们也能看出四则运算和其数学意义相同,乘除法的优先级依旧高于加减法,所以结果是13.</p>
+<p>那么如果想要强制先运算<code>a+b</code>,我们加上小括号即可,同时小括号可嵌套使用!</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">	<span class="type">int</span> a = <span class="number">3</span>, b = <span class="number">2</span>, c = <span class="number">5</span>;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, (a + b) * c); <span class="comment">// 输出结果为25</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里涉及到<code>运算符的优先级</code>,同样,现在进行详细讲解还为时过早.</p>
+<h2 id="两种类型转换">两种类型转换</h2>
+<p>前面我们分别举了整型计算和浮点型计算的例子,那么问题来了,这个程序输出的是什么:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">	<span class="type">int</span> a = <span class="number">3</span>, b = <span class="number">2</span>;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, a / b);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果你觉得输出的是<code>1.5</code>,那么很遗憾,你完全忽略了上面讲的数据类型的知识!</p>
+<img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20230923155340995.png" alt="image-20230923155340995" style="zoom:33%;" />	
+<p>运行结果可能出乎你的预料,是<code>1</code>!原因很简单,a和b都是int类型,那么很自然的,C语言没有理由自动的为你将a/b作为一个double类型的值,而是只会是一个int,那么实际上1.5的0.5被忽略了,而且是直接舍弃,没有四舍五入.</p>
+<p>换句话说, <code>/运算符</code>对于int变量,执行的叫做<code>整除</code>,这里的<code>a/b相当于[a/b],这里的[]代表向下取整</code>.</p>
+<p>那么解决的办法也很简单,使用类型转换.</p>
+<h3 id="隐式类型转换">隐式类型转换</h3>
+<p>将a或b中的其中任何一个声明为double即可(或者两个都是double),此时,C语言会有一个<code>类型提升</code>,也就是说,其中那个精度较低的变量(int类型的那一个)会被提升为和另一个变量相同的精度更高的类型(double),此时,double类型的值就可以保留浮点:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">	<span class="type">double</span> a = <span class="number">3</span>;</span><br><span class="line">	<span class="type">int</span> b = <span class="number">2</span>; <span class="comment">// 这里将a声明为double</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%lf&quot;</span>, a / b); <span class="comment">// 注意此时需要用%lf来输出浮点数!!!</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出结果为:</p>
+<img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20230923160409779.png" alt="image-20230923160409779" style="zoom:33%;" />	
+<p>这里的&quot;类型提升&quot;实际上是一个<code>隐式类型转换</code>,顾名思义,C程序默默地将b提升为double.</p>
+<p>转换对应的两种类型必须能够互相转换,否则会报错,例如:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">	<span class="type">int</span> a = <span class="number">3</span>, *p = &amp;a;</span><br><span class="line">	<span class="type">double</span> b = <span class="number">3</span>;</span><br><span class="line">	b = p; <span class="comment">// 错误,int*类型的指针值不能转换为double类型</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%lf&quot;</span>, a); </span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>不过,如果一种类型的值赋值给另一种类型的变量,如果可以转换过去的话,那么将不会报错,而是可能产生一个警告,但可以通过编译.</p>
+<p>另外,必须注意的是,从高精度值向低精度值转换会损失信息:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">	<span class="type">double</span> pi = <span class="number">3.14</span>; <span class="comment">// 这里a声明为double</span></span><br><span class="line">	<span class="type">int</span> b = pi*<span class="number">2</span>; <span class="comment">// 本意是让b存储2倍的pi</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, b); <span class="comment">// 注意此时需要用%d来输出b!</span></span><br><span class="line">	<span class="comment">// 但是输出结果为6,小数部分丢失!</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="显式-强制-类型转换">显式(强制)类型转换</h3>
+<p>与之对应的,我们可以进行<code>显式类型转换(或者说强制类型转换)</code>,使用方式是在要提升的值前加一对小括号,括号内写要转换为的类型:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">	<span class="type">int</span> a = <span class="number">3</span>,b = <span class="number">2</span>;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%lf&quot;</span>, (<span class="type">double</span>)a / b);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>此程序同样输出<code>1.500000</code></p>
+<p>需要注意的是,由于<code>强制类型转换</code>的<code>优先级</code>大于<code>/</code>运算符,因此实际上被强制类型转换的是<code>a</code>,然后<code>b</code>被隐式转换为double类型,和提升后的<code>a</code>进行运算,最终的结果是double类型.</p>
+<h3 id="类型转换与运算符">类型转换与运算符</h3>
+<p>实际上,如果某个运算符的两个操作数类型不同,那么该运算符会先将精度更低的操作数隐式类型转换(也就是所谓的类型提升)为精度更高的操作数的类型,然后再以该类型进行运算,以保证类型匹配,同时避免精度损失.</p>
+<p>当然,这种转换是有限度的,如果两种类型完全无法兼容,那么会报错.</p>
+<h1 id="附注">附注</h1>
+<h2 id="标准中对算数类型的定义">标准中对算数类型的定义</h2>
+<p>可以参阅</p>
+<p><a target="_blank" rel="noopener" href="https://zh.cppreference.com/w/c/language/arithmetic_types">https://zh.cppreference.com/w/c/language/arithmetic_types</a></p>
+<p>中的内容,对各种类型都有明确清晰的描述.</p>
+<p>里面不仅有类型的用途,大小,并且还有它们取值范围的参考.</p>
+<p align=right>---WAHAHA</p>
+<br>
+<br>
+<p>上一篇:<a href="2023bb3b8099b657/">c语言教程-2-环境搭建</a></p>
+<p>下一篇:<a href="2023427f4611cc41/">C语言教程-3_2-基本输入输出</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://gngtwhh.github.io">WAHAHA</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://gngtwhh.github.io/2023949602bbfb8e/">https://gngtwhh.github.io/2023949602bbfb8e/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://gngtwhh.github.io" target="_blank">WAHAHA's blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/C/">C</a></div><div class="post_share"><div class="social-share" data-image="/img/avatar.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/reward/wechat_reward.jpg" target="_blank"><img class="post-qr-code-img" src="/img/reward/wechat_reward.jpg" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="/img/reward/alipay_reward.png" target="_blank"><img class="post-qr-code-img" src="/img/reward/alipay_reward.png" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023bb3b8099b657/" title="C语言教程-2-环境搭建"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">C语言教程-2-环境搭建</div></div></a></div><div class="next-post pull-right"><a href="/202322bfbdadd502/" title="C语言教程-5-顺序执行"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">C语言教程-5-顺序执行</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/202379dbc5fa8424/" title="C语言贪吃蛇"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-09-08</div><div class="title">C语言贪吃蛇</div></div></a></div><div><a href="/2023b7fda0df05ff/" title="C语言教程-10-数组"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-20</div><div class="title">C语言教程-10-数组</div></div></a></div><div><a href="/202382eafac4349b/" title="C语言教程-12_1-初识函数"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-31</div><div class="title">C语言教程-12_1-初识函数</div></div></a></div><div><a href="/2023b45ef26d6ec3/" title="C语言教程-11-字符串"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-06</div><div class="title">C语言教程-11-字符串</div></div></a></div><div><a href="/2023def693eb5bf8/" title="C语言教程-12_2-深入分析函数和面向过程初识"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-11-01</div><div class="title">C语言教程-12_2-深入分析函数和面向过程初识</div></div></a></div><div><a href="/202339a6f8c668c3/" title="C语言教程-12_3-函数的其他用法和特性"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-11-01</div><div class="title">C语言教程-12_3-函数的其他用法和特性</div></div></a></div></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">WAHAHA</div><div class="author-info__description">一个爱折腾的蒟蒻</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">126</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">74</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">18</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/gngtwhh" target="_blank" title="Github"><i class="fab fa-brands fa-github"></i></a><a class="social-icon" href="mailto:2784126850@qq.com" target="_blank" title="Email"><i class="fas fa-solid fa-envelope"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E6%9C%89%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.</span> <span class="toc-text">为什么要有数据类型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#c%E8%AF%AD%E8%A8%80%E6%94%AF%E6%8C%81%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.</span> <span class="toc-text">C语言支持的数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B4%E5%9E%8B"><span class="toc-number">2.1.</span> <span class="toc-text">整型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%AE%E7%82%B9%E6%95%B0"><span class="toc-number">2.2.</span> <span class="toc-text">浮点数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E5%9E%8B"><span class="toc-number">2.3.</span> <span class="toc-text">字符型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ascii%E7%A0%81"><span class="toc-number">2.3.1.</span> <span class="toc-text">ASCII码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%AD%98%E5%82%A8%E4%B8%80%E4%B8%AA%E5%AD%97%E7%AC%A6"><span class="toc-number">2.3.2.</span> <span class="toc-text">如何存储一个字符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E8%BD%AC%E4%B9%89%E5%AD%97%E7%AC%A6%E6%9D%A5%E5%A4%84%E7%90%86%E7%89%B9%E6%AE%8A%E5%AD%97%E7%AC%A6"><span class="toc-number">2.3.3.</span> <span class="toc-text">使用转义字符来处理特殊字符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E5%B8%B8%E9%87%8F"><span class="toc-number">2.3.4.</span> <span class="toc-text">字符常量</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E7%89%B9%E6%AE%8A%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.4.</span> <span class="toc-text">其他特殊类型</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#c%E8%AF%AD%E8%A8%80%E7%9A%84%E6%95%B0%E6%8D%AE"><span class="toc-number">3.</span> <span class="toc-text">C语言的数据</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%A3%B0%E6%98%8E%E4%B8%80%E4%B8%AA%E5%8F%98%E9%87%8F"><span class="toc-number">3.1.</span> <span class="toc-text">如何声明一个变量</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%98%E9%87%8F%E7%9A%84%E5%A3%B0%E6%98%8E%E6%96%B9%E6%B3%95"><span class="toc-number">3.1.1.</span> <span class="toc-text">变量的声明方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%87%E8%AF%86%E7%AC%A6%E7%9A%84%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99"><span class="toc-number">3.1.2.</span> <span class="toc-text">标识符的命名规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%98%E9%87%8F%E4%BB%8E%E5%93%AA%E9%87%8C%E5%A3%B0%E6%98%8E"><span class="toc-number">3.1.3.</span> <span class="toc-text">变量从哪里声明</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E4%B8%80%E4%B8%AA%E5%B8%B8%E9%87%8F"><span class="toc-number">3.2.</span> <span class="toc-text">如何使用一个常量</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E9%87%8F%E5%92%8C%E5%8F%98%E9%87%8F%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">3.2.1.</span> <span class="toc-text">常量和变量的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E9%87%8F%E6%9C%89%E5%93%AA%E4%BA%9B"><span class="toc-number">3.2.2.</span> <span class="toc-text">常量有哪些</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E9%87%8F%E7%9A%84%E5%AD%98%E5%82%A8%E9%97%AE%E9%A2%98"><span class="toc-number">3.2.3.</span> <span class="toc-text">常量的存储问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8B%E4%BA%8E%E5%B8%B8%E9%87%8F%E5%92%8C%E5%8F%98%E9%87%8F%E4%B9%8B%E9%97%B4-%E5%B8%B8%E5%8F%98%E9%87%8F%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">3.2.4.</span> <span class="toc-text">介于常量和变量之间—常变量的使用</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E6%95%B0%E6%8D%AE"><span class="toc-number">4.</span> <span class="toc-text">如何使用数据</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%98%E9%87%8F%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-number">4.1.</span> <span class="toc-text">变量的初始化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E5%8F%98%E9%87%8F%E8%B5%8B%E5%80%BC"><span class="toc-number">4.2.</span> <span class="toc-text">为变量赋值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%98%E9%87%8F-%E5%B8%B8%E9%87%8F%E9%97%B4%E8%BF%9B%E8%A1%8C%E8%BF%90%E7%AE%97"><span class="toc-number">4.3.</span> <span class="toc-text">变量&#x2F;常量间进行运算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%A4%E7%A7%8D%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="toc-number">4.4.</span> <span class="toc-text">两种类型转换</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9A%90%E5%BC%8F%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="toc-number">4.4.1.</span> <span class="toc-text">隐式类型转换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%98%BE%E5%BC%8F-%E5%BC%BA%E5%88%B6-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="toc-number">4.4.2.</span> <span class="toc-text">显式(强制)类型转换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">4.4.3.</span> <span class="toc-text">类型转换与运算符</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%99%84%E6%B3%A8"><span class="toc-number">5.</span> <span class="toc-text">附注</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%87%E5%87%86%E4%B8%AD%E5%AF%B9%E7%AE%97%E6%95%B0%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-number">5.1.</span> <span class="toc-text">标准中对算数类型的定义</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/20241059784280b9/" title="VSCode基本配置教程">VSCode基本配置教程</a><time datetime="2024-08-21T01:54:14.717Z" title="发表于 2024-08-21 09:54:14">2024-08-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/202476a8c85896e3/" title="C语言教程-1_1-计算机基础概述">C语言教程-1_1-计算机基础概述</a><time datetime="2024-08-15T02:29:46.690Z" title="发表于 2024-08-15 10:29:46">2024-08-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024dfb5f5f4194f/" title="C语言教程-17-预处理器">C语言教程-17-预处理器</a><time datetime="2024-08-08T16:04:39.615Z" title="发表于 2024-08-09 00:04:39">2024-08-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024b336a5921d4e/" title="JWT鉴权">JWT鉴权</a><time datetime="2024-07-21T05:16:46.750Z" title="发表于 2024-07-21 13:16:46">2024-07-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/20245f401b0c1d3c/" title="分支界限法">分支界限法</a><time datetime="2024-06-23T08:26:37.611Z" title="发表于 2024-06-23 16:26:37">2024-06-23</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2024 By WAHAHA</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">欢迎大佬光临鄙人的<a href="https://gngtwhh.github.io/">博客</a>orz!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅/深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><div class="js-pjax"><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://wahahablog.netlify.app/.netlify/functions/twikoo',
+      region: '',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://wahahablog.netlify.app/.netlify/functions/twikoo',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      countELement.textContent = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-show-text.min.js" data-mobile="false" data-text="C语言,是世界上,最美的,语言" data-fontsize="15px" data-random="false" async="async"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

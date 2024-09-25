@@ -1,0 +1,420 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>C语言教程-3_2-基本输入输出 | WAHAHA's blog</title><meta name="author" content="WAHAHA"><meta name="copyright" content="WAHAHA"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="初步操作数据-进行输入输出操作">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C语言教程-3_2-基本输入输出">
+<meta property="og:url" content="https://gngtwhh.github.io/2023427f4611cc41/index.html">
+<meta property="og:site_name" content="WAHAHA&#39;s blog">
+<meta property="og:description" content="初步操作数据-进行输入输出操作">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gngtwhh.github.io/img/avatar.jpg">
+<meta property="article:published_time" content="2023-10-18T06:04:19.171Z">
+<meta property="article:modified_time" content="2024-09-25T15:03:54.433Z">
+<meta property="article:author" content="WAHAHA">
+<meta property="article:tag" content="C">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gngtwhh.github.io/img/avatar.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://gngtwhh.github.io/2023427f4611cc41/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'C语言教程-3_2-基本输入输出',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-09-25 23:03:54'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="referrer" content="no-referrer-when-downgrade" /><meta name="generator" content="Hexo 6.3.0"><link href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" rel="stylesheet" /></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load',() => { preloader.endLoading() })
+
+  if (false) {
+    document.addEventListener('pjax:send', () => { preloader.initLoading() })
+    document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+  }
+})()</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">126</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">74</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">18</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 文章</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tools/"><i class="fa-fw fas fa-solid fa-wrench"></i><span> 工具</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background: transparent"><nav id="nav"><span id="blog-info"><a href="/" title="WAHAHA's blog"><img class="site-icon" src="/img/logo.png"/></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 文章</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tools/"><i class="fa-fw fas fa-solid fa-wrench"></i><span> 工具</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">C语言教程-3_2-基本输入输出</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-10-18T06:04:19.171Z" title="发表于 2023-10-18 14:04:19">2023-10-18</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-09-25T15:03:54.433Z" title="更新于 2024-09-25 23:03:54">2024-09-25</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/C%E8%AF%AD%E8%A8%80%E6%95%99%E7%A8%8B/">C语言教程</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">3k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>10分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="C语言教程-3_2-基本输入输出"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="理解输入输出">理解输入输出</h1>
+<h2 id="什么是交互">什么是交互</h2>
+<p>程序是为人服务的,程序计算出来的所有数据,最终都以各种不同的方式来间接或直接地提供给我们,也就是<code>输出</code>.</p>
+<p>同样,程序在运行时,我们往往也需要为其提供一些必要的数据,作为<code>输入</code>.</p>
+<p>程序根据我们输入的信息来进行处理,并将结果显示出来.</p>
+<p>最基本的输入输出操作,就是在控制台屏幕使用键盘进行交互,我们将需要输入的数据使用<code>键盘</code>来输入,程序将需要输出的数据显示在<code>屏幕</code>上.这种输入输出叫做<code>标准输入输出</code>.</p>
+<p>在<code>标准输入输出</code>中,往往使用<code>电脑显示器</code>来作为标准输出的目标,使用<code>键盘</code>来作为标准输入的来源.</p>
+<p>本章我们要讲的就是<code>标准输入输出</code>,也就是<code>Standard input/output</code>.即简单地使用键盘输入,从屏幕上看到输出信息.</p>
+<h2 id="什么是流">什么是流</h2>
+<p>许多资料都会引入<code>流</code>这个概念,输入输出也是一种流.</p>
+<p><code>流(Stream)</code>是一个抽象的概念,表示数据从一个地方流向另一个地方，或者数据从一个源生成，并最终被传递到目的地。流可以是字节流（以字节为单位处理数据）或字符流（以字符为单位处理数据).</p>
+<p>我们之前存储的数据全部是固定存储在某个地方,我们直接通过地址等方式进行引用即可找到,但是流数据不同.</p>
+<p>可以将存储的数据类比为水池中的水,流数据类比为水流.存储的数据是<code>相对固定的</code>,我们可以反复进行存取,例如电脑中存储的一张照片,一段视频;而流数据往往代表的是某个数据源<code>即时生成的</code>数据,直接依次传输到目的地,例如键盘读取的一系列敲击操作.</p>
+<p>标准输入输出就是这样的一类流.</p>
+<p>在进行<code>标准输入</code>时,也即从键盘进行读取,键盘就是一个<code>标准输入流设备</code>,从键盘读入的数据不需要进行<code>缓冲</code>,直接逐个进行传输即可,就像<code>水流</code>一样.</p>
+<p>同理,在进行<code>标准输出</code>是,也即向屏幕显示,也是将其视为数据流来&quot;流&quot;向屏幕(实际上是终端),并逐个打印到屏幕上.</p>
+<p>或者,读者可能知道<code>&quot;流媒体&quot;</code>这个概念.与键盘这样的<code>流设备</code>对应的,还有<code>块设备</code>,例如硬盘,它们需要一个成块的空间来进行<code>缓冲</code>,数据的读取是成块成块的.</p>
+<p>关于<code>流</code>的简单讲解就这么多,我们只需要知道,本章讲解的就是对标准输入输出流进行操作.</p>
+<h1 id="c语言对标准输入输出的支持">C语言对标准输入输出的支持</h1>
+<h2 id="stdio-h">stdio.h</h2>
+<p>我们前面看到很多程序的开头都有<code>#include &lt;stdio.h&gt;</code>这行指令,但是并没有深究其作用,实际上,它就是为我们的程序提供了标准输入输出的支持.</p>
+<p><code>#include预处理指令</code>用于引入头文件,这里引入的就是C标准库的<code>stdio.h</code>头文件,这个头文件中定义,声明了有关输入输出的各种内容.想必各位可能已经意识到,<code>stdio</code>,即<code>standard in/out</code>的缩写.</p>
+<p>当然,C可以支持的输出输出不仅仅有标准IO(即标准输入输出,以下均简写为标准IO),还有文件IO,网络IO,内存IO等等,它们往往更加复杂,需要更多的处理,但是殊途同归,它们都是数据操作,并且往往都是视为流去处理.</p>
+<p>在stdio.h中有许多函数声明,和一些常用的宏,下面进行简单列举:</p>
+<h2 id="输入输出函数">输入输出函数</h2>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>scanf()函数</td>
+<td>用于格式化输入</td>
+</tr>
+<tr>
+<td>printf()函数</td>
+<td>用于格式化输出</td>
+</tr>
+<tr>
+<td>puts()函数</td>
+<td>用于输出字符串,并自动加上换行符</td>
+</tr>
+<tr>
+<td>gets()函数</td>
+<td>输入一个字符串,同时会接受除了<code>'\n'</code>的其他空白字符.(由于有严重的安全缺陷已弃用)</td>
+</tr>
+<tr>
+<td>putchar()函数</td>
+<td>输出单个字符</td>
+</tr>
+<tr>
+<td>getchar()函数</td>
+<td>输入单个字符</td>
+</tr>
+</tbody>
+</table>
+<h2 id="三个流">三个流</h2>
+<table>
+<thead>
+<tr>
+<th>预定义</th>
+<th>关联</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>#define stdin  /* implementation-defined */</td>
+<td>标准输入流</td>
+</tr>
+<tr>
+<td>#define stdout /* implementation-defined */</td>
+<td>标准输出流</td>
+</tr>
+<tr>
+<td>#define stderr /* implementation-defined */</td>
+<td>标准错误流</td>
+</tr>
+</tbody>
+</table>
+<p>这些宏展开成 <a target="_blank" rel="noopener" href="http://zh.cppreference.com/w/c/io">FILE</a>* 类型表达式(即它们是文件指针)</p>
+<h1 id="常用函数讲解">常用函数讲解</h1>
+<h2 id="c风格字符串">C风格字符串</h2>
+<p>这里简单讲解一下字符串:</p>
+<p>C语言中,字符串是由一对<code>&quot;&quot;</code>和其包括起来的任意数量的字符组成.</p>
+<p>例如,我们想要表示<code>Hello world!</code>这行字符串,就是这么写:</p>
+<p><code>&quot;Hello world!&quot;</code></p>
+<p>任何可以放到char变量中的字符,都可以出现在字符串中.</p>
+<h2 id="printf-函数">printf()函数</h2>
+<h3 id="基本用法">基本用法</h3>
+<p>函数原型如下:</p>
+<p><code>int printf( const char *restrict format, ... );</code></p>
+<p>printf函数名实际就是print formatted的缩写,意即打印格式化的字符串.</p>
+<p>可以看到printf函数的第一个参数是一个字符串,后面可以继续接任意个数的其他参数(函数参数的内容将在后面讲解函数时详细展开).</p>
+<p>函数的返回值为最终打印的字符个数.</p>
+<p>printf()函数用于根据我们的格式要求生成一个最终的字符串,来打印到我们的终端(输出),这个字符串可以由多个字符串,多个整数,多个字符,多个浮点数等等拼接而成.</p>
+<p>参数的第一个字符串就是用于描述这些数据如何进行拼装的,也即所谓的格式化字符串,用于描述输出格式.</p>
+<p>我们说的各个数据就是后面可以追加的若干任意数量的参数,它们可以是任意数据类型的值.</p>
+<p>printf函数的最基本用法就是输出一个字符串常量:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="comment">// 此代码中格式化字符串中没有任何格式字符,仅仅是输出了一个普通的字符串</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;Hello World!&quot;</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>但是printf函数的强大是体现在这个格式化字符串的,这个字符串中可以加入一些指定好的<code>格式指示符</code>,来进行额外的格式化操作,举一个简单的例子:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">     <span class="type">int</span> i = <span class="number">123</span>;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;hello%5d!&quot;</span>,i);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出结果为:</p>
+<img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20231018151927825.png" alt="image-20231018151927825" style="zoom: 50%;" />
+<p>可以看到123前面有2个空格,<code>&quot;  123&quot;</code>一共占用5个字符的宽度,即格式化字符串中的%5d用于将后面的第一个整型参数i输出,并保证至少占用5位的宽度,并插入到其他的<code>&quot;Hello&quot;</code>和<code>&quot;!&quot;</code>中间,最终生成<code>&quot;Hello  123!&quot;</code>这个字符串打印到终端.</p>
+<p>这里<code>%5d</code>就是一种<code>格式指示符</code>,与此类似的<code>格式指示符</code>还有很多,我们列举一些常用的.</p>
+<h3 id="格式指示符">格式指示符</h3>
+<p>这里引用了《C Primer Plus (第6版)》的内容:</p>
+<p><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20231018154428429.png" alt="image-20231018154428429"></p>
+<p><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20231018154451517.png" alt="image-20231018154451517"></p>
+<p><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20231018154512241.png" alt="image-20231018154512241"></p>
+<p>读者请自行理解试验,需要用到哪种控制符可以去查找表格学习用法.</p>
+<h3 id="注意">注意</h3>
+<p>1.对于浮点数,为了安全起见,printf函数将所有float类型的参数都提升为double类型(对未使用显式类型原型的所有C函数都有效).</p>
+<p>2.如果格式化字符串较长,可以在一行结尾加上<code>\</code>来转义换行符(下一行必须从最开始开始,否则缩进就会变成字符串的一部分),或者使用两个字符串进行拼接:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">     <span class="type">int</span> sum = <span class="number">123</span>;</span><br><span class="line">     <span class="built_in">printf</span>(<span class="string">&quot;Hello \</span></span><br><span class="line"><span class="string">World!\n&quot;</span>);</span><br><span class="line">     <span class="built_in">printf</span>(<span class="string">&quot;Hello &quot;</span></span><br><span class="line">            <span class="string">&quot;World!&quot;</span>);</span><br><span class="line">     <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20231018155655371.png" alt="image-20231018155655371" style="zoom:50%;" />
+<p>3.还有一些表格中可能没有的格式指示符,例如<code>%s</code>,它用于输出一个字符串:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;Hello world!&quot;</span>);</span><br><span class="line"><span class="comment">// 等价于</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%s&quot;</span>,<span class="string">&quot;Hello world!&quot;</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="scanf-函数">scanf()函数</h2>
+<h3 id="基本用法">基本用法</h3>
+<p>函数原型为:</p>
+<p><code>int scanf( const char *restrict format, ... );</code></p>
+<p>scanf()函数的功能和printf相反,它用于输入数据(scan意即&quot;扫描&quot;)</p>
+<p>同时,它也接受一个格式字符串和若干准备输入的参数,与printf不同的是,scanf后面的若干参数必须是合法的<code>指针</code>.</p>
+<p>函数的返回值为成功读取的参数个数.</p>
+<p>读者此时不必疑惑<code>指针</code>这个概念,你需要知道相比于printf,scanf后面的参数之前需要加上一个<code>&amp;字符</code>(实际上是取地址运算符),用来获取期待输入值的这个变量的地址(指针).</p>
+<p>实际上很简单,我们想要对一个变量进行输入,就需要知道他的存储位置.</p>
+<p>同时,scanf的格式化字符串不允许使用像printf那样多样的<code>格式指示符</code>,我们仅仅需要使用例如:</p>
+<p>%d来输入int类型的整数;</p>
+<p>%s来输入字符串;</p>
+<p>%f来输入float类型的浮点数;</p>
+<p>%lf来输入double类型的浮点数;</p>
+<p>%ld来输入long类型的整数…</p>
+<p>等等…</p>
+<h3 id="格式指示符">格式指示符</h3>
+<p>C标准中的描述:</p>
+<p><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20231018160736236.png" alt="image-20231018160736236"></p>
+<h3 id="举例">举例</h3>
+<p>例如我们需要输入两个int类型的值,赋值给i,j,应该这样写:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">     <span class="type">int</span> i,j;</span><br><span class="line">     <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>,&amp;i,&amp;j);</span><br><span class="line">   	 <span class="built_in">printf</span>(<span class="string">&quot;%d %d&quot;</span>, i, j);</span><br><span class="line">     <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20231018160936632.png" alt="image-20231018160936632" style="zoom: 50%;" />
+<p>注意到,scanf中的两个<code>%d</code>之间没有空格,我们输入时和printf中却需要空格,这是一个不同,事实上,scanf在输入整数/浮点数时,会不断读取,直到遇到不合法的字符为止—例如空格等空白符,逗号等字符.</p>
+<p>该<code>%d</code>结束后,再继续读取下一个<code>%d</code>.</p>
+<p>另一方面,scanf也允许使用一般字符,scanf会在读取时匹配这些字符(如果格式化字符串中有的话,则必须匹配,否则之后的变量会读取失败),然后简单地丢弃这个字符:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">     <span class="type">int</span> i=<span class="number">0</span>, j=<span class="number">0</span>, k=<span class="number">0</span>;</span><br><span class="line">     <span class="built_in">scanf</span>(<span class="string">&quot;%d,%d%d&quot;</span>, &amp;i, &amp;j, &amp;k);</span><br><span class="line">     <span class="built_in">printf</span>(<span class="string">&quot;%d %d %d&quot;</span>, i, j, k);</span><br><span class="line">     <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>正确的输入:</p>
+<img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20231018161749017.png" alt="image-20231018161749017" style="zoom:50%;" />
+<p>错误的输入:</p>
+<img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20231018161814337.png" alt="image-20231018161814337" style="zoom:50%;" />
+<p>可以看到后两个变量并没有被正确地赋值,或者我们也可以输出scanf的返回值(成功读取的变量个数)来观察:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">     <span class="type">int</span> i=<span class="number">0</span>, j=<span class="number">0</span>, k=<span class="number">0</span>,num=<span class="number">0</span>;</span><br><span class="line">     num = <span class="built_in">scanf</span>(<span class="string">&quot;%d,%d%d&quot;</span>, &amp;i, &amp;j, &amp;k);</span><br><span class="line">     <span class="built_in">printf</span>(<span class="string">&quot;%d %d %d\n&quot;</span>, i, j, k);</span><br><span class="line">     <span class="built_in">printf</span>(<span class="string">&quot;num = %d&quot;</span>,num);</span><br><span class="line">     <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20231018161942008.png" alt="image-20231018161942008" style="zoom:50%;" />
+<h3 id="注意">注意</h3>
+<p>1.不要在scanf中使用<code>'\n',' '</code>等空白字符来结尾,例如:</p>
+<p><code>scanf(&quot;%d%d%d &quot;, &amp;i, &amp;j, &amp;k);</code></p>
+<p><code>scanf(&quot;%d%d%d\n&quot;, &amp;i, &amp;j, &amp;k);</code></p>
+<p>因为不同于printf,scanf函数的空白符代表忽略(匹配并丢弃)任意数量的空白字符,如果放在结尾,意味着这个scanf无法使用换行来结束输入!</p>
+<p>2.(个人的建议)scanf中尽量只使用格式指示符,不要使用其他普通字符,做到简化输入.</p>
+<h2 id="getchar-函数">getchar()函数</h2>
+<p>函数原型为:</p>
+<p><code>int getchar( void );</code></p>
+<p>该函数非常简单,用于读取一个字符:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> c = getchar();</span><br></pre></td></tr></table></figure>
+<p>上面的代码和下面的代码等价:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> c</span><br><span class="line"><span class="title function_">scanf</span><span class="params">(<span class="string">&quot;%c&quot;</span>,&amp;c)</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="putchar-函数">putchar()函数</h2>
+<p>函数原型为:</p>
+<p><code>int putchar( int ch );</code></p>
+<p>很简单,<code>putchar('a');</code>就可以将一个字符<code>a</code>输出.</p>
+<h2 id="其他-待扩充">其他(待扩充)</h2>
+<p>puts()和gets()将在讲解字符串时展开.</p>
+<br>
+<p>本章讲解了最常用的几个输入输出函数的使用,到现在我们多少掌握了printf和scanf的写法,需要在练习中不断熟悉.由于比较简单,可能例子不多.</p>
+<p>自己多查资料.</p>
+<p align=right>---WAHAHA</p>
+<br>
+<br>
+<p>上一篇:<a href="2023949602bbfb8e/">c语言教程-3_1-数据类型</a></p>
+<p>下一篇:<a href="20237bb78790d38b/">c语言教程-4-表达式和语句</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://gngtwhh.github.io">WAHAHA</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://gngtwhh.github.io/2023427f4611cc41/">https://gngtwhh.github.io/2023427f4611cc41/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://gngtwhh.github.io" target="_blank">WAHAHA's blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/C/">C</a></div><div class="post_share"><div class="social-share" data-image="/img/avatar.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/reward/wechat_reward.jpg" target="_blank"><img class="post-qr-code-img" src="/img/reward/wechat_reward.jpg" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="/img/reward/alipay_reward.png" target="_blank"><img class="post-qr-code-img" src="/img/reward/alipay_reward.png" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023f369fd533e40/" title="WriteUp-XSCTF2023初赛"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">WriteUp-XSCTF2023初赛</div></div></a></div><div class="next-post pull-right"><a href="/2023b7fda0df05ff/" title="C语言教程-10-数组"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">C语言教程-10-数组</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/202379dbc5fa8424/" title="C语言贪吃蛇"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-09-08</div><div class="title">C语言贪吃蛇</div></div></a></div><div><a href="/2023b7fda0df05ff/" title="C语言教程-10-数组"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-20</div><div class="title">C语言教程-10-数组</div></div></a></div><div><a href="/202382eafac4349b/" title="C语言教程-12_1-初识函数"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-31</div><div class="title">C语言教程-12_1-初识函数</div></div></a></div><div><a href="/2023b45ef26d6ec3/" title="C语言教程-11-字符串"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-06</div><div class="title">C语言教程-11-字符串</div></div></a></div><div><a href="/2023def693eb5bf8/" title="C语言教程-12_2-深入分析函数和面向过程初识"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-11-01</div><div class="title">C语言教程-12_2-深入分析函数和面向过程初识</div></div></a></div><div><a href="/202339a6f8c668c3/" title="C语言教程-12_3-函数的其他用法和特性"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-11-01</div><div class="title">C语言教程-12_3-函数的其他用法和特性</div></div></a></div></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">WAHAHA</div><div class="author-info__description">一个爱折腾的蒟蒻</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">126</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">74</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">18</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/gngtwhh" target="_blank" title="Github"><i class="fab fa-brands fa-github"></i></a><a class="social-icon" href="mailto:2784126850@qq.com" target="_blank" title="Email"><i class="fas fa-solid fa-envelope"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%90%86%E8%A7%A3%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA"><span class="toc-number">1.</span> <span class="toc-text">理解输入输出</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E4%BA%A4%E4%BA%92"><span class="toc-number">1.1.</span> <span class="toc-text">什么是交互</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E6%B5%81"><span class="toc-number">1.2.</span> <span class="toc-text">什么是流</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#c%E8%AF%AD%E8%A8%80%E5%AF%B9%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E7%9A%84%E6%94%AF%E6%8C%81"><span class="toc-number">2.</span> <span class="toc-text">C语言对标准输入输出的支持</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#stdio-h"><span class="toc-number">2.1.</span> <span class="toc-text">stdio.h</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E5%87%BD%E6%95%B0"><span class="toc-number">2.2.</span> <span class="toc-text">输入输出函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E4%B8%AA%E6%B5%81"><span class="toc-number">2.3.</span> <span class="toc-text">三个流</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%E8%AE%B2%E8%A7%A3"><span class="toc-number">3.</span> <span class="toc-text">常用函数讲解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#c%E9%A3%8E%E6%A0%BC%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">3.1.</span> <span class="toc-text">C风格字符串</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#printf-%E5%87%BD%E6%95%B0"><span class="toc-number">3.2.</span> <span class="toc-text">printf()函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95"><span class="toc-number">3.2.1.</span> <span class="toc-text">基本用法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%BC%E5%BC%8F%E6%8C%87%E7%A4%BA%E7%AC%A6"><span class="toc-number">3.2.2.</span> <span class="toc-text">格式指示符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F"><span class="toc-number">3.2.3.</span> <span class="toc-text">注意</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#scanf-%E5%87%BD%E6%95%B0"><span class="toc-number">3.3.</span> <span class="toc-text">scanf()函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95"><span class="toc-number">3.3.1.</span> <span class="toc-text">基本用法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%BC%E5%BC%8F%E6%8C%87%E7%A4%BA%E7%AC%A6"><span class="toc-number">3.3.2.</span> <span class="toc-text">格式指示符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BE%E4%BE%8B"><span class="toc-number">3.3.3.</span> <span class="toc-text">举例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F"><span class="toc-number">3.3.4.</span> <span class="toc-text">注意</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#getchar-%E5%87%BD%E6%95%B0"><span class="toc-number">3.4.</span> <span class="toc-text">getchar()函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#putchar-%E5%87%BD%E6%95%B0"><span class="toc-number">3.5.</span> <span class="toc-text">putchar()函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96-%E5%BE%85%E6%89%A9%E5%85%85"><span class="toc-number">3.6.</span> <span class="toc-text">其他(待扩充)</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/20241059784280b9/" title="VSCode基本配置教程">VSCode基本配置教程</a><time datetime="2024-08-21T01:54:14.717Z" title="发表于 2024-08-21 09:54:14">2024-08-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/202476a8c85896e3/" title="C语言教程-1_1-计算机基础概述">C语言教程-1_1-计算机基础概述</a><time datetime="2024-08-15T02:29:46.690Z" title="发表于 2024-08-15 10:29:46">2024-08-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024dfb5f5f4194f/" title="C语言教程-17-预处理器">C语言教程-17-预处理器</a><time datetime="2024-08-08T16:04:39.615Z" title="发表于 2024-08-09 00:04:39">2024-08-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024b336a5921d4e/" title="JWT鉴权">JWT鉴权</a><time datetime="2024-07-21T05:16:46.750Z" title="发表于 2024-07-21 13:16:46">2024-07-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/20245f401b0c1d3c/" title="分支界限法">分支界限法</a><time datetime="2024-06-23T08:26:37.611Z" title="发表于 2024-06-23 16:26:37">2024-06-23</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2024 By WAHAHA</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">欢迎大佬光临鄙人的<a href="https://gngtwhh.github.io/">博客</a>orz!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅/深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><div class="js-pjax"><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://wahahablog.netlify.app/.netlify/functions/twikoo',
+      region: '',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://wahahablog.netlify.app/.netlify/functions/twikoo',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      countELement.textContent = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-show-text.min.js" data-mobile="false" data-text="C语言,是世界上,最美的,语言" data-fontsize="15px" data-random="false" async="async"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

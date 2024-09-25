@@ -1,0 +1,309 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>C语言教程-13_2-指针类型与指针运算 | WAHAHA's blog</title><meta name="author" content="WAHAHA"><meta name="copyright" content="WAHAHA"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="指针值的运算问题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C语言教程-13_2-指针类型与指针运算">
+<meta property="og:url" content="https://gngtwhh.github.io/2023270f21643ff7/index.html">
+<meta property="og:site_name" content="WAHAHA&#39;s blog">
+<meta property="og:description" content="指针值的运算问题">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gngtwhh.github.io/img/avatar.jpg">
+<meta property="article:published_time" content="2023-11-26T06:00:49.353Z">
+<meta property="article:modified_time" content="2024-09-25T15:03:54.409Z">
+<meta property="article:author" content="WAHAHA">
+<meta property="article:tag" content="C">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gngtwhh.github.io/img/avatar.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://gngtwhh.github.io/2023270f21643ff7/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'C语言教程-13_2-指针类型与指针运算',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-09-25 23:03:54'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="referrer" content="no-referrer-when-downgrade" /><meta name="generator" content="Hexo 6.3.0"><link href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" rel="stylesheet" /></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load',() => { preloader.endLoading() })
+
+  if (false) {
+    document.addEventListener('pjax:send', () => { preloader.initLoading() })
+    document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+  }
+})()</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">126</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">74</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">18</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 文章</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tools/"><i class="fa-fw fas fa-solid fa-wrench"></i><span> 工具</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background: transparent"><nav id="nav"><span id="blog-info"><a href="/" title="WAHAHA's blog"><img class="site-icon" src="/img/logo.png"/></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 文章</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tools/"><i class="fa-fw fas fa-solid fa-wrench"></i><span> 工具</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">C语言教程-13_2-指针类型与指针运算</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-11-26T06:00:49.353Z" title="发表于 2023-11-26 14:00:49">2023-11-26</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-09-25T15:03:54.409Z" title="更新于 2024-09-25 23:03:54">2024-09-25</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/C%E8%AF%AD%E8%A8%80%E6%95%99%E7%A8%8B/">C语言教程</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>7分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="C语言教程-13_2-指针类型与指针运算"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>前面<a href="202310666f346238">13_1</a>章节中提到一个问题:<code>指针指向的数据类型的大小</code>.本章节围绕这个问题展开.</p>
+<p>前置知识:</p>
+<ol>
+<li>指针变量的声明,赋值,与解引用操作</li>
+<li>指向不同类型的指针如何声明</li>
+</ol>
+<h1 id="指针指向类型的大小">指针指向类型的大小</h1>
+<p>前面提到,<code>指针的类型</code>即为<code>其指向的类型的指针</code>,声明语法如下:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[类型] *[指针变量名];</span><br></pre></td></tr></table></figure>
+<p>C语言中任何值都有其类型,例如<code>int</code>,<code>float</code>,<code>char</code>等等.</p>
+<p>同理,每一个指针变量/指针值也都有固定的类型,例如<code>int *</code>,<code>char *</code>,<code>float *</code>等,在这些基本类型的后面加一个<code>*</code>,整体即为一个特定的<code>指针类型</code>.</p>
+<p>一个<code>指针变量</code>只能指向与其<code>指针类型</code>一致的变量.例如<code>int *</code>的指针变量只能指向int类型的变量,而不能指向char类型的变量.原因就是,对一个指针进行寻址(解引用),必须要确定数据大小,从指针值开始,取出固定的几个字节.</p>
+<br>
+<p>以前面<code>int i=2;</code>为例:</p>
+<img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20231121004333759.png" alt="image-20231121004333759" style="zoom:50%;" />
+<p>假设i在内存中的地址为<code>0xFFFFFECC</code>,如图.我们知道int变量需要4个字节才能够存下,而实际上计算机内存的每个字节都有自己的地址,那么我们讲的&quot;i的地址&quot;,实际上是使用其最小字节的地址作为&quot;代表&quot;,也就是<code>0xFFFFFECC</code>,当我们需要访问i的时候,从这个字节开始,将连续的<code>4</code>个字节一起拿出来,作为一个整体来处理,也就是<code>02 00 00 00</code>.</p>
+<p>以上操作的前提是,我们已知了int占用4字节,即<code>sizeof(int)==4</code>.使用指针进行访问也是如此,光知道了i的起始地址还不够,我们需要知道从这个指针值起始需要取出多少字节的数据.<code>指针类型</code>就提供了这样的信息.例如我们有<code>int *p;</code>想要获取一个指针指向类型的大小,可以这样:</p>
+<p><code>int size = sizeof(*p);</code></p>
+<p>由于sizeof后的表达式<code>不求值</code>,所以尽管没有对p初始化,我们也是可以写<code>sizeof(*p)</code>的,想想,p为<code>int*</code>,那么对p解引用自然就是<code>int</code>了,<code>sizeof int</code>就算出来<code>4</code>,即使用指针p进行解引用,要将4个字节作为一个整体去处理.同理,<code>char *p;</code>对p解引用时只处理1个字节,因为<code>sizeof(*p)</code>即为<code>sizeof(char)</code>,结果为<code>1</code>.</p>
+<p>也就是说,我们可以确定一个指针所指向的类型占用的字节数,根据这个值在<code>解引用</code>时取出特定长度的一段内存数据.</p>
+<h1 id="指针运算">指针运算</h1>
+<p>指针本质上就是一个有类型的内存地址,其实就是一个特定长度的无符号整数,所谓的<code>指针类型</code>是这个整数的特殊解释方式.</p>
+<p>作为一个数值,指针也支持一些运算,但是由于其并不是一般的整数,他的运算较为特殊.</p>
+<p>指针仅支持<code>整数加减法</code>,而且两个指针间只能做<code>减法</code>,因为其他的运算没有任何意义.另外,指针运算往往离不开数组.</p>
+<h2 id="指针加法">指针加法</h2>
+<p>一个指针(地址)加1,即将地址加1,代表着这个指针指向下一个内存单元,即紧挨着原来那个字节再往后一个位置的字节.同理,一个指针加n,代表着这个指针指向原来的地址往后n个字节的地址.</p>
+<p>例如有一个指向char类型的指针p,初始化为<code>0x1</code>:</p>
+<img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20231211000827380.png" alt="image-20231211000827380" style="zoom:50%;" />
+<p>我们对p加上某个整数n,结果就是指向往后面数n个字节的那个内存地址.</p>
+<br>
+<p>现在问题来了,如果是<code>int *p=(int*)0x1;</code>呢?</p>
+<img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20231211002229945.png" alt="image-20231211002229945" style="zoom:50%;" />
+<p>显然,<code>p+1</code>不再是指向紧挨着p之后的那个字节,而是向后<code>偏移</code>了整整4个字节,到达了<code>0x5</code>的位置.</p>
+<br>
+<p>这个问题其实很简单,我们在对指针进行解引用的时候,需要计算对应类型(即这个指针指向的类型)的大小,然后一次性取出特定长度的数据.对应地,我们将指针加上某个数,就是想要指向后面对应的数据,彼此之间应该是不能冲突的.</p>
+<p>因此,我们需要做一个乘法,即:</p>
+<p><code>(p+1)</code>等价于<code>(p)+sizeof(*p)*i</code> 其中,前者是C语言表达式,而后者是普通的数学算式!</p>
+<p>对于<code>int *p</code>,其指向的类型<code>int</code>占用4个字节(只考虑32位以上的机器),那么在计算<code>p+1</code>的时候,要先将1乘以4,然后再和p的值进行相加,得到的就是0x1+1*4,即0x5.同理,<code>p+2</code>得到的就是0x1+2*4,即0x9.</p>
+<p>而对于char *p,其指向的类型<code>char</code>只占用1个字节而已,所以加1仅仅是向后偏移1而已.</p>
+<p>注:好好体会<code>偏移</code>这个词,后面会经常遇到.</p>
+<br>
+<p>另一方面,虽然标题写的是<code>指针加法</code>,但是两个指针进行相加是没有任何意义的…</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a,b;</span><br><span class="line"><span class="type">int</span> *p1=&amp;a,*p2=&amp;b;</span><br><span class="line"><span class="comment">//int *p3=p1+p2; // 很容易理解,p3没有任何意义!因此实际上这行代码会报错</span></span><br></pre></td></tr></table></figure>
+<h2 id="指针减法">指针减法</h2>
+<p>一个指针减去一个常数和指针加一个常数的意义是一样的,只不过这回是向前(更低的地址)偏移了而已,这里就不举例了.</p>
+<p>另一方面,与两个指针相加不同,两个指针相减是合法的,而且作用很大!</p>
+<img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20231211005128076.png" alt="image-20231211005128076" style="zoom:50%;" />
+<p>这里,p2指向p1的下一个位置(相差1个int的长度),那么<code>(p2-p1)</code>的结果是这两个指针之间间隔的元素个数.</p>
+<p>也许加一个数组进来会更加直观:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> a[<span class="number">10</span>];</span><br><span class="line">    <span class="type">int</span> *p1 = &amp;a[<span class="number">0</span>], *p2 = &amp;a[<span class="number">3</span>];</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%p %p\n&quot;</span>, p2, p1);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%lld\n&quot;</span>, p2 - p1); <span class="comment">// 3</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出结果是3,代表着二者之间相差3个int变量,从数组下标也能看出来.</p>
+<p>也就是说,指针与指针的相减操作,表示两个指针指向的内存位置之间相隔多少个元素(而不是字节数),因此指针相减往往与数组结合使用.</p>
+<p>另外,必须提出的一点是,这两个指针必须指向同一个数组的某两个元素,否则<code>行为未定义</code>.</p>
+<h2 id="指针自增">指针自增</h2>
+<p>C语言中,<code>++</code>和<code>--</code>运算符是可以用于指针变量的,和普通变量一样,对指针自增或自减都是让这个指针变量的值&quot;加一&quot;或&quot;减一&quot;.</p>
+<p>需要注意的区别是,其效果和<code>指针加法</code>,<code>指针减法</code>相同,都是向前向后<code>偏移</code>一个元素大小的长度,而不是1个字节的大小.</p>
+<p>对指针变量自增/自减会修改指针变量的值,也就是修改这个指针的指向.这种写法有着十分重要的作用,例如达到只使用一个指针进行遍历的效果.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a[<span class="number">10</span>]=&#123;<span class="number">0</span>&#125;;</span><br><span class="line"><span class="type">int</span> *p = &amp;a[<span class="number">0</span>];</span><br><span class="line"><span class="comment">// 以下3种写法等价</span></span><br><span class="line">p++;</span><br><span class="line">p = p + <span class="number">1</span>;</span><br><span class="line">++p;</span><br></pre></td></tr></table></figure>
+<p>同样需要注意的是,<code>前缀++</code>和<code>后缀++</code>的区别依然不变,如果不清楚的话请回看&quot;运算符&quot;这一部分.我们举一个例子:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> a[<span class="number">10</span>] = &#123;<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>&#125;;</span><br><span class="line">    <span class="type">int</span> *p, *q; <span class="comment">// 2个指针变量</span></span><br><span class="line">    p = q = &amp;a[<span class="number">0</span>]; <span class="comment">// 都指向数组的第一个元素</span></span><br><span class="line">    <span class="type">int</span> *i = p++; <span class="comment">// 后缀++，i指向a[0],即p的旧值，p指向a[1]</span></span><br><span class="line">    <span class="type">int</span> *j = ++q; <span class="comment">// 前缀++，j指向a[1],即q的新值，q指向a[1]</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d %d %d %d\n&quot;</span>, *i, *j, *p, *q); <span class="comment">// 0 1 1 1</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>唯一的区别是对指针的自增遵循指针运算,而不是简单地将地址值+1.</p>
+<p>指针自增实际上还有许多细节,易错点和应用技巧,他们和数组有着紧密的关联,后面细说.</p>
+<br>
+<p>关于指针运算,详见<a target="_blank" rel="noopener" href="https://zh.cppreference.com/w/c/language/operator_arithmetic">算术运算符</a></p>
+<p>本部分讲解了指针类型与指针运算,读者应该意识到(虽然可能为时尚早),<code>指针的行为与其类型息息相关</code>.</p>
+<p>接下来的指针话题会涉及到数组,而且比较复杂.</p>
+<p align=right>---WAHAHA</p>
+<br>
+<br>
+<p>上一篇:<a href="202310666f346238">C语言教程-13_1-初识指针</a></p>
+<p>下一篇:<a href="20237cb717142d36">C语言教程-13_3-初探指针和数组的关系</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://gngtwhh.github.io">WAHAHA</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://gngtwhh.github.io/2023270f21643ff7/">https://gngtwhh.github.io/2023270f21643ff7/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://gngtwhh.github.io" target="_blank">WAHAHA's blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/C/">C</a></div><div class="post_share"><div class="social-share" data-image="/img/avatar.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/reward/wechat_reward.jpg" target="_blank"><img class="post-qr-code-img" src="/img/reward/wechat_reward.jpg" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="/img/reward/alipay_reward.png" target="_blank"><img class="post-qr-code-img" src="/img/reward/alipay_reward.png" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023354e7a2c8c35/" title="PE文件分析"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">PE文件分析</div></div></a></div><div class="next-post pull-right"><a href="/202393a6fbe4e453/" title="Dijkstra算法"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Dijkstra算法</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/202379dbc5fa8424/" title="C语言贪吃蛇"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-09-08</div><div class="title">C语言贪吃蛇</div></div></a></div><div><a href="/2023b7fda0df05ff/" title="C语言教程-10-数组"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-20</div><div class="title">C语言教程-10-数组</div></div></a></div><div><a href="/202382eafac4349b/" title="C语言教程-12_1-初识函数"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-31</div><div class="title">C语言教程-12_1-初识函数</div></div></a></div><div><a href="/2023b45ef26d6ec3/" title="C语言教程-11-字符串"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-06</div><div class="title">C语言教程-11-字符串</div></div></a></div><div><a href="/2023def693eb5bf8/" title="C语言教程-12_2-深入分析函数和面向过程初识"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-11-01</div><div class="title">C语言教程-12_2-深入分析函数和面向过程初识</div></div></a></div><div><a href="/202339a6f8c668c3/" title="C语言教程-12_3-函数的其他用法和特性"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-11-01</div><div class="title">C语言教程-12_3-函数的其他用法和特性</div></div></a></div></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">WAHAHA</div><div class="author-info__description">一个爱折腾的蒟蒻</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">126</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">74</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">18</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/gngtwhh" target="_blank" title="Github"><i class="fab fa-brands fa-github"></i></a><a class="social-icon" href="mailto:2784126850@qq.com" target="_blank" title="Email"><i class="fas fa-solid fa-envelope"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8C%87%E9%92%88%E6%8C%87%E5%90%91%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%A4%A7%E5%B0%8F"><span class="toc-number">1.</span> <span class="toc-text">指针指向类型的大小</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8C%87%E9%92%88%E8%BF%90%E7%AE%97"><span class="toc-number">2.</span> <span class="toc-text">指针运算</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%87%E9%92%88%E5%8A%A0%E6%B3%95"><span class="toc-number">2.1.</span> <span class="toc-text">指针加法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%87%E9%92%88%E5%87%8F%E6%B3%95"><span class="toc-number">2.2.</span> <span class="toc-text">指针减法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%87%E9%92%88%E8%87%AA%E5%A2%9E"><span class="toc-number">2.3.</span> <span class="toc-text">指针自增</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/20241059784280b9/" title="VSCode基本配置教程">VSCode基本配置教程</a><time datetime="2024-08-21T01:54:14.717Z" title="发表于 2024-08-21 09:54:14">2024-08-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/202476a8c85896e3/" title="C语言教程-1_1-计算机基础概述">C语言教程-1_1-计算机基础概述</a><time datetime="2024-08-15T02:29:46.690Z" title="发表于 2024-08-15 10:29:46">2024-08-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024dfb5f5f4194f/" title="C语言教程-17-预处理器">C语言教程-17-预处理器</a><time datetime="2024-08-08T16:04:39.615Z" title="发表于 2024-08-09 00:04:39">2024-08-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024b336a5921d4e/" title="JWT鉴权">JWT鉴权</a><time datetime="2024-07-21T05:16:46.750Z" title="发表于 2024-07-21 13:16:46">2024-07-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/20245f401b0c1d3c/" title="分支界限法">分支界限法</a><time datetime="2024-06-23T08:26:37.611Z" title="发表于 2024-06-23 16:26:37">2024-06-23</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2024 By WAHAHA</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">欢迎大佬光临鄙人的<a href="https://gngtwhh.github.io/">博客</a>orz!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅/深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><div class="js-pjax"><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://wahahablog.netlify.app/.netlify/functions/twikoo',
+      region: '',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://wahahablog.netlify.app/.netlify/functions/twikoo',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      countELement.textContent = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-show-text.min.js" data-mobile="false" data-text="C语言,是世界上,最美的,语言" data-fontsize="15px" data-random="false" async="async"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
