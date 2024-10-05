@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>限流算法</title>
+      <link href="/202405d328682204/"/>
+      <url>/202405d328682204/</url>
+      
+        <content type="html"><![CDATA[<h1 id="漏桶算法">漏桶算法</h1><p><code>漏桶算法</code>  是最为简单的限流算法，原理类似一个容积一定的木桶，有水源向该木桶加入水，但是流入的数量不确定，任意时刻的流入速率也是随机；而木桶底部有一个固定大小的洞，以恒定的速率向外漏水；这样，桶中流出水的速率恒定，而当桶满了的时候，水会自然地溢出。</p><p>其中：桶中的水类比网络请求；流入的水代表新到达的请求，而流出的水代表被系统处理的请求。<br>可以看到：新到达的请求量以及频率是不确定的，而整个桶却能保持一定的最大容量，并且以恒定的速率处理请求（漏出水）；当桶满时，即系统满负载时，新到达的请求被自然丢弃，这样即可确保系统能够始终以恒定的速率处理请求。</p><p>实际实现中，漏桶可以使用一个恒定容量的队列实现，系统以恒定的速率从队列中取出一定数量的请求进行处理；而当队满时，新到达的请求被丢弃。</p><p>优点：</p><ul><li>（强制）保证稳定的流量控制，适用于流量稳定，没有或较少突发流量的场景</li><li>易于理解，实现简单</li></ul><p>缺点：</p><ul><li>速度相对稳定，缺乏弹性</li><li>由于保持稳定的处理速率，导致无法应对突发流量（例如秒杀活动）</li></ul><h1 id="令牌桶算法">令牌桶算法</h1><p>实际的网络应用中，常常存在着突发流量，此时 <code>漏桶算法</code> 便无法适应这种情况，<code>令牌桶算法</code> 能够在保持流量的平均传输速率时，也能允许一定的突发流量。</p><p><code>令牌桶算法</code> 中，存在一个以大小一定的 <code>令牌桶</code> ，用于存储一定数量的令牌，所有的数据都需要消耗令牌来放行；<br>而系统中有一个不断产生令牌的源，它向令牌桶中以恒定速率放入令牌。</p><p>而每一个数据包到达时，都要消耗与其大小相当数量的令牌；<br>如果桶中无令牌或令牌数量不足，则丢弃（或缓存）该数据包，否则将其放行（或处理）。</p><p>与 <code>漏桶算法</code> 不同，<code>令牌桶算法</code> 除了能够限制数据的平均传输速率外，还允许一定程度的突发传输。在突发流量的情况下爱，只要令牌桶中还存在足够的令牌，那么就允许不断传输数据，直到达到门限为止（取决于实际的配置）。</p><p>优点：</p><ul><li>保证稳定的平均传输速率，同时允许一定程度的突发流量<br>缺点：</li><li>内存消耗较大，例如对每一个用户都进行限制，就需要单独使用一个令牌桶，消耗大量资源</li><li>无法保证任一时刻速率的平滑性</li></ul><h1 id="固定窗口计数器算法">固定窗口计数器算法</h1>]]></content>
+      
+      
+      <categories>
+          
+          <category> 后端技术 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 后端 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>VSCode基本配置教程</title>
       <link href="/20241059784280b9/"/>
       <url>/20241059784280b9/</url>
@@ -3389,11 +3414,11 @@
     
     
     <entry>
-      <title>WAHAHA&#39;s C语言教程</title>
-      <link href="/C_tutorial/index.html"/>
-      <url>/C_tutorial/index.html</url>
+      <title>分类导航</title>
+      <link href="/categories/index.html"/>
+      <url>/categories/index.html</url>
       
-        <content type="html"><![CDATA[<p>Hello World!</p>]]></content>
+        <content type="html"><![CDATA[<p>hello world</p>]]></content>
       
     </entry>
     
@@ -3411,11 +3436,11 @@
     
     
     <entry>
-      <title>分类导航</title>
-      <link href="/categories/index.html"/>
-      <url>/categories/index.html</url>
+      <title>WAHAHA&#39;s C语言教程</title>
+      <link href="/C_tutorial/index.html"/>
+      <url>/C_tutorial/index.html</url>
       
-        <content type="html"><![CDATA[<p>hello world</p>]]></content>
+        <content type="html"><![CDATA[<p>Hello World!</p>]]></content>
       
     </entry>
     
