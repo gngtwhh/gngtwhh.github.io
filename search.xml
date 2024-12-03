@@ -5,10 +5,23 @@
     
     <entry>
       <title></title>
+      <link href="/2024e59726ea8626/"/>
+      <url>/2024e59726ea8626/</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title></title>
       <link href="/20247cacc9338251/"/>
       <url>/20247cacc9338251/</url>
       
-        <content type="html"><![CDATA[<p><img src="https://raw.githubusercontent.com/gngtwhh/PicGoPicbed/master/img/20241027004511.png" alt="image.png"></p>]]></content>
+        <content type="html"><![CDATA[]]></content>
       
       
       
@@ -1534,7 +1547,7 @@
       <link href="/20248f216d97b28c/"/>
       <url>/20248f216d97b28c/</url>
       
-        <content type="html"><![CDATA[<h1 id="基本概念">基本概念</h1><h2 id="树的定义">树的定义</h2><p>在图论中,树是一种无向图,其中任意两个顶点间存在一条唯一路径.</p><p>换句话说,没有环的连通图就是树.并且树有层次关系,其有且仅有一个根节点.</p><p>如果一个无向简单图G满足如下关系,那么G是一棵树:</p><ul><li>G是没有环的连通图</li><li>G内添加一条边则会形成一个环</li><li>G删除一条边则不再联通</li><li>G中任意2个顶点间存在唯一路径</li></ul><p>与线性表不同,树是一种非线性的结构,并且各顶点(数据项)间有一定的层次关系,一个顶点有着0个或若干个子顶点.</p><h3 id="各结点的关系">各结点的关系</h3><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20240108191132338.png" alt="image-20240108191132338" style="zoom:33%;" /><h2 id="森林">森林</h2><p>森林是m(m&gt;=0)棵互不相交的树的集合.</p><p>每棵树去掉其根节点后,剩下的部分即若干个子树,构成一个森林.</p><h2 id="常见属性">常见属性</h2><ol><li><p>结点的度</p><p>一个节点含有的子树的个数称为该节点的度</p></li><li><p>树的度</p><p>一棵树中,最大的结点的度称为树的度,例如二叉树的度为2</p></li><li><p>树的高度(定义不统一)</p><p>高度从下向上数,即该节点到叶子结点的最长路径(边数)+1,叶子结点的高度为<code>1</code></p></li><li><p>树的深度(定义不统一)</p><p>深度从上向下数,即从树根到该节点的路径(边数)+1,树根的深度为<code>1</code></p></li></ol><h1 id="常用公式">常用公式</h1><h2 id="一般的树">一般的树</h2><ol><li><code>总结点数 = 总度数 + 1</code></li></ol><h2 id="二叉树">二叉树</h2><ol><li><p>第i层有<code>2^(k-1)</code>个结点(k&gt;=1)</p></li><li><p>深度为m的二叉树最多有<code>2^m-1</code>个结点,最少有<code>m</code>个节点</p><p>最多时为<code>满二叉树</code>,最少时退化为<code>单链表</code></p></li><li><p>任意一颗二叉树,叶子结点数为<code>N0</code>,度为2结点数为<code>N2</code>,则<code>N0 = N2 + 1</code></p><p>证明: 度为1的结点数为<code>N1</code>,总结点数为<code>N</code>,则<code>N=N0+N1+N2</code>,又<code>总度数=N1*1+N2*2</code>,且<code>N=总度数+1</code>,联立即可得出.</p></li><li><p>具有<code>n</code>个结点的<code>完全二叉树</code>,其深度为<code>[log2(n)]+1</code>,其中<code>[log2(n)]</code>为向下取整</p></li><li><p>具有<code>n</code>个结点的<code>满二叉树</code>,其深度为<code>log2(n+1)</code>或<code>[log2(n)]+1</code></p></li><li><p>对完全二叉树从上到下,从左到右从1依次编号,第<code>i</code>个结点的父亲是<code>[i/2]</code>,左孩子是<code>2*i</code>,右孩子是<code>2*i+1</code></p></li></ol>]]></content>
+        <content type="html"><![CDATA[<h1 id="基本概念">基本概念</h1><h2 id="树的定义">树的定义</h2><p>在图论中,树是一种无向图,其中任意两个顶点间存在一条唯一路径.</p><p>换句话说,没有环的连通图就是树.并且树有层次关系,其有且仅有一个根节点.</p><p>如果一个无向简单图G满足如下关系,那么G是一棵树:</p><ul><li>G是没有环的连通图</li><li>G内添加一条边则会形成一个环</li><li>G删除一条边则不再联通</li><li>G中任意2个顶点间存在唯一路径</li></ul><p>与线性表不同,树是一种非线性的结构,并且各顶点(数据项)间有一定的层次关系,一个顶点有着0个或若干个子顶点.</p><h3 id="各结点的关系">各结点的关系</h3><img src="https://typora-blogs-pic.oss-cn-beijing.aliyuncs.com/img/image-20240108191132338.png" alt="image-20240108191132338" style="zoom:33%;" /><h2 id="森林">森林</h2><p>森林是m(m&gt;=0)棵互不相交的树的集合.</p><p>每棵树去掉其根节点后,剩下的部分即若干个子树,构成一个森林.</p><h2 id="常见属性">常见属性</h2><ul><li><strong>父亲（parent node）</strong>：对于除根以外的每个结点，定义为从该结点到根路径上的第二个结点。<br>根结点没有父结点。</li><li><strong>祖先（ancestor）</strong>：一个结点到根结点的路径上，除了它本身外的结点。<br>根结点的祖先集合为空。</li><li><strong>子结点（child node）</strong>：如果<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>u</mi></mrow><annotation encoding="application/x-tex">u</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">u</span></span></span></span>是<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi></mrow><annotation encoding="application/x-tex">v</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span></span></span></span>的父亲，那么<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi></mrow><annotation encoding="application/x-tex">v</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span></span></span></span>是<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>u</mi></mrow><annotation encoding="application/x-tex">u</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">u</span></span></span></span>的子结点。子结点的顺序一般不加以区分，二叉树是一个例外。</li><li><strong>结点的深度（depth）</strong>：到根结点的路径上的边数。</li><li><strong>树的高度（height）</strong>：所有结点的深度的最大值。</li><li><strong>兄弟（sibling）</strong>：同一个父亲的多个子结点互为兄弟。</li><li><strong>后代（descendant）</strong>：子结点和子结点的后代。或者理解成：如果<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>u</mi></mrow><annotation encoding="application/x-tex">u</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">u</span></span></span></span>是<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi></mrow><annotation encoding="application/x-tex">v</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span></span></span></span>的祖先，那么<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi></mrow><annotation encoding="application/x-tex">v</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span></span></span></span>是<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>u</mi></mrow><annotation encoding="application/x-tex">u</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">u</span></span></span></span>的后代。</li></ul><h1 id="常用公式">常用公式</h1><h2 id="一般的树">一般的树</h2><ol><li><code>总结点数 = 总度数 + 1</code></li></ol><h2 id="二叉树">二叉树</h2><ol><li><p>第i层有<code>2^(k-1)</code>个结点(k&gt;=1)</p></li><li><p>深度为m的二叉树最多有<code>2^m-1</code>个结点,最少有<code>m</code>个节点</p><p>最多时为<code>满二叉树</code>,最少时退化为<code>单链表</code></p></li><li><p>任意一颗二叉树,叶子结点数为<code>N0</code>,度为2结点数为<code>N2</code>,则<code>N0 = N2 + 1</code></p><p>证明: 度为1的结点数为<code>N1</code>,总结点数为<code>N</code>,则<code>N=N0+N1+N2</code>,又<code>总度数=N1*1+N2*2</code>,且<code>N=总度数+1</code>,联立即可得出.</p></li><li><p>具有<code>n</code>个结点的<code>完全二叉树</code>,其深度为<code>[log2(n)]+1</code>,其中<code>[log2(n)]</code>为向下取整</p></li><li><p>具有<code>n</code>个结点的<code>满二叉树</code>,其深度为<code>log2(n+1)</code>或<code>[log2(n)]+1</code></p></li><li><p>对完全二叉树从上到下,从左到右从1依次编号,第<code>i</code>个结点的父亲是<code>[i/2]</code>,左孩子是<code>2*i</code>,右孩子是<code>2*i+1</code></p></li></ol>]]></content>
       
       
       <categories>
@@ -2410,13 +2423,13 @@
             
             <tag> RE </tag>
             
+            <tag> PWN </tag>
+            
             <tag> Crypto </tag>
             
             <tag> Misc </tag>
             
             <tag> Web </tag>
-            
-            <tag> PWN </tag>
             
         </tags>
       
@@ -3438,11 +3451,11 @@
     
     
     <entry>
-      <title>WAHAHA&#39;s C语言教程</title>
-      <link href="/C_tutorial/index.html"/>
-      <url>/C_tutorial/index.html</url>
+      <title>分类导航</title>
+      <link href="/categories/index.html"/>
+      <url>/categories/index.html</url>
       
-        <content type="html"><![CDATA[<p>Hello World!</p>]]></content>
+        <content type="html"><![CDATA[<p>hello world</p>]]></content>
       
     </entry>
     
@@ -3460,17 +3473,6 @@
     
     
     <entry>
-      <title>我的标签</title>
-      <link href="/tags/index.html"/>
-      <url>/tags/index.html</url>
-      
-        <content type="html"><![CDATA[<p>hello world</p>]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>在线工具</title>
       <link href="/tools/index.html"/>
       <url>/tools/index.html</url>
@@ -3482,22 +3484,33 @@
     
     
     <entry>
-      <title>分类导航</title>
-      <link href="/categories/index.html"/>
-      <url>/categories/index.html</url>
+      <title></title>
+      <link href="/json-data/tools.json"/>
+      <url>/json-data/tools.json</url>
       
-        <content type="html"><![CDATA[<p>hello world</p>]]></content>
+        <content type="html"><![CDATA[[{"class_name":"CTF工具","class_desc":"常用在线工具","link_list":[{"name":"CyberChef","link":"https://icyberchef.com/","avatar":"/img/artical_pic.png","descr":"编码万能转换"},{"name":"密码破解","link":"http://www.atoolbox.net/Category.php?Id=27&Page=1","avatar":"/img/artical_pic.png","descr":"基本密码在线解密"},{"name":"正则表达式工具","link":"https://c.runoob.com/front-end/854/?optionGlobl=global","avatar":"/img/artical_pic.png","descr":"正则表达式在线处理"},{"name":"BrainF**k and Ook","link":"https://www.splitbrain.org/services/ook","avatar":"/img/artical_pic.png","descr":"某种玄学的东西"},{"name":"因数分解","link":"http://www.factordb.com/index.php","avatar":"/img/artical_pic.png","descr":"一个因数分解数据库"},{"name":"摩斯电码","link":"https://morsecode.world/international/decoder/audio-decoder-adaptive.html","avatar":"/img/artical_pic.png","descr":"不解释"},{"name":"图像处理","link":"https://onlinetools.com/image","avatar":"/img/artical_pic.png","descr":"图像的各种特殊处理"},{"name":"Java在线逆向","link":"http://javare.cn","avatar":"/img/artical_pic.png","descr":"可以class文件..."},{"name":"Awesome-Hacking","link":"https://blog.csdn.net/ZYC88888/article/details/113663486","avatar":"/img/artical_pic.png","descr":"CTF工具库"}]},{"class_name":"转换工具","class_desc":"格式转换的一些小工具","link_list":[{"name":"pdf转换工具","link":"https://www.alltoall.net/","avatar":"/img/artical_pic.png","descr":"文档在线转换"},{"name":"音频格式转换工具","link":"http://ncm.miidj.com/","avatar":"/img/artical_pic.png","descr":"方便使用播放器"},{"name":"操作系统文件格式转换","link":"http://tools.bugscaner.com/text/textconvert.html","avatar":"/img/artical_pic.png","descr":"在线文档格式windows unix macintosh互相转换"}]},{"class_name":"网络工具","class_desc":"网络相关的工具和资源","link_list":[{"name":"测速网","link":"https://www.speedtest.cn/","avatar":"/img/artical_pic.png","descr":"网速测试"},{"name":"Clash","link":"https://github.com/Dreamacro/clash/releases","avatar":"/img/artical_pic.png","descr":"Clash下载直达"},{"name":"虚拟手机号","link":"https://sms-activate.org/cn/getNumber","avatar":"/img/artical_pic.png","descr":"虚拟手机号服务"},{"name":"机场","link":"https://www.mojie.mx/#/login","avatar":"/img/artical_pic.png","descr":"懂?"}]},{"class_name":"其他工具","class_desc":"其他各种工具","link_list":[{"name":"文本对比工具","link":"https://tool.p2hp.com/tool-online-difftext/","avatar":"/img/artical_pic.png","descr":"在线文本对比"},{"name":"大数运算器","link":"https://goodcalculators.com/big-number-calculator/","avatar":"/img/artical_pic.png","descr":"高精度大数在线运算"},{"name":"阶乘运算器","link":"https://zh.numberempire.com/factorialcalculator.php","avatar":"/img/artical_pic.png","descr":"阶乘计算"}]},{"class_name":"创作与AI工具","class_desc":"AI,文档,表格,图像等创作工具","link_list":[{"name":"ChatGPT","link":"https://chat.openai.com/","avatar":"/img/ChatGPT.webp","descr":"学习的好帮手"},{"name":"在线作图工具","link":"https://www.processon.com/","avatar":"/img/artical_pic.png","descr":"免费在线流程图思维导图"}]},{"class_name":"技术文档","class_desc":"各种语言,框架,工具的文档","link_list":[{"name":"C/C++参考手册","link":"https://zh.cppreference.com/mwiki/index.php?title=%E9%A6%96%E9%A1%B5&variant=zh-cn","avatar":"/img/Logo/C_and_CPP.jpg","descr":"C和C++语言的在线参考手册"},{"name":"GTK文档","link":"https://www.gtk.org/docs/installations/windows/","avatar":"/img/Logo/logo-gtk-sm.png","descr":"GTK库的文档"},{"name":"Windows API 索引","link":"https://learn.microsoft.com/zh-cn/windows/win32/apiindex/windows-api-list","avatar":"/img/Logo/Microsoft.png","descr":"Windows API 的文档"}]}]]]></content>
       
     </entry>
     
     
     
     <entry>
-      <title></title>
-      <link href="/json-data/tools.json"/>
-      <url>/json-data/tools.json</url>
+      <title>WAHAHA&#39;s C语言教程</title>
+      <link href="/C_tutorial/index.html"/>
+      <url>/C_tutorial/index.html</url>
       
-        <content type="html"><![CDATA[[{"class_name":"CTF工具","class_desc":"常用在线工具","link_list":[{"name":"CyberChef","link":"https://icyberchef.com/","avatar":"/img/artical_pic.png","descr":"编码万能转换"},{"name":"密码破解","link":"http://www.atoolbox.net/Category.php?Id=27&Page=1","avatar":"/img/artical_pic.png","descr":"基本密码在线解密"},{"name":"正则表达式工具","link":"https://c.runoob.com/front-end/854/?optionGlobl=global","avatar":"/img/artical_pic.png","descr":"正则表达式在线处理"},{"name":"BrainF**k and Ook","link":"https://www.splitbrain.org/services/ook","avatar":"/img/artical_pic.png","descr":"某种玄学的东西"},{"name":"因数分解","link":"http://www.factordb.com/index.php","avatar":"/img/artical_pic.png","descr":"一个因数分解数据库"},{"name":"摩斯电码","link":"https://morsecode.world/international/decoder/audio-decoder-adaptive.html","avatar":"/img/artical_pic.png","descr":"不解释"},{"name":"图像处理","link":"https://onlinetools.com/image","avatar":"/img/artical_pic.png","descr":"图像的各种特殊处理"},{"name":"Java在线逆向","link":"http://javare.cn","avatar":"/img/artical_pic.png","descr":"可以class文件..."},{"name":"Awesome-Hacking","link":"https://blog.csdn.net/ZYC88888/article/details/113663486","avatar":"/img/artical_pic.png","descr":"CTF工具库"}]},{"class_name":"转换工具","class_desc":"格式转换的一些小工具","link_list":[{"name":"pdf转换工具","link":"https://www.alltoall.net/","avatar":"/img/artical_pic.png","descr":"文档在线转换"},{"name":"音频格式转换工具","link":"http://ncm.miidj.com/","avatar":"/img/artical_pic.png","descr":"方便使用播放器"},{"name":"操作系统文件格式转换","link":"http://tools.bugscaner.com/text/textconvert.html","avatar":"/img/artical_pic.png","descr":"在线文档格式windows unix macintosh互相转换"}]},{"class_name":"网络工具","class_desc":"网络相关的工具和资源","link_list":[{"name":"测速网","link":"https://www.speedtest.cn/","avatar":"/img/artical_pic.png","descr":"网速测试"},{"name":"Clash","link":"https://github.com/Dreamacro/clash/releases","avatar":"/img/artical_pic.png","descr":"Clash下载直达"},{"name":"虚拟手机号","link":"https://sms-activate.org/cn/getNumber","avatar":"/img/artical_pic.png","descr":"虚拟手机号服务"},{"name":"机场","link":"https://www.mojie.mx/#/login","avatar":"/img/artical_pic.png","descr":"懂?"}]},{"class_name":"其他工具","class_desc":"其他各种工具","link_list":[{"name":"文本对比工具","link":"https://tool.p2hp.com/tool-online-difftext/","avatar":"/img/artical_pic.png","descr":"在线文本对比"},{"name":"大数运算器","link":"https://goodcalculators.com/big-number-calculator/","avatar":"/img/artical_pic.png","descr":"高精度大数在线运算"},{"name":"阶乘运算器","link":"https://zh.numberempire.com/factorialcalculator.php","avatar":"/img/artical_pic.png","descr":"阶乘计算"}]},{"class_name":"创作与AI工具","class_desc":"AI,文档,表格,图像等创作工具","link_list":[{"name":"ChatGPT","link":"https://chat.openai.com/","avatar":"/img/ChatGPT.webp","descr":"学习的好帮手"},{"name":"在线作图工具","link":"https://www.processon.com/","avatar":"/img/artical_pic.png","descr":"免费在线流程图思维导图"}]},{"class_name":"技术文档","class_desc":"各种语言,框架,工具的文档","link_list":[{"name":"C/C++参考手册","link":"https://zh.cppreference.com/mwiki/index.php?title=%E9%A6%96%E9%A1%B5&variant=zh-cn","avatar":"/img/Logo/C_and_CPP.jpg","descr":"C和C++语言的在线参考手册"},{"name":"GTK文档","link":"https://www.gtk.org/docs/installations/windows/","avatar":"/img/Logo/logo-gtk-sm.png","descr":"GTK库的文档"},{"name":"Windows API 索引","link":"https://learn.microsoft.com/zh-cn/windows/win32/apiindex/windows-api-list","avatar":"/img/Logo/Microsoft.png","descr":"Windows API 的文档"}]}]]]></content>
+        <content type="html"><![CDATA[<p>Hello World!</p>]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>我的标签</title>
+      <link href="/tags/index.html"/>
+      <url>/tags/index.html</url>
+      
+        <content type="html"><![CDATA[<p>hello world</p>]]></content>
       
     </entry>
     
