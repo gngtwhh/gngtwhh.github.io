@@ -34,7 +34,7 @@
       <link href="/202405d328682204/"/>
       <url>/202405d328682204/</url>
       
-        <content type="html"><![CDATA[<h1 id="漏桶算法">漏桶算法</h1><p><code>漏桶算法</code>  是最为简单的限流算法，原理类似一个容积一定的木桶，有水源向该木桶加入水，但是流入的数量不确定，任意时刻的流入速率也是随机；而木桶底部有一个固定大小的洞，以恒定的速率向外漏水；这样，桶中流出水的速率恒定，而当桶满了的时候，水会自然地溢出。</p><p>其中：桶中的水类比网络请求；流入的水代表新到达的请求，而流出的水代表被系统处理的请求。<br>可以看到：新到达的请求量以及频率是不确定的，而整个桶却能保持一定的最大容量，并且以恒定的速率处理请求（漏出水）；当桶满时，即系统满负载时，新到达的请求被自然丢弃，这样即可确保系统能够始终以恒定的速率处理请求。</p><p>实际实现中，漏桶可以使用一个恒定容量的队列实现，系统以恒定的速率从队列中取出一定数量的请求进行处理；而当队满时，新到达的请求被丢弃。</p><p>优点：</p><ul><li>（强制）保证稳定的流量控制，适用于流量稳定，没有或较少突发流量的场景</li><li>易于理解，实现简单</li></ul><p>缺点：</p><ul><li>速度相对稳定，缺乏弹性</li><li>由于保持稳定的处理速率，导致无法应对突发流量（例如秒杀活动）</li></ul><h1 id="令牌桶算法">令牌桶算法</h1><p>实际的网络应用中，常常存在着突发流量，此时 <code>漏桶算法</code> 便无法适应这种情况，<code>令牌桶算法</code> 能够在保持流量的平均传输速率时，也能允许一定的突发流量。</p><p><code>令牌桶算法</code> 中，存在一个以大小一定的 <code>令牌桶</code> ，用于存储一定数量的令牌，所有的数据都需要消耗令牌来放行；<br>而系统中有一个不断产生令牌的源，它向令牌桶中以恒定速率放入令牌。</p><p>而每一个数据包到达时，都要消耗与其大小相当数量的令牌；<br>如果桶中无令牌或令牌数量不足，则丢弃（或缓存）该数据包，否则将其放行（或处理）。</p><p>与 <code>漏桶算法</code> 不同，<code>令牌桶算法</code> 除了能够限制数据的平均传输速率外，还允许一定程度的突发传输。在突发流量的情况下爱，只要令牌桶中还存在足够的令牌，那么就允许不断传输数据，直到达到门限为止（取决于实际的配置）。</p><p>优点：</p><ul><li>保证稳定的平均传输速率，同时允许一定程度的突发流量<br>缺点：</li><li>内存消耗较大，例如对每一个用户都进行限制，就需要单独使用一个令牌桶，消耗大量资源</li><li>无法保证任一时刻速率的平滑性</li></ul><h1 id="固定窗口计数器算法">固定窗口计数器算法</h1>]]></content>
+        <content type="html"><![CDATA[<h1 id="漏桶算法">漏桶算法</h1><p><code>漏桶算法</code>  是最为简单的限流算法，原理类似一个容积一定的木桶，有水源向该木桶加入水，但是流入的数量不确定，任意时刻的流入速率也是随机；而木桶底部有一个固定大小的洞，以恒定的速率向外漏水；这样，桶中流出水的速率恒定，而当桶满了的时候，水会自然地溢出。</p><p>其中：桶中的水类比网络请求；流入的水代表新到达的请求，而流出的水代表被系统处理的请求。<br>可以看到：新到达的请求量以及频率是不确定的，而整个桶却能保持一定的最大容量，并且以恒定的速率处理请求（漏出水）；当桶满时，即系统满负载时，新到达的请求被自然丢弃，这样即可确保系统能够始终以恒定的速率处理请求。</p><p>实际实现中，漏桶可以使用一个恒定容量的队列实现，系统以恒定的速率从队列中取出一定数量的请求进行处理；而当队满时，新到达的请求被丢弃。</p><p>优点：</p><ul><li>（强制）保证稳定的流量控制，<strong>适用于流量稳定，没有或较少突发流量的场景</strong></li><li>易于理解，实现简单</li></ul><p>缺点：</p><ul><li>速度相对稳定，缺乏弹性</li><li>由于保持稳定的处理速率，导致无法应对突发流量（例如秒杀活动）</li></ul><h1 id="令牌桶算法">令牌桶算法</h1><p>实际的网络应用中，常常存在着突发流量，此时 <code>漏桶算法</code> 便无法适应这种情况，<code>令牌桶算法</code> 能够在保持流量的平均传输速率时，也能允许一定的突发流量。</p><p><code>令牌桶算法</code> 中，存在一个以大小一定的 <code>令牌桶</code> ，用于存储一定数量的令牌，所有的数据都需要消耗令牌来放行；<br>而系统中有一个不断产生令牌的源，它向令牌桶中以恒定速率放入令牌。</p><p>而每一个数据包到达时，都要消耗与其大小相当数量的令牌；<br>如果桶中无令牌或令牌数量不足，则丢弃（或缓存）该数据包，否则将其放行（或处理）。</p><p>与 <code>漏桶算法</code> 不同，<code>令牌桶算法</code> 除了能够限制数据的平均传输速率外，还允许一定程度的突发传输。在突发流量的情况下爱，只要令牌桶中还存在足够的令牌，那么就允许不断传输数据，直到达到门限为止（取决于实际的配置）。</p><p>优点：</p><ul><li>保证稳定的平均传输速率，同时允许一定程度的突发流量<br>缺点：</li><li>内存消耗较大，例如对每一个用户都进行限制，就需要单独使用一个令牌桶，消耗大量资源</li><li>无法保证任一时刻速率的平滑性</li></ul><h1 id="固定窗口计数器算法">固定窗口计数器算法</h1><p><code>固定窗口计数器算法</code> 将时间划分为若干固定大小的窗口，在每个窗口内统计<code>请求数</code>，超过一定阈值后，多余的请求会被拒绝，直到开始下一个窗口。每次窗口结束时重置计数器。<br>适用于<strong>系统总体流量平缓，有较少短时波动的场景</strong>。</p><p>优点：</p><ul><li>原理简单，易于实现</li><li>允许瞬时高峰请求<br>缺点：</li><li>在窗口边界处，两个窗口边缘的总请求数可以突破阈值，最高可达2倍</li></ul><h1 id="滑动窗口日志算法">滑动窗口日志算法</h1><p><code>滑动窗口日志算法</code> 为解决 <code>固定窗口计数法</code> 在窗口边界处请求数突破阈值的问题。该算法随着时间推移不断移动窗口，记录通过请求的<code>时间戳日志</code>，对每个新请求，根据日志回溯最近窗口的访问量，若未超过阈值，则接受该请求并记录日志，否则拒绝请求。</p><p>优点：</p><ul><li>流量控制精细，不存在窗口边界问题<br>缺点：</li><li>系统复杂增加，需要维护更新日志</li></ul><h1 id="滑动窗口计数器算法">滑动窗口计数器算法</h1><p>权衡了 <code>固定窗口计数器算法</code>  和 <code>滑动窗口日志算法</code> ，并不记录窗口日志，而是对两个相邻窗口的请求数进行加权，计算公式为：</p><p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>w</mi><mi>e</mi><mi>i</mi><mi>g</mi><mi>h</mi><mi>t</mi><mo>=</mo><mo stretchy="false">(</mo><mn>1</mn><mo>−</mo><mi>X</mi><mi mathvariant="normal">%</mi><mo stretchy="false">)</mo><mo>×</mo><mi>l</mi><mi>a</mi><mi>s</mi><mi>t</mi><mi>W</mi><mi>i</mi><mi>n</mi><mi>d</mi><mi>o</mi><mi>w</mi><mi>R</mi><mi>e</mi><mi>q</mi><mi>u</mi><mi>e</mi><mi>s</mi><mi>t</mi><mi>s</mi><mo>+</mo><mi>c</mi><mi>u</mi><mi>r</mi><mi>r</mi><mi>e</mi><mi>n</mi><mi>t</mi><mi>W</mi><mi>i</mi><mi>n</mi><mi>d</mi><mi>o</mi><mi>w</mi><mi>R</mi><mi>e</mi><mi>q</mi><mi>u</mi><mi>e</mi><mi>s</mi><mi>t</mi><mi>s</mi><mo separator="true">,</mo><mtext> 其中</mtext><mi>X</mi><mtext>为请求在当前窗口的时间占比</mtext></mrow><annotation encoding="application/x-tex">weight = (1-X\%)\times lastWindowRequests+currentWindowRequests,\ 其中X为请求在当前窗口的时间占比</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="mord mathdefault">e</span><span class="mord mathdefault">i</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault">h</span><span class="mord mathdefault">t</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.07847em;">X</span><span class="mord">%</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">a</span><span class="mord mathdefault">s</span><span class="mord mathdefault">t</span><span class="mord mathdefault" style="margin-right:0.13889em;">W</span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span><span class="mord mathdefault">d</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.03588em;">q</span><span class="mord mathdefault">u</span><span class="mord mathdefault">e</span><span class="mord mathdefault">s</span><span class="mord mathdefault">t</span><span class="mord mathdefault">s</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">c</span><span class="mord mathdefault">u</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">e</span><span class="mord mathdefault">n</span><span class="mord mathdefault">t</span><span class="mord mathdefault" style="margin-right:0.13889em;">W</span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span><span class="mord mathdefault">d</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.03588em;">q</span><span class="mord mathdefault">u</span><span class="mord mathdefault">e</span><span class="mord mathdefault">s</span><span class="mord mathdefault">t</span><span class="mord mathdefault">s</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mspace"> </span><span class="mord cjk_fallback">其</span><span class="mord cjk_fallback">中</span><span class="mord mathdefault" style="margin-right:0.07847em;">X</span><span class="mord cjk_fallback">为</span><span class="mord cjk_fallback">请</span><span class="mord cjk_fallback">求</span><span class="mord cjk_fallback">在</span><span class="mord cjk_fallback">当</span><span class="mord cjk_fallback">前</span><span class="mord cjk_fallback">窗</span><span class="mord cjk_fallback">口</span><span class="mord cjk_fallback">的</span><span class="mord cjk_fallback">时</span><span class="mord cjk_fallback">间</span><span class="mord cjk_fallback">占</span><span class="mord cjk_fallback">比</span></span></span></span></span></p><p>当 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>w</mi><mi>e</mi><mi>i</mi><mi>g</mi><mi>h</mi><mi>t</mi><mo>+</mo><mn>1</mn><mo>&lt;</mo><mo>=</mo><mi>L</mi><mi>I</mi><mi>M</mi><mi>I</mi><mi>T</mi></mrow><annotation encoding="application/x-tex">weight + 1 &lt;= LIMIT</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="mord mathdefault">e</span><span class="mord mathdefault">i</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault">h</span><span class="mord mathdefault">t</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68354em;vertical-align:-0.0391em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span></span><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">L</span><span class="mord mathdefault" style="margin-right:0.07847em;">I</span><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="mord mathdefault" style="margin-right:0.07847em;">I</span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span></span></span></span> 时接受请求，否则拒绝请求。</p><p>相较于 <code>固定窗口计数器算法</code> ：</p><ul><li>更精准，能平滑处理窗口边界</li><li>实现更复杂</li><li></li></ul><p>相较于 <code>固定窗口计数器算法</code> ：</p><ul><li>计算更为简单，存储空间占用更少</li><li>但不够精确，窗口边界处仍能突破阈值</li></ul>]]></content>
       
       
       <categories>
@@ -1335,31 +1335,6 @@
     
     
     <entry>
-      <title>进程管理</title>
-      <link href="/2024da9c28cf6ee0/"/>
-      <url>/2024da9c28cf6ee0/</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-      
-      <categories>
-          
-          <category> Linux内核 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> kernel </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>Linux内核概述</title>
       <link href="/2024c9dc3e5e81ef/"/>
       <url>/2024c9dc3e5e81ef/</url>
@@ -2425,11 +2400,11 @@
             
             <tag> PWN </tag>
             
+            <tag> Web </tag>
+            
             <tag> Crypto </tag>
             
             <tag> Misc </tag>
-            
-            <tag> Web </tag>
             
         </tags>
       
@@ -3440,17 +3415,6 @@
     
     
     <entry>
-      <title>我的影子</title>
-      <link href="/about/index.html"/>
-      <url>/about/index.html</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>分类导航</title>
       <link href="/categories/index.html"/>
       <url>/categories/index.html</url>
@@ -3462,11 +3426,33 @@
     
     
     <entry>
+      <title>我的影子</title>
+      <link href="/about/index.html"/>
+      <url>/about/index.html</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>关于</title>
       <link href="/link/index.html"/>
       <url>/link/index.html</url>
       
         <content type="html"><![CDATA[<p><a href="https://www.baidu.com">https://www.baidu.com</a></p>]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>我的标签</title>
+      <link href="/tags/index.html"/>
+      <url>/tags/index.html</url>
+      
+        <content type="html"><![CDATA[<p>hello world</p>]]></content>
       
     </entry>
     
@@ -3500,17 +3486,6 @@
       <url>/C_tutorial/index.html</url>
       
         <content type="html"><![CDATA[<p>Hello World!</p>]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>我的标签</title>
-      <link href="/tags/index.html"/>
-      <url>/tags/index.html</url>
-      
-        <content type="html"><![CDATA[<p>hello world</p>]]></content>
       
     </entry>
     
